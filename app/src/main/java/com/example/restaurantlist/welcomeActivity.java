@@ -35,7 +35,7 @@ public class welcomeActivity extends AppCompatActivity {
 
 
     }
-    
+
 
     private void setupprog() {
         progressBar=findViewById(R.id.pb);

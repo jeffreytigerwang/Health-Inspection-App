@@ -8,7 +8,7 @@ public class Restaurant {
     private double latitude;
     private String physicalCity;
     private String facType;
-    private Inspection inspection;
+    private InspectionManager inspections;
 
     public Restaurant() {
         this.restaurantName="";
@@ -18,10 +18,10 @@ public class Restaurant {
         this.latitude=0;
         this.physicalCity="";
         this.facType="";
-        this.inspection=new Inspection(this.trackingNumber);
+
     }
 
-    public Restaurant(String restaurantName, String address, String trackingNumber, double longitude, double latitude, String physicalCity, String facType, Inspection inspection) {
+    public Restaurant(String restaurantName, String address, String trackingNumber, double longitude, double latitude, String physicalCity, String facType, InspectionManager inspections) {
         this.restaurantName = restaurantName;
         this.address = address;
         this.trackingNumber = trackingNumber;
@@ -29,7 +29,7 @@ public class Restaurant {
         this.latitude = latitude;
         this.physicalCity = physicalCity;
         this.facType = facType;
-        this.inspection = inspection;
+        this.inspections = inspections;
     }
 
     public String getRestaurantName() {
@@ -88,13 +88,14 @@ public class Restaurant {
         this.facType = facType;
     }
 
-    public void setInspection(Inspection inspection) {
-        this.inspection = inspection;
+    public void setInspections(InspectionManager inspections) {
+        this.inspections = inspections;
     }
 
-    public Inspection getInspection() {
-        return inspection;
+    public InspectionManager getInspections() {
+        return inspections;
     }
+
     public Restaurant getRestaurant(String trackingNumber){
         if(this.trackingNumber==trackingNumber)
         {

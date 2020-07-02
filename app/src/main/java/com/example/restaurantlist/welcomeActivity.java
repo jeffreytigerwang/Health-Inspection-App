@@ -3,12 +3,20 @@ package com.example.restaurantlist;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class welcomeActivity extends AppCompatActivity {
-
+    ProgressBar progressBar;
+    int count=40;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +25,10 @@ public class welcomeActivity extends AppCompatActivity {
         //hide hideNavigationBar, let it full screen.
         hideNavigationBar();
 
+        //set up the ProgressBar
+        setupprog();
+
+
 
 
 
@@ -24,8 +36,48 @@ public class welcomeActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    private void setuptextview() {
+        TextView textView = findViewById(R.id.percent);
+        textView.setText("" + count + "%" );
+
+    }
+
+    private void setupprog() {
+        progressBar=findViewById(R.id.pb);
+
+        final Timer time = new Timer();
+        TimerTask timerTask= new TimerTask() {
+            @Override
+            public void run() {
+
+                count++;
+                progressBar.setProgress(count);
+
+                if(count == 100)
+                {
+
+                    time.cancel();
+                    Intent intent= new Intent(welcomeActivity.this,MenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
 
 
+            }
+
+        };
+
+        time.schedule(timerTask,0,100);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideNavigationBar();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void hideNavigationBar() {

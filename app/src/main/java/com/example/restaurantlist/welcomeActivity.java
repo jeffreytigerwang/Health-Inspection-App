@@ -35,13 +35,7 @@ public class welcomeActivity extends AppCompatActivity {
 
 
     }
-
-    @SuppressLint("SetTextI18n")
-    private void setuptextview() {
-        TextView textView = findViewById(R.id.percent);
-        textView.setText("" + count + "%" );
-
-    }
+    
 
     private void setupprog() {
         progressBar=findViewById(R.id.pb);

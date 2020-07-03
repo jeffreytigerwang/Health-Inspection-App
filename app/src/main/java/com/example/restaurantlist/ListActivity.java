@@ -108,7 +108,7 @@ public class ListActivity extends AppCompatActivity {
               t2.setText("Issues Found: " + number);
 
               TextView t3= itemview.findViewById(R.id.text3);
-              t3.setText("Inspection date "+ currentrestaurant.getInspections().get(0).getInspectionDate()[0]+" "+
+              t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(0).getInspectionDate()[0]+" "+
                       currentrestaurant.getInspections().get(0).getInspectionDate()[1]+" "+
                       currentrestaurant.getInspections().get(0).getInspectionDate()[2]);
 

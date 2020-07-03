@@ -63,7 +63,7 @@ public class ListActivity extends AppCompatActivity {
                 new String[]{"303,Critical,Equipment/facilities/hot & cold water for sanitary maintenance not adequate [s. 17(3); s. 4(1)(f)],Not Repeat",
                         "402,Critical,Employee does not wash hands properly or at adequate frequency [s. 21(3)],Not Repeat",},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
-                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeatt",
+                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "311,Not Critical,Premises not maintained as per approved plans [s. 6(1)(b)],Not Repeat"}));
 
 

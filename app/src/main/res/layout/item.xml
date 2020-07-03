@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    >
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/icon"
+        android:id="@+id/icon"
+        />
+    <LinearLayout
+        android:id="@+id/row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurant_information"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurant_information"
+            android:textColor="#9a9a9a"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurant_information"
+            android:textColor="#9a9a9a"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurant_information"
+            android:textColor="#9a9a9a"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/hazard"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+

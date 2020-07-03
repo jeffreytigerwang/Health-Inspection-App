@@ -30,6 +30,8 @@ public class Inspection {
         HazardRating = hazardRating;
         CViolLump = cviolLump;
         CViolLump = nonviolLump;
+        setColour();
+
     }
 
     public int[] getInspectionDate() {
@@ -90,17 +92,20 @@ public class Inspection {
 
 
     public void setColour(){
-        if(this.HazardRating=="low")
+        if(this.HazardRating=="Low")
         {
             this.colour="blue";
         }
-        else if(this.HazardRating=="Medium")
+        else if(this.HazardRating=="Moderate")
         {
             this.colour="yellow";
         }
-        else if(this.HazardRating=="high")
+        else if(this.HazardRating=="High")
         {
             this.colour="red";
         }
+    }
+    public String getColour(){
+        return colour;
     }
 }

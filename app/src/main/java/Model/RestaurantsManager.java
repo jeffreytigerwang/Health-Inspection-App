@@ -37,6 +37,9 @@ public class RestaurantsManager {
         return restaurants.get(i);
     }
 
+    public  List get(){
+        return restaurants;
+    }
     public int getNumRestaurants() {
         return restaurants.size();
     }

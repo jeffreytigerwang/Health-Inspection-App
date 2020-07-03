@@ -108,8 +108,8 @@ public class ListActivity extends AppCompatActivity {
               t2.setText("Issues Found: " + number);
 
               TextView t3= itemview.findViewById(R.id.text3);
-              t3.setText("Inspection date "+ currentrestaurant.getInspections().get(0).getInspectionDate()[0]+
-                      currentrestaurant.getInspections().get(0).getInspectionDate()[1]+
+              t3.setText("Inspection date "+ currentrestaurant.getInspections().get(0).getInspectionDate()[0]+" "+
+                      currentrestaurant.getInspections().get(0).getInspectionDate()[1]+" "+
                       currentrestaurant.getInspections().get(0).getInspectionDate()[2]);
 
 
@@ -121,7 +121,7 @@ public class ListActivity extends AppCompatActivity {
               t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(0).getColour());
 
               ImageView color = itemview.findViewById(R.id.hazard);
-              switch(currentrestaurant.getInspections().get(0).getColour()) {
+              switch(currentrestaurant.getInspections().get(0).getHazardRating()) {
                 case "Low":
                     color.setImageResource(R.drawable.blue);
                     break;

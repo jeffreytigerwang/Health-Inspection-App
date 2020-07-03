@@ -2,32 +2,34 @@ package Model;
 
 public class Inspection {
     private String TrackingNum;
-    private int[]InspectionDate;
+    private int[] InspectionDate;
     private String InspType;
     private int NumCritical;
     private int NumNonCritical;
+    private String[] CViolLump;            //Critical ViolLUmp
+    private String[] NonViolLump;          //Non Critical ViolLump
     private String HazardRating;
-    private String ViolLump;
     private String colour;
 
     public Inspection(String trackingNum) {
         this.TrackingNum=trackingNum;
-        this.InspectionDate=new int[8];
+        this.InspectionDate=new int[3];
         this.InspType="";
         this.NumCritical=0;
         this.NumNonCritical=0;
         this.HazardRating="";
-        this.ViolLump="";
+
     }
 
-    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String violLump) {
+    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String[] cviolLump,String[] nonviolLump) {
         TrackingNum = trackingNum;
         InspectionDate = inspectionDate;
         InspType = inspType;
         NumCritical = numCritical;
         NumNonCritical = numNonCritical;
         HazardRating = hazardRating;
-        ViolLump = violLump;
+        CViolLump = cviolLump;
+        CViolLump = nonviolLump;
     }
 
     public int[] getInspectionDate() {
@@ -70,13 +72,23 @@ public class Inspection {
         HazardRating = hazardRating;
     }
 
-    public String getViolLump() {
-        return ViolLump;
+    public String[] getCViolLump() {
+        return CViolLump;
     }
 
-    public void setViolLump(String violLump) {
-        ViolLump = violLump;
+    public void setCViolLump(String[] violLump) {
+        CViolLump = violLump;
     }
+
+    public String[] getNonViolLump() {
+        return NonViolLump;
+    }
+
+    public void setNonViolLump(String[] violLump) {
+        NonViolLump = violLump;
+    }
+
+
     public void setColour(){
         if(this.HazardRating=="low")
         {

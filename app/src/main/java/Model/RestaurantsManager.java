@@ -1,5 +1,7 @@
 package Model;
 
+import androidx.annotation.NonNull;
+
 import com.example.restaurantlist.R;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.List;
  * Data model: Store a collection of restaurants.
  */
 
-public class RestaurantsManager {
+public class RestaurantsManager implements Iterable<Restaurant> {
     private List<Restaurant> restaurants = new ArrayList<>();
     private static RestaurantsManager instance;
     private int count=0;
@@ -54,13 +56,9 @@ public class RestaurantsManager {
     }
 
 
-
-
-
-
-
-
-
-
-
+    @NonNull
+    @Override
+    public Iterator<Restaurant> iterator() {
+        return restaurants.iterator();
+    }
 }

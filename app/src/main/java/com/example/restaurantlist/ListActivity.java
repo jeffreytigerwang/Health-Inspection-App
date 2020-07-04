@@ -5,21 +5,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ArrayAdapter;
 
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import Model.Inspection;
 import Model.InspectionManager;
@@ -30,13 +23,7 @@ public class ListActivity extends AppCompatActivity {
 
     private RestaurantsManager restaurantsManager;
     private InspectionManager inspectionManager;
-    private InspectionManager inspectionManager2;
-    private InspectionManager inspectionManager3;
-    private InspectionManager inspectionManager4;
-    private InspectionManager inspectionManager5;
-    private InspectionManager inspectionManager6;
-    private InspectionManager inspectionManager7;
-    private InspectionManager inspectionManager8;
+
 
 
 
@@ -46,13 +33,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         restaurantsManager = RestaurantsManager.getInstance();
         inspectionManager = InspectionManager.getInstance();
-        inspectionManager2=InspectionManager.getInstance();
-        inspectionManager3=InspectionManager.getInstance();
-        inspectionManager4=InspectionManager.getInstance();
-        inspectionManager5=InspectionManager.getInstance();
-        inspectionManager6=InspectionManager.getInstance();
-        inspectionManager7=InspectionManager.getInstance();
-        inspectionManager8=InspectionManager.getInstance();
+
 
         // add the restaurants to the RestaurantsManager
         if(restaurantsManager.getcount()==0)
@@ -225,68 +206,68 @@ public class ListActivity extends AppCompatActivity {
                         "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2019, 10, 2},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2019, 10, 2},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 24},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 24},
                 "Follow-Up", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 11, 6},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 11, 6},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2019, 4, 10},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2019, 4, 10},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 11, 1},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 11, 1},
                 "Follow-Up", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 5, 2},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 5, 2},
                 "Routine", 0,
                 2, "Low",
                 new String[]{""},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "315,Not Critical,Refrigeration units and hot holding equipment lack accurate thermometers [s. 19(2)],Not Repeat"}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 5, 8},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 5, 8},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager2.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 19},
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 19},
                 "Routine", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 8, 27},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 8, 27},
                 "Follow-Up", 1,
                 1, "Low",
                 new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
                 new String[]{"210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 1, 30},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 1, 30},
                 "Follow-Up", 1,
                 1, "Low",
                 new String[]{"401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 10, 1},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 10, 1},
                 "Follow-Up", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 11, 5},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 11, 5},
                 "Routine", 1,
                 1, "Low",
                 new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 7, 3},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 7, 3},
                 "Routine", 3,
                 2, "High",
                 new String[]{"203,Critical,Food not cooled in an acceptable manner [s. 12(a)],Not Repeat",
@@ -294,12 +275,12 @@ public class ListActivity extends AppCompatActivity {
                         "302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 3, 18},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 3, 18},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 9, 24},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 9, 24},
                 "Follow-Up", 3,
                 2, "High",
                 new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
@@ -307,12 +288,12 @@ public class ListActivity extends AppCompatActivity {
                         "402,Critical,Employee does not wash hands properly or at adequate frequency [s. 21(3)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 3, 12},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 3, 12},
                 "Follow-Up", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager3.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 1, 15},
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 1, 15},
                 "Follow-Up", 2,
                 3, "High",
                 new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
@@ -320,7 +301,7 @@ public class ListActivity extends AppCompatActivity {
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat",
                         "315,Not Critical,Refrigeration units and hot holding equipment lack accurate thermometers [s. 19(2)],Not Repeat"}));
-        inspectionManager5.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 9, 24},
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 9, 24},
                 "Routine", 2,
                 4, "High",
                 new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat",
@@ -329,7 +310,7 @@ public class ListActivity extends AppCompatActivity {
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "502,Not Critical,In operator鈥檚 absence no staff on duty has FOODSAFE Level 1 or equivalent [s. 10(2)],Not Repeat"}));
-        inspectionManager5.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 3, 20},
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 3, 20},
                 "Routine", 2,
                 4, "Low",
                 new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat",
@@ -338,18 +319,18 @@ public class ListActivity extends AppCompatActivity {
                         "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "311,Not Critical,Premises not maintained as per approved plans [s. 6(1)(b)],Not Repeat"}));
-        inspectionManager5.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 10, 1},
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 10, 1},
                 "Follow-Up", 1,
                 0, "Low",
                 new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{""}));
-        inspectionManager5.add(new Inspection("SDFO-8GPUJX", new int[]{2018, 3, 12},
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2018, 3, 12},
                 "Routine", 0,
                 2, "Low",
                 new String[]{""},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "309,Not Critical,Chemicals cleansers & similar agents stored or labeled improperly [s. 27],Not Repeat"}));
-        inspectionManager5.add(new Inspection("SDFO-8GPUJX", new int[]{2018, 7, 18},
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2018, 7, 18},
                 "Routine", 1,
                 4, "Low",
                 new String[]{"401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
@@ -357,12 +338,12 @@ public class ListActivity extends AppCompatActivity {
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
                         "307,Not Critical,Equipment/utensils/food contact surfaces are not of suitable design/material [s. 16; s. 19],Not Repeat",
                         "315,Not Critical,Refrigeration units and hot holding equipment lack accurate thermometers [s. 19(2)],Not Repeat"}));
-        inspectionManager5.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 9, 26},
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 9, 26},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager6.add(new Inspection("SWOD-APSP3X", new int[]{2018, 6, 25},
+        inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2018, 6, 25},
                 "Routine", 2,
                 3, "Moderate",
                 new String[]{"303,Critical,Equipment/facilities/hot & cold water for sanitary maintenance not adequate [s. 17(3); s. 4(1)(f)],Not Repeat",
@@ -370,100 +351,102 @@ public class ListActivity extends AppCompatActivity {
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "311,Not Critical,Premises not maintained as per approved plans [s. 6(1)(b)],Not Repeat"}));
-        inspectionManager6.add(new Inspection("SWOD-APSP3X", new int[]{2019, 3, 5},
+        inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2019, 3, 5},
                 "Routine", 0,
                 2, "Low",
                 new String[]{""},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
                         "403,Not Critical,Employee lacks good personal hygiene clean clothing and hair control [s. 21(1)],Not Repeat"}));
-        inspectionManager6.add(new Inspection("SWOD-APSP3X", new int[]{2019, 8, 30},
+        inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2019, 8, 30},
                 "Routine", 1,
                 0, "Low",
                 new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat"},
                 new String[]{""}));
-        inspectionManager7.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 2, 27},
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 2, 27},
                 "Routine", 1,
                 0, "Low",
                 new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
                 new String[]{""}));
-        inspectionManager7.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 23},
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 23},
                 "Routine", 1,
                 0, "Low",
                 new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager7.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 6, 24},
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 6, 24},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager7.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 3, 5},
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 3, 5},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager7.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 31},
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 31},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager7.add(new Inspection("SHEN-ANSLB4", new int[]{2019,12,16},
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019,12,16},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager8.add(new Inspection("SPLH-9NEUHG", new int[]{2019,10,1},
+        inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2019,10,1},
                 "Routine", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat"}));
-        inspectionManager8.add(new Inspection("SPLH-9NEUHG", new int[]{2018,10,29},
+        inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2018,10,29},
                 "Routine", 1,
                 2, "Low",
                 new String[]{"206,Critical,Hot potentially hazardous food stored/displayed below 60 掳C. [s. 14(2)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "501,Not Critical,Operator does not have FOODSAFE Level 1 or Equivalent [s. 10(1)],Not Repeat"}));
-        inspectionManager8.add(new Inspection("SPLH-9NEUHG", new int[]{2018,5,30},
+        inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2018,5,30},
                 "Routine", 1,
                 1, "Low",
                 new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager8.add(new Inspection("SPLH-9NEUHG", new int[]{2019,4,10},
+        inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2019,4,10},
                 "Routine", 1,
                 1, "Low",
                 new String[]{"206,Critical,Hot potentially hazardous food stored/displayed below 60 掳C. [s. 14(2)],Not Repeat"},
                 new String[]{"501,Not Critical,Operator does not have FOODSAFE Level 1 or Equivalent [s. 10(1)],Not Repeat"}));
-        restaurantsManager.add(new Restaurant("Lee Yuen Seafood Restaurant", "14755 104 Ave",
+
+        /***restaurantsManager.add(new Restaurant("Lee Yuen Seafood Restaurant", "14755 104 Ave",
                 "SWOD-AHZUMF", -122.8668064,
                 49.20610961, "Surrey",
-                "Restaurant", inspectionManager));
+                "Restaurant", inspectionManager));***/
+
         restaurantsManager.add(new Restaurant("Pattullo", "12808 King George Blvd",
                 "SDFO-8HKP7E", -122.8136896,
                 49.19166808, "Surrey",
-                "Restaurant", inspectionManager2));
+                "Restaurant", inspectionManager));
         restaurantsManager.add(new Restaurant("Lee Yuen Seafood Restaurant", "1812 152 St",
                 "SHEN-B7BNSR", -122.80086843,
                 49.03508252, "Surrey",
-                "Restaurant", inspectionManager3));
+                "Restaurant", inspectionManager));
         restaurantsManager.add(new Restaurant("The Unfindable Bar", "12345 67 Ave",
                 "NOSU-CHNUM", -122.86815856,
                 49.14214908, "Surrey",
-                "Restaurant", inspectionManager4));
+                "Restaurant", inspectionManager));
         restaurantsManager.add(new Restaurant("Top in Town Pizza", "12788 76A Ave",
                 "SDFO-8GPUJX", -122.86855856,
                 49.14218908, "Surrey",
-                "Restaurant", inspectionManager5));
+                "Restaurant", inspectionManager));
         restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
                 "SWOD-APSP3X", -122.75625586,
                 49.19205936, "Surrey",
-                "Restaurant", inspectionManager6));
+                "Restaurant", inspectionManager));
         restaurantsManager.add(new Restaurant("Top In Town Pizza", "14330 64 Ave",
                 "SHEN-ANSLB4", -122.82521495,
                 49.11851305, "Surrey",
-                "Restaurant", inspectionManager7));
+                "Restaurant", inspectionManager));
         restaurantsManager.add(new Restaurant("Zugba Flame Grilled Chicken", "14351 104 Ave",
                 "SPLH-9NEUHG", -122.82418348,
                 49.19172759, "Surrey",
-                "Restaurant", inspectionManager8));
+                "Restaurant", inspectionManager));
 
         restaurantsManager.setcount(2);
 
@@ -485,46 +468,144 @@ public class ListActivity extends AppCompatActivity {
             if (itemview == null) {
                 itemview = getLayoutInflater().inflate(R.layout.item, parent, false);
             }
+            Restaurant currentrestaurant = restaurantsManager.get(position);
+
+            for (Restaurant tracking : restaurantsManager){
+                if (tracking.equals(currentrestaurant)){
+                    int temp = 0;
+                    for (int i = 0; i < 55; i++){
+                        if (inspectionManager.get(i).getTrackingNum().equals(tracking.getTrackingNumber())) {
+                            temp = i;
+                            break;
+                        }
+                    }
+                    int number;
+                    // the number of issues
+
+                    number=currentrestaurant.getInspections().get(temp).getNumCritical()
+                            + currentrestaurant.getInspections().get(temp).getNumNonCritical();
+
+                    //fill the view
+                    TextView t1 = itemview.findViewById(R.id.text11);
+                    t1.setText(currentrestaurant.getRestaurantName());
+
+                    TextView t2= itemview.findViewById(R.id.text2);
+                    t2.setText("Issues Found: " + number);
+
+                    TextView t3= itemview.findViewById(R.id.text3);
+                    t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(temp).getInspectionDate()[0]+" "+
+                            currentrestaurant.getInspections().get(temp).getInspectionDate()[1]+" "+
+                            currentrestaurant.getInspections().get(temp).getInspectionDate()[2]);
+
+
+                    TextView t4= itemview.findViewById(R.id.text4);
+                    t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(temp).getColour());
+
+                    ImageView color = itemview.findViewById(R.id.hazard);
+                    switch(currentrestaurant.getInspections().get(temp).getHazardRating()) {
+                        case "Low":
+                            color.setImageResource(R.drawable.blue);
+                            break;
+                        case "Moderate":
+                            color.setImageResource(R.drawable.yellow);
+                            break;
+                        default:
+                            color.setImageResource(R.drawable.red);
+                    }
+                }
+                //break;
+            }
+
+
+            /***if (tracking.equals("SDFO-8HKP7E")){
+                int number;
+                // the number of issues
+
+                number=currentrestaurant.getInspections().get(0).getNumCritical()
+                        + currentrestaurant.getInspections().get(0).getNumNonCritical();
+
+
+                //fill the view
+                TextView t1 = itemview.findViewById(R.id.text11);
+                t1.setText(currentrestaurant.getRestaurantName());
+
+                TextView t2= itemview.findViewById(R.id.text2);
+                t2.setText("Issues Found: " + number);
+
+                TextView t3= itemview.findViewById(R.id.text3);
+                t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(0).getInspectionDate()[0]+" "+
+                        currentrestaurant.getInspections().get(0).getInspectionDate()[1]+" "+
+                        currentrestaurant.getInspections().get(0).getInspectionDate()[2]);
+
+
+                TextView t4= itemview.findViewById(R.id.text4);
+                t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(0).getColour());
+
+                ImageView color = itemview.findViewById(R.id.hazard);
+                switch(currentrestaurant.getInspections().get(0).getHazardRating()) {
+                    case "Low":
+                        color.setImageResource(R.drawable.blue);
+                        break;
+                    case "Moderate":
+                        color.setImageResource(R.drawable.yellow);
+                        break;
+                    default:
+                        color.setImageResource(R.drawable.red);
+                }
+
+            }
+            //else if (tracking.equals("SHEN-B7BNSR")){
+            else{
+                int temp = 0;
+                for (int i = 0; i < 55; i++){
+                    if (inspectionManager.get(i).getTrackingNum().equals("SDFO-8GPUJX")) {
+                        temp = i;
+                        break;
+                    }
+                }
+                int number;
+                // the number of issues
+
+                number=currentrestaurant.getInspections().get(temp).getNumCritical()
+                        + currentrestaurant.getInspections().get(temp).getNumNonCritical();
+
+
+                //fill the view
+                TextView t1 = itemview.findViewById(R.id.text11);
+                t1.setText(currentrestaurant.getRestaurantName());
+
+                TextView t2= itemview.findViewById(R.id.text2);
+                t2.setText("Issues Found: " + number);
+
+                TextView t3= itemview.findViewById(R.id.text3);
+                t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(temp).getInspectionDate()[0]+" "+
+                        currentrestaurant.getInspections().get(temp).getInspectionDate()[1]+" "+
+                        currentrestaurant.getInspections().get(temp).getInspectionDate()[2]);
+
+
+                TextView t4= itemview.findViewById(R.id.text4);
+                t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(temp).getColour());
+
+                ImageView color = itemview.findViewById(R.id.hazard);
+                switch(currentrestaurant.getInspections().get(temp).getHazardRating()) {
+                    case "Low":
+                        color.setImageResource(R.drawable.blue);
+                        break;
+                    case "Moderate":
+                        color.setImageResource(R.drawable.yellow);
+                        break;
+                    default:
+                        color.setImageResource(R.drawable.red);
+                }
+
+            }***/
+
+
 
             //find the restaurantmanager to work with
-            Restaurant currentrestaurant = restaurantsManager.get(position);
-            int number;
-            // the number of issues
-            number=currentrestaurant.getInspections().get(0).getNumCritical()
-                             + currentrestaurant.getInspections().get(0).getNumNonCritical();
+            //Restaurant currentrestaurant = restaurantsManager.get(position);
 
 
-              //fill the view
-              TextView t1 = itemview.findViewById(R.id.text11);
-              t1.setText(currentrestaurant.getRestaurantName());
-
-              TextView t2= itemview.findViewById(R.id.text2);
-              t2.setText("Issues Found: " + number);
-
-              TextView t3= itemview.findViewById(R.id.text3);
-              t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(0).getInspectionDate()[0]+" "+
-                      currentrestaurant.getInspections().get(0).getInspectionDate()[1]+" "+
-                      currentrestaurant.getInspections().get(0).getInspectionDate()[2]);
-
-
-
-
-
-
-              TextView t4= itemview.findViewById(R.id.text4);
-              t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(0).getColour());
-
-              ImageView color = itemview.findViewById(R.id.hazard);
-              switch(currentrestaurant.getInspections().get(0).getHazardRating()) {
-                case "Low":
-                    color.setImageResource(R.drawable.blue);
-                    break;
-                case "Moderate":
-                    color.setImageResource(R.drawable.yellow);
-                    break;
-                default:
-                    color.setImageResource(R.drawable.red);
-            }
 
 
 

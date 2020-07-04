@@ -21,7 +21,8 @@ public class Inspection {
 
     }
 
-    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String[] cviolLump,String[] nonviolLump) {
+
+    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String[] cviolLump, String[] nonviolLump) {
         TrackingNum = trackingNum;
         InspectionDate = inspectionDate;
         InspType = inspType;
@@ -32,6 +33,11 @@ public class Inspection {
         CViolLump = nonviolLump;
         setColour();
 
+    }
+
+
+    public String getTrackingNum() {
+        return TrackingNum;
     }
 
     public int[] getInspectionDate() {

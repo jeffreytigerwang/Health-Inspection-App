@@ -54,7 +54,7 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     public int getNumRestaurants() {
         return restaurants.size();
     }
-
+    //test
 
     @NonNull
     @Override

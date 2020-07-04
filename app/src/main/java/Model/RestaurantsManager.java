@@ -13,7 +13,16 @@ import java.util.List;
 public class RestaurantsManager {
     private List<Restaurant> restaurants = new ArrayList<>();
     private static RestaurantsManager instance;
+    private int count=0;
 
+    public void setcount(int i){
+        count=i;
+    }
+
+    public int getcount()
+    {
+        return count;
+    }
 
     public static RestaurantsManager getInstance() {
         if (instance == null) {

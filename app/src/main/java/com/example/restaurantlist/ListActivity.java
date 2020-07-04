@@ -41,7 +41,9 @@ public class ListActivity extends AppCompatActivity {
         inspectionManager = InspectionManager.getInstance();
 
         // add the restaurants to the RestaurantsManager
-        addrestaurants();
+        if(restaurantsManager.getcount()==0)
+        { addrestaurants();}
+
         pupulateListView();
 
 
@@ -72,6 +74,8 @@ public class ListActivity extends AppCompatActivity {
                 49.19166808, "Surrey",
                 "Restaurant", inspectionManager));
 
+
+        restaurantsManager.setcount(2);
 
 
 

@@ -8,9 +8,13 @@ import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
+import Model.Inspection;
+import Model.InspectionManager;
+import Model.Restaurant;
 import Model.RestaurantsManager;
 
 public class MenuActivity extends AppCompatActivity {
+
 
 
     @Override
@@ -18,6 +22,7 @@ public class MenuActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
 
         // create a btn that user can intend to ListActivity for the list of restaurant.
         final LinearLayout linearLayout;

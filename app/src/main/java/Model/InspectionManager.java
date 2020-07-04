@@ -15,6 +15,7 @@ public class InspectionManager {
     private static InspectionManager instance;
 
 
+
     public static InspectionManager getInstance() {
         if (instance == null) {
             instance = new InspectionManager();

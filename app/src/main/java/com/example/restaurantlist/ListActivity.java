@@ -414,10 +414,10 @@ public class ListActivity extends AppCompatActivity {
                 new String[]{"206,Critical,Hot potentially hazardous food stored/displayed below 60 掳C. [s. 14(2)],Not Repeat"},
                 new String[]{"501,Not Critical,Operator does not have FOODSAFE Level 1 or Equivalent [s. 10(1)],Not Repeat"}));
 
-        /***restaurantsManager.add(new Restaurant("Lee Yuen Seafood Restaurant", "14755 104 Ave",
+        restaurantsManager.add(new Restaurant("Lee Yuen Seafood Restaurant", "14755 104 Ave",
                 "SWOD-AHZUMF", -122.8668064,
                 49.20610961, "Surrey",
-                "Restaurant", inspectionManager));***/
+                "Restaurant", inspectionManager));
 
         restaurantsManager.add(new Restaurant("Pattullo", "12808 King George Blvd",
                 "SDFO-8HKP7E", -122.8136896,

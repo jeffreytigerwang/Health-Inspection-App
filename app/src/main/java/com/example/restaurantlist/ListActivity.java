@@ -17,6 +17,9 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import Model.Inspection;
 import Model.InspectionManager;
@@ -474,20 +477,27 @@ public class ListActivity extends AppCompatActivity {
             }
             Restaurant currentrestaurant = restaurantsManager.get(position);
 
-            for (Restaurant tracking : restaurantsManager){
-                if (tracking.equals(currentrestaurant)){
-                    int temp = 0;
+
+         for (Restaurant tracking : restaurantsManager){
+                if (tracking.getTrackingNumber().equals(currentrestaurant.getTrackingNumber())){
+                    int temp = -1;
                     for (int i = 0; i < 55; i++){
                         if (inspectionManager.get(i).getTrackingNum().equals(tracking.getTrackingNumber())) {
                             temp = i;
                             break;
                         }
                     }
+
                     int number;
                     // the number of issues
-
-                    number=currentrestaurant.getInspections().get(temp).getNumCritical()
-                            + currentrestaurant.getInspections().get(temp).getNumNonCritical();
+                    if(temp==-1)
+                    {
+                       number=0;
+                    }
+                    else {
+                        number = currentrestaurant.getInspections().get(temp).getNumCritical()
+                                + currentrestaurant.getInspections().get(temp).getNumNonCritical();
+                    }
 
                     //fill the view
                     TextView t1 = itemview.findViewById(R.id.text11);
@@ -497,18 +507,32 @@ public class ListActivity extends AppCompatActivity {
                     t2.setText("Issues Found: " + number);
 
                     TextView t3= itemview.findViewById(R.id.text3);
-
-                    t3.setText(""+timefunction(currentrestaurant.getInspections().get(temp).getInspectionDate()[0],
-                            currentrestaurant.getInspections().get(temp).getInspectionDate()[1],
-                            currentrestaurant.getInspections().get(temp).getInspectionDate()[2]));
-
-
+                  if(temp==-1)
+                  {
+                      t3.setText("N/A");}
+                  else
+                    {
+                        t3.setText("" + timefunction(currentrestaurant.getInspections().get(temp).getInspectionDate()[0],
+                                currentrestaurant.getInspections().get(temp).getInspectionDate()[1],
+                                currentrestaurant.getInspections().get(temp).getInspectionDate()[2]));
+                    }
 
 
                     TextView t4= itemview.findViewById(R.id.text4);
-                    t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(temp).getColour());
+                    if(temp==-1)
+                    {
+                        t4.setText("Hazard Level: blue " );
+                    }
+                    else
+                    {  t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(temp).getColour());}
+
 
                     ImageView color = itemview.findViewById(R.id.hazard);
+                    if(temp==-1)
+                    {
+                        color.setImageResource(R.drawable.blue);
+                    }
+                    else{
                     switch(currentrestaurant.getInspections().get(temp).getHazardRating()) {
                         case "Low":
                             color.setImageResource(R.drawable.blue);
@@ -521,97 +545,7 @@ public class ListActivity extends AppCompatActivity {
                     }
                 }
                 //break;
-            }
-
-
-            /***if (tracking.equals("SDFO-8HKP7E")){
-                int number;
-                // the number of issues
-
-                number=currentrestaurant.getInspections().get(0).getNumCritical()
-                        + currentrestaurant.getInspections().get(0).getNumNonCritical();
-
-
-                //fill the view
-                TextView t1 = itemview.findViewById(R.id.text11);
-                t1.setText(currentrestaurant.getRestaurantName());
-
-                TextView t2= itemview.findViewById(R.id.text2);
-                t2.setText("Issues Found: " + number);
-
-                TextView t3= itemview.findViewById(R.id.text3);
-                t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(0).getInspectionDate()[0]+" "+
-                        currentrestaurant.getInspections().get(0).getInspectionDate()[1]+" "+
-                        currentrestaurant.getInspections().get(0).getInspectionDate()[2]);
-
-
-                TextView t4= itemview.findViewById(R.id.text4);
-                t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(0).getColour());
-
-                ImageView color = itemview.findViewById(R.id.hazard);
-                switch(currentrestaurant.getInspections().get(0).getHazardRating()) {
-                    case "Low":
-                        color.setImageResource(R.drawable.blue);
-                        break;
-                    case "Moderate":
-                        color.setImageResource(R.drawable.yellow);
-                        break;
-                    default:
-                        color.setImageResource(R.drawable.red);
-                }
-
-            }
-            //else if (tracking.equals("SHEN-B7BNSR")){
-            else{
-                int temp = 0;
-                for (int i = 0; i < 55; i++){
-                    if (inspectionManager.get(i).getTrackingNum().equals("SDFO-8GPUJX")) {
-                        temp = i;
-                        break;
-                    }
-                }
-                int number;
-                // the number of issues
-
-                number=currentrestaurant.getInspections().get(temp).getNumCritical()
-                        + currentrestaurant.getInspections().get(temp).getNumNonCritical();
-
-
-                //fill the view
-                TextView t1 = itemview.findViewById(R.id.text11);
-                t1.setText(currentrestaurant.getRestaurantName());
-
-                TextView t2= itemview.findViewById(R.id.text2);
-                t2.setText("Issues Found: " + number);
-
-                TextView t3= itemview.findViewById(R.id.text3);
-                t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(temp).getInspectionDate()[0]+" "+
-                        currentrestaurant.getInspections().get(temp).getInspectionDate()[1]+" "+
-                        currentrestaurant.getInspections().get(temp).getInspectionDate()[2]);
-
-
-                TextView t4= itemview.findViewById(R.id.text4);
-                t4.setText("Hazard Level: " + currentrestaurant.getInspections().get(temp).getColour());
-
-                ImageView color = itemview.findViewById(R.id.hazard);
-                switch(currentrestaurant.getInspections().get(temp).getHazardRating()) {
-                    case "Low":
-                        color.setImageResource(R.drawable.blue);
-                        break;
-                    case "Moderate":
-                        color.setImageResource(R.drawable.yellow);
-                        break;
-                    default:
-                        color.setImageResource(R.drawable.red);
-                }
-
-            }***/
-
-
-
-            //find the restaurantmanager to work with
-            //Restaurant currentrestaurant = restaurantsManager.get(position);
-
+            }}
 
 
             return itemview;
@@ -623,103 +557,206 @@ public class ListActivity extends AppCompatActivity {
     }
 
     //a time function in an intelligent format so that it's easier to understand than dates
-    private String timefunction(int Year, int Month , int Day){
-         Calendar calendar = Calendar.getInstance();
-         SimpleDateFormat simpleyearFormat = new SimpleDateFormat("yyyy");
-         SimpleDateFormat simplemonthFormat = new SimpleDateFormat("MM");
-         SimpleDateFormat simpledayFormat = new SimpleDateFormat("dd");
+   /** private String timefunction(int Year, int Month , int Day){
 
-         //get yeat
-         String yeartime = simpleyearFormat.format(calendar.getTime());
-         int year = Integer.parseInt(yeartime);
-         //get month
-         String monthtime =  simplemonthFormat.format(calendar.getTime());
-         int  month = Integer.parseInt(monthtime);
-         //get day
-         String daytime = simpledayFormat.format(calendar.getTime());
-         int  day = Integer.parseInt(daytime);
+        // SOURCE: https://stackoverflow.com/questions/36370895/getyear-getmonth-getday-are-deprecated-in-calendar-what-to-use-then
 
-         //calculate days
-         int amount1 = (Year-2015)*365 + (Month-1)*30 + Day;   // inspection time
-         int amount2 = (year-2015)*365 + (month-1)*30 + day;   // current time
-        String m ;
-        {
-        switch(Month) {
-            case 1:
-                m="January";
-                break;
-            case 2:
-                m="February";
-                break;
-            case 3:
-                m="March";
-                break;
-            case 4:
-                m="April";
-                break;
-            case 5:
-                m="May";
-                break;
-            case 6:
-                m="June";
-            case 7:
-                m="July";
-                break;
-            case 8:
-                m="August";
-                break;
-            case 9:
-                m="September";
-                break;
-            case 10:
-                m="October";
-                break;
-            case 11:
-                m="November";
-                break;
-            default:
-                m="December";
-        }}
+        try{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+            String inspectiondate = Integer.toString(Year) + Integer.toString(Month) + Integer.toString(Day);
+            Date inspection = simpleDateFormat.parse(inspectiondate);
+            Date currentDate = new Date();
 
+            long diffInMonth = Math.abs(currentDate.getTime() - inspection.getTime());
+            long diffInDay = TimeUnit.DAYS.convert(diffInMonth, TimeUnit.MILLISECONDS);
+            //this.diffInDay = (int) diffInDay;
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(inspection);
 
+            String m ;
+            {
+                switch(Month) {
+                    case 1:
+                        m="January";
+                        break;
+                    case 2:
+                        m="February";
+                        break;
+                    case 3:
+                        m="March";
+                        break;
+                    case 4:
+                        m="April";
+                        break;
+                    case 5:
+                        m="May";
+                        break;
+                    case 6:
+                        m="June";
+                        break;
+                    case 7:
+                        m="July";
+                        break;
+                    case 8:
+                        m="August";
+                        break;
+                    case 9:
+                        m="September";
+                        break;
+                    case 10:
+                        m="October";
+                        break;
+                    case 11:
+                        m="November";
+                        break;
+                    default:
+                        m="December";
+                }}
 
-        if(amount2-amount1<=30)
-        {
-            String T = " days";
-            String t = Integer.toString(amount2-amount1);
-            return t + T ;
+            if(diffInDay<=30)
+            {
+                String T = " days";
+                String t = Long.toString(diffInDay);
+                return t + T ;
+
+            }
+
+            else if(diffInDay <=365) {
+                String space = " ";
+                String d = Integer.toString(Day);
+
+                return m + space + d;
+            }
+
+            else
+            {
+                String space = " ";
+                String y = Integer.toString(Year);
+                return m + space + y ;
+            }
+
 
         }
-
-         if(amount2-amount1>30&&amount2-amount1<=365) {
-             String space = " ";
-             String d = Integer.toString(Day);
-
-             return m + space + d;
-         }
-
-         else
-         {
-             String space = " ";
-             String y = Integer.toString(Year);
-         return m + space + y ;
-
-         }
-
-
-
-
-
-
-
-
-
-
-
-
-
+        catch (Exception e) {
+            e.printStackTrace();
+            return "N/A";
+        }
 
     }
+*/
+   //a time function in an intelligent format so that it's easier to understand than dates
+   private String timefunction(int Year, int Month , int Day){
+       Calendar calendar = Calendar.getInstance();
+       SimpleDateFormat simpleyearFormat = new SimpleDateFormat("yyyy");
+       SimpleDateFormat simplemonthFormat = new SimpleDateFormat("MM");
+       SimpleDateFormat simpledayFormat = new SimpleDateFormat("dd");
+
+       //get yeat
+       String yeartime = simpleyearFormat.format(calendar.getTime());
+       int year = Integer.parseInt(yeartime);
+       //get month
+       String monthtime =  simplemonthFormat.format(calendar.getTime());
+       int  month = Integer.parseInt(monthtime);
+       //get day
+       String daytime = simpledayFormat.format(calendar.getTime());
+       int  day = Integer.parseInt(daytime);
+
+       //calculate days
+       int amount1 = (Year-2015)*365 + (Month-1)*30 + Day;   // inspection time
+       int amount2 = (year-2015)*365 + (month-1)*30 + day;   // current time
+       String m ;
+       {
+           switch(Month) {
+               case 1:
+                   m="January";
+                   break;
+               case 2:
+                   m="February";
+                   break;
+               case 3:
+                   m="March";
+                   break;
+               case 4:
+                   m="April";
+                   break;
+               case 5:
+                   m="May";
+                   break;
+               case 6:
+                   m="June";
+                   break;
+               case 7:
+                   m="July";
+                   break;
+               case 8:
+                   m="August";
+                   break;
+               case 9:
+                   m="September";
+                   break;
+               case 10:
+                   m="October";
+                   break;
+               case 11:
+                   m="November";
+                   break;
+               default:
+                   m="December";
+           }}
+
+
+
+       if(amount2-amount1<=30)
+       {
+           String T = " days";
+           String t = Integer.toString(amount2-amount1);
+           return t + T ;
+
+       }
+
+       if(amount2-amount1>30&&amount2-amount1<=365) {
+           String space = " ";
+           String d = Integer.toString(Day);
+
+           return m + space + d;
+       }
+
+       else
+       {
+           String space = " ";
+           String y = Integer.toString(Year);
+           return m + space + y ;
+
+       }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

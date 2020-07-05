@@ -6,4 +6,9 @@
     <string name="list_of_restaurant">List of Restaurant</string>
     <string name="restaurant_name">Restaurant Name</string>
     <string name="restaurant_information">restaurant information</string>
+    <string name="how_long_ago">how long ago</string>
+    <string name="noncrit">NonCrit</string>
+    <string name="crit">Crit</string>
+    <string name="gps_coords">GPS Coords :</string>
+    <string name="address">Address :</string>
 </resources>

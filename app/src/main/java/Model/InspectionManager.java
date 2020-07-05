@@ -27,6 +27,9 @@ public class InspectionManager {
         // Nothing: ensure this is a singleton.
     }
 
+    public List getList(){
+        return inspections;
+    }
     public void add(Inspection inspection) {
         inspections.add(inspection);
     }

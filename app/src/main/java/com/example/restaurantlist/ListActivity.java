@@ -5,9 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.ImageView;
@@ -25,12 +27,13 @@ import Model.Inspection;
 import Model.InspectionManager;
 import Model.Restaurant;
 import Model.RestaurantsManager;
+import Model.restaurantDetails;
 
 public class ListActivity extends AppCompatActivity {
 
     private RestaurantsManager restaurantsManager;
     private InspectionManager inspectionManager;
-
+    public static final String INDEX = "index";
 
 
 
@@ -48,8 +51,25 @@ public class ListActivity extends AppCompatActivity {
 
         pupulateListView();
 
+        registerClickCallback();
 
     }
+
+    private void registerClickCallback(){
+        //takes user to restaurant details when they click on a restaurant
+        ListView list = findViewById(R.id.listvieww);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                Intent intent = restaurantDetails.makeLaunchIntent(ListActivity.this);
+                //Sends index of which lens was click on in ViewList
+                intent.putExtra(INDEX, position);
+                startActivity(intent);
+            }
+        });
+
+    }
+
 
     private void pupulateListView() {
         ArrayAdapter<RestaurantsManager> adapter = new MyListAdapter();

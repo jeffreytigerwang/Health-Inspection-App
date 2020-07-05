@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 public class welcomeActivity extends AppCompatActivity {
     ProgressBar progressBar;
-    int count=40;
+    int count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public class welcomeActivity extends AppCompatActivity {
 
         };
 
-        time.schedule(timerTask,0,100);
+        time.schedule(timerTask,0,15);
 
     }
 

@@ -64,53 +64,119 @@ public class ListActivity extends AppCompatActivity {
         inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2020, 1, 22},
                 "Routine", 2,
                 3, "Moderate",
-                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat",
+                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)],Not Repeat",
                         "402,Critical,Employee does not wash hands properly or at adequate frequency [s. 21(3)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 12, 7},
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 11, 5},
+                "Routine", 2,
+                5, "High",
+                new String[]{"203,Critical,Food not cooled in an acceptable manner [s. 12(a)],Not Repeat",
+                        "205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)],Not Repeat"},
+                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
+                        "211,Not Critical,Frozen potentially hazardous food stored/displayed above -18 °C. [s. 14(3)],Not Repeat",
+                        "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
+                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
+                        "309,Not Critical,Chemicals cleansers & similar agents stored or labeled improperly [s. 27],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 7, 29},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 10, 30},
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 7, 8},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 3, 20},
+
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 6, 24},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 3, 19},
-                "Routine", 6,
-                8, "High",
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 6, 24},
+                "Routine", 2,
+                6, "High",
+                new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat",
+                        "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
+                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
+                        "304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
+                        "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
+                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
+                        "307,Not Critical,Equipment/utensils/food contact surfaces are not of suitable design/material [s. 16; s. 19],Not Repeat",
+                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 3, 1},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 2, 26},
+                "Routine", 7,
+                6, "High",
                 new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat",
-                        "203,Critical,Food not cooled in an acceptable manner [s. 12(a)],Not Repeat",
-                        "205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat",
+                        "202,Critical,Food not processed in a manner that makes it safe to eat [s. 14(1)],Not Repeat",
+                        "205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)]",
+                        "206,Critical,Hot potentially hazardous food stored/displayed below 60 °C. [s. 14(2)],Not Repeat",
                         "301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
                         "302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat",
                         "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat",
-                        "211,Not Critical,Frozen potentially hazardous food stored/displayed above -18 掳C. [s. 14(3)],Not Repeat",
                         "304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
                         "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
-                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
-                        "309,Not Critical,Chemicals cleansers & similar agents stored or labeled improperly [s. 27],Not Repeat"}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 6, 26},
-                "Routine", 3,
+                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 2, 1},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 1, 31},
+                "Follow-Up", 3,
+                1, "High",
+                new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat",
+                        "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat",
+                        "402,Critical,Employee does not wash hands properly or at adequate frequency [s. 21(3)],Not Repeat"},
+                new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 1, 3},
+                "Follow-Up", 1,
                 4, "High",
-                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat",
-                        "301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
-                        "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
-                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
+                new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat"},
+                new String[]{"210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat",
                         "304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
                         "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
+
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 12, 7},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 10, 30},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 10, 30},
+                "Follow-Up", 1,
+                0, "High",
+                new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat"},
+                new String[]{""}));
+
         inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 10, 29},
                 "Routine", 5,
                 6, "High",
@@ -126,167 +192,110 @@ public class ListActivity extends AppCompatActivity {
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "502,Not Critical,In operator鈥檚 absence no staff on duty has FOODSAFE Level 1 or equivalent [s. 10(2)],Not Repeat"
                 }));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 7, 8},
-                "Follow-Up", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 3, 1},
-                "Follow-Up", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 6, 24},
-                "Follow-Up", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 1, 3},
-                "Follow-Up", 1,
-                4, "High",
-                new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat"},
-                new String[]{"210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat",
-                        "304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
-                        "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
-                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 6, 24},
-                "Routine", 2,
-                6, "High",
-                new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat",
-                        "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
-                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
-                        "304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
-                        "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
-                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
-                        "307,Not Critical,Equipment/utensils/food contact surfaces are not of suitable design/material [s. 16; s. 19],Not Repeat",
-                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 2, 1},
-                "Follow-Up", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 1, 31},
-                "Follow-Up", 3,
-                1, "High",
-                new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat",
-                        "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat",
-                        "402,Critical,Employee does not wash hands properly or at adequate frequency [s. 21(3)],Not Repeat"},
-                new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 6, 29},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 7, 29},
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 6, 26},
+                "Routine", 3,
+                4, "High",
+                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)],Not Repeat",
+                        "301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
+                        "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
+                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
+                        "304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
+                        "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
+                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 3, 20},
                 "Follow-Up", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 10, 30},
-                "Follow-Up", 1,
-                0, "High",
-                new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat"},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 11, 5},
-                "Routine", 2,
-                5, "High",
-                new String[]{"203,Critical,Food not cooled in an acceptable manner [s. 12(a)],Not Repeat",
-                        "205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat"},
-                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
-                        "211,Not Critical,Frozen potentially hazardous food stored/displayed above -18 掳C. [s. 14(3)],Not Repeat",
-                        "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
-                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
-                        "309,Not Critical,Chemicals cleansers & similar agents stored or labeled improperly [s. 27],Not Repeat"}));
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2019, 2, 26},
-                "Routine", 7,
-                6, "High",
+
+        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2018, 3, 19},
+                "Routine", 6,
+                8, "High",
                 new String[]{"201,Critical,Food contaminated or unfit for human consumption [s. 13],Not Repeat",
-                        "202,Critical,Food not processed in a manner that makes it safe to eat [s. 14(1)],Not Repeat",
-                        "205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)]",
-                        "206,Critical,Hot potentially hazardous food stored/displayed below 60 掳C. [s. 14(2)],Not Repeat",
+                        "203,Critical,Food not cooled in an acceptable manner [s. 12(a)],Not Repeat",
+                        "205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)],Not Repeat",
                         "301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
                         "302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat",
                         "401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat",
+                        "211,Not Critical,Frozen potentially hazardous food stored/displayed above -18 °C. [s. 14(3)],Not Repeat",
                         "304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
                         "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
-                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
+                        "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
+                        "309,Not Critical,Chemicals cleansers & similar agents stored or labeled improperly [s. 27],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2019, 10, 2},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
-        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 24},
-                "Follow-Up", 0,
-                1, "Low",
-                new String[]{""},
-                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 11, 6},
-                "Follow-Up", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
+
         inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2019, 4, 10},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
+
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 11, 6},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
         inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 11, 1},
                 "Follow-Up", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 24},
+                "Follow-Up", 0,
+                1, "Low",
+                new String[]{""},
+                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 19},
+                "Routine", 0,
+                1, "Low",
+                new String[]{""},
+                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 5, 8},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
         inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 5, 2},
                 "Routine", 0,
                 2, "Low",
                 new String[]{""},
                 new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "315,Not Critical,Refrigeration units and hot holding equipment lack accurate thermometers [s. 19(2)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 5, 8},
-                "Follow-Up", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SDFO-8HKP7E", new int[]{2018, 10, 19},
-                "Routine", 0,
-                1, "Low",
-                new String[]{""},
-                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 8, 27},
-                "Follow-Up", 1,
-                1, "Low",
-                new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
-                new String[]{"210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 1, 30},
-                "Follow-Up", 1,
-                1, "Low",
-                new String[]{"401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
-                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 10, 1},
-                "Follow-Up", 0,
-                1, "Low",
-                new String[]{""},
-                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat"}));
+
+
         inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 11, 5},
                 "Routine", 1,
                 1, "Low",
                 new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 7, 3},
-                "Routine", 3,
-                2, "High",
-                new String[]{"203,Critical,Food not cooled in an acceptable manner [s. 12(a)],Not Repeat",
-                        "301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
-                        "302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
-                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
-                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 3, 18},
+
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 10, 1},
                 "Follow-Up", 0,
-                0, "Low",
+                1, "Low",
                 new String[]{""},
-                new String[]{""}));
+                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 9, 24},
                 "Follow-Up", 3,
                 2, "High",
@@ -295,11 +304,40 @@ public class ListActivity extends AppCompatActivity {
                         "402,Critical,Employee does not wash hands properly or at adequate frequency [s. 21(3)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 8, 27},
+                "Follow-Up", 1,
+                1, "Low",
+                new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
+                new String[]{"210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 7, 3},
+                "Routine", 3,
+                2, "High",
+                new String[]{"203,Critical,Food not cooled in an acceptable manner [s. 12(a)],Not Repeat",
+                        "301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat",
+                        "302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
+                new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
+                        "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 3, 18},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
         inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 3, 12},
                 "Follow-Up", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 1, 30},
+                "Follow-Up", 1,
+                1, "Low",
+                new String[]{"401,Critical,Adequate handwashing stations not available for employees [s. 21(4)],Not Repeat"},
+                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SHEN-B7BNSR", new int[]{2019, 1, 15},
                 "Follow-Up", 2,
                 3, "High",
@@ -308,15 +346,29 @@ public class ListActivity extends AppCompatActivity {
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "210,Not Critical,Food not thawed in an acceptable manner [s. 14(2)],Not Repeat",
                         "315,Not Critical,Refrigeration units and hot holding equipment lack accurate thermometers [s. 19(2)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 10, 1},
+                "Follow-Up", 1,
+                0, "Low",
+                new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 9, 26},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
         inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 9, 24},
                 "Routine", 2,
                 4, "High",
-                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat",
+                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)],Not Repeat",
                         "302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{"304,Not Critical,Premises not free of pests [s. 26(a)],Not Repeat",
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "502,Not Critical,In operator鈥檚 absence no staff on duty has FOODSAFE Level 1 or equivalent [s. 10(2)],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 3, 20},
                 "Routine", 2,
                 4, "Low",
@@ -326,17 +378,7 @@ public class ListActivity extends AppCompatActivity {
                         "305,Not Critical,Conditions observed that may allow entrance/harbouring/breeding of pests [s. 26(b)(c)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "311,Not Critical,Premises not maintained as per approved plans [s. 6(1)(b)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 10, 1},
-                "Follow-Up", 1,
-                0, "Low",
-                new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2018, 3, 12},
-                "Routine", 0,
-                2, "Low",
-                new String[]{""},
-                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
-                        "309,Not Critical,Chemicals cleansers & similar agents stored or labeled improperly [s. 27],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2018, 7, 18},
                 "Routine", 1,
                 4, "Low",
@@ -345,11 +387,27 @@ public class ListActivity extends AppCompatActivity {
                         "306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
                         "307,Not Critical,Equipment/utensils/food contact surfaces are not of suitable design/material [s. 16; s. 19],Not Repeat",
                         "315,Not Critical,Refrigeration units and hot holding equipment lack accurate thermometers [s. 19(2)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2019, 9, 26},
-                "Follow-Up", 0,
-                0, "Low",
+
+        inspectionManager.add(new Inspection("SDFO-8GPUJX", new int[]{2018, 3, 12},
+                "Routine", 0,
+                2, "Low",
                 new String[]{""},
+                new String[]{"308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
+                        "309,Not Critical,Chemicals cleansers & similar agents stored or labeled improperly [s. 27],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2019, 8, 30},
+                "Routine", 1,
+                0, "Low",
+                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)],Not Repeat"},
                 new String[]{""}));
+
+        inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2019, 3, 5},
+                "Routine", 0,
+                2, "Low",
+                new String[]{""},
+                new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
+                        "403,Not Critical,Employee lacks good personal hygiene clean clothing and hair control [s. 21(1)],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2018, 6, 25},
                 "Routine", 2,
                 3, "Moderate",
@@ -358,56 +416,59 @@ public class ListActivity extends AppCompatActivity {
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "308,Not Critical,Equipment/utensils/food contact surfaces are not in good working order [s. 16(b)],Not Repeat",
                         "311,Not Critical,Premises not maintained as per approved plans [s. 6(1)(b)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2019, 3, 5},
-                "Routine", 0,
-                2, "Low",
-                new String[]{""},
-                new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat",
-                        "403,Not Critical,Employee lacks good personal hygiene clean clothing and hair control [s. 21(1)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SWOD-APSP3X", new int[]{2019, 8, 30},
-                "Routine", 1,
-                0, "Low",
-                new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 掳C. [s. 14(2)],Not Repeat"},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 2, 27},
-                "Routine", 1,
-                0, "Low",
-                new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 23},
-                "Routine", 1,
-                0, "Low",
-                new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
-                new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 6, 24},
-                "Routine", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 3, 5},
-                "Routine", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
-        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 31},
-                "Follow-Up", 0,
-                0, "Low",
-                new String[]{""},
-                new String[]{""}));
+
         inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019,12,16},
                 "Routine", 0,
                 0, "Low",
                 new String[]{""},
                 new String[]{""}));
+
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 6, 24},
+                "Routine", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2019, 2, 27},
+                "Routine", 1,
+                0, "Low",
+                new String[]{"301,Critical,Equipment/utensils/food contact surfaces not maintained in sanitary condition [s. 17(1)],Not Repeat"},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 31},
+                "Follow-Up", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 8, 23},
+                "Routine", 1,
+                0, "Low",
+                new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
+                new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SHEN-ANSLB4", new int[]{2018, 3, 5},
+                "Routine", 0,
+                0, "Low",
+                new String[]{""},
+                new String[]{""}));
+
         inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2019,10,1},
                 "Routine", 0,
                 1, "Low",
                 new String[]{""},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat"}));
+
+        inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2019,4,10},
+                "Routine", 1,
+                1, "Low",
+                new String[]{"206,Critical,Hot potentially hazardous food stored/displayed below 60 °C. [s. 14(2)],Not Repeat"},
+                new String[]{"501,Not Critical,Operator does not have FOODSAFE Level 1 or Equivalent [s. 10(1)],Not Repeat"}));
+
         inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2018,10,29},
                 "Routine", 1,
                 2, "Low",
-                new String[]{"206,Critical,Hot potentially hazardous food stored/displayed below 60 掳C. [s. 14(2)],Not Repeat"},
+                new String[]{"206,Critical,Hot potentially hazardous food stored/displayed below 60 °C. [s. 14(2)],Not Repeat"},
                 new String[]{"209,Not Critical,Food not protected from contamination [s. 12(a)],Not Repeat",
                         "501,Not Critical,Operator does not have FOODSAFE Level 1 or Equivalent [s. 10(1)],Not Repeat"}));
         inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2018,5,30},
@@ -415,41 +476,43 @@ public class ListActivity extends AppCompatActivity {
                 1, "Low",
                 new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        inspectionManager.add(new Inspection("SPLH-9NEUHG", new int[]{2019,4,10},
-                "Routine", 1,
-                1, "Low",
-                new String[]{"206,Critical,Hot potentially hazardous food stored/displayed below 60 掳C. [s. 14(2)],Not Repeat"},
-                new String[]{"501,Not Critical,Operator does not have FOODSAFE Level 1 or Equivalent [s. 10(1)],Not Repeat"}));
+
+
+        restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
+                "SWOD-APSP3X", -122.75625586,
+                49.19205936, "Surrey",
+                "Restaurant", inspectionManager));
 
         restaurantsManager.add(new Restaurant("Lee Yuen Seafood Restaurant", "14755 104 Ave",
                 "SWOD-AHZUMF", -122.8668064,
                 49.20610961, "Surrey",
                 "Restaurant", inspectionManager));
 
-        restaurantsManager.add(new Restaurant("Pattullo", "12808 King George Blvd",
-                "SDFO-8HKP7E", -122.8136896,
-                49.19166808, "Surrey",
-                "Restaurant", inspectionManager));
         restaurantsManager.add(new Restaurant("Lee Yuen Seafood Restaurant", "1812 152 St",
                 "SHEN-B7BNSR", -122.80086843,
                 49.03508252, "Surrey",
                 "Restaurant", inspectionManager));
+
+        restaurantsManager.add(new Restaurant("Pattullo", "12808 King George Blvd",
+                "SDFO-8HKP7E", -122.8136896,
+                49.19166808, "Surrey",
+                "Restaurant", inspectionManager));
+
         restaurantsManager.add(new Restaurant("The Unfindable Bar", "12345 67 Ave",
                 "NOSU-CHNUM", -122.86815856,
                 49.14214908, "Surrey",
                 "Restaurant", inspectionManager));
+
         restaurantsManager.add(new Restaurant("Top in Town Pizza", "12788 76A Ave",
                 "SDFO-8GPUJX", -122.86855856,
                 49.14218908, "Surrey",
                 "Restaurant", inspectionManager));
-        restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
-                "SWOD-APSP3X", -122.75625586,
-                49.19205936, "Surrey",
-                "Restaurant", inspectionManager));
+
         restaurantsManager.add(new Restaurant("Top In Town Pizza", "14330 64 Ave",
                 "SHEN-ANSLB4", -122.82521495,
                 49.11851305, "Surrey",
                 "Restaurant", inspectionManager));
+
         restaurantsManager.add(new Restaurant("Zugba Flame Grilled Chicken", "14351 104 Ave",
                 "SPLH-9NEUHG", -122.82418348,
                 49.19172759, "Surrey",

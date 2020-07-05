@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import Model.Inspection;
 import Model.InspectionManager;
 import Model.Restaurant;
@@ -493,9 +497,12 @@ public class ListActivity extends AppCompatActivity {
                     t2.setText("Issues Found: " + number);
 
                     TextView t3= itemview.findViewById(R.id.text3);
-                    t3.setText("Inspection date: "+ currentrestaurant.getInspections().get(temp).getInspectionDate()[0]+" "+
-                            currentrestaurant.getInspections().get(temp).getInspectionDate()[1]+" "+
-                            currentrestaurant.getInspections().get(temp).getInspectionDate()[2]);
+
+                    t3.setText(""+timefunction(currentrestaurant.getInspections().get(temp).getInspectionDate()[0],
+                            currentrestaurant.getInspections().get(temp).getInspectionDate()[1],
+                            currentrestaurant.getInspections().get(temp).getInspectionDate()[2]));
+
+
 
 
                     TextView t4= itemview.findViewById(R.id.text4);
@@ -607,10 +614,6 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-
-
-
-
             return itemview;
 
 
@@ -618,4 +621,121 @@ public class ListActivity extends AppCompatActivity {
 
 
     }
+
+    //a time function in an intelligent format so that it's easier to understand than dates
+    private String timefunction(int Year, int Month , int Day){
+         Calendar calendar = Calendar.getInstance();
+         SimpleDateFormat simpleyearFormat = new SimpleDateFormat("yyyy");
+         SimpleDateFormat simplemonthFormat = new SimpleDateFormat("MM");
+         SimpleDateFormat simpledayFormat = new SimpleDateFormat("dd");
+
+         //get yeat
+         String yeartime = simpleyearFormat.format(calendar.getTime());
+         int year = Integer.parseInt(yeartime);
+         //get month
+         String monthtime =  simplemonthFormat.format(calendar.getTime());
+         int  month = Integer.parseInt(monthtime);
+         //get day
+         String daytime = simpledayFormat.format(calendar.getTime());
+         int  day = Integer.parseInt(daytime);
+
+         //calculate days
+         int amount1 = (Year-2015)*365 + (Month-1)*30 + Day;   // inspection time
+         int amount2 = (year-2015)*365 + (month-1)*30 + day;   // current time
+        String m ;
+        {
+        switch(Month) {
+            case 1:
+                m="January";
+                break;
+            case 2:
+                m="February";
+                break;
+            case 3:
+                m="March";
+                break;
+            case 4:
+                m="April";
+                break;
+            case 5:
+                m="May";
+                break;
+            case 6:
+                m="June";
+            case 7:
+                m="July";
+                break;
+            case 8:
+                m="August";
+                break;
+            case 9:
+                m="September";
+                break;
+            case 10:
+                m="October";
+                break;
+            case 11:
+                m="November";
+                break;
+            default:
+                m="December";
+        }}
+
+
+
+        if(amount2-amount1<=30)
+        {
+            String T = " days";
+            String t = Integer.toString(amount2-amount1);
+            return t + T ;
+
+        }
+
+         if(amount2-amount1>30&&amount2-amount1<=365) {
+             String space = " ";
+             String d = Integer.toString(Day);
+
+             return m + space + d;
+         }
+
+         else
+         {
+             String space = " ";
+             String y = Integer.toString(Year);
+         return m + space + y ;
+
+         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+

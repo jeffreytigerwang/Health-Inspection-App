@@ -3,58 +3,66 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="12dp"
     >
 
     <ImageView
-        android:id="@+id/hazard_level"
+        android:id="@+id/ImageViolation"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/icon" />
 
     <LinearLayout
-        android:id="@+id/row"
+        android:id="@+id/LayoutDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/details_Crit"
+            android:id="@+id/TextDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/crit"
+            android:text="Description:"
             android:textColor="#9a9a9a"
             android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/details_NonCrit"
+            android:id="@+id/TextSetDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="@string/noncrit"
             android:textColor="#9a9a9a"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textSize="14sp" />
+
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/LayoutSeverity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ImageSeverity"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/icon" />
 
         <TextView
-            android:id="@+id/details_howLong"
+            android:id="@+id/TextSetSeverity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/how_long_ago"
-            android:textColor="#9a9a9a"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/hazard_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="hazard"
+            android:text="Severity:"
             android:textColor="#9a9a9a"
             android:textSize="14sp"
             android:textStyle="bold" />

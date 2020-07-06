@@ -16,18 +16,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import Model.Inspection;
 import Model.InspectionManager;
 import Model.Restaurant;
 import Model.RestaurantsManager;
-import Model.restaurantDetails;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -61,7 +56,7 @@ public class ListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                Intent intent = restaurantDetails.makeLaunchIntent(ListActivity.this);
+                Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this);
                 //Sends index of which lens was click on in ViewList
                 intent.putExtra(INDEX, position);
                 startActivity(intent);

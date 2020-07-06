@@ -1,32 +1,27 @@
-package Model;
+package com.example.restaurantlist;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.example.restaurantlist.ListActivity;
-import com.example.restaurantlist.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class restaurantDetails extends AppCompatActivity {
+import Model.Inspection;
+import Model.InspectionManager;
+import Model.RestaurantsManager;
+import Model.inspectionListAdapter;
+
+public class restaurantDetailsActivity extends AppCompatActivity {
 
     private int index;
 
     public static Intent makeLaunchIntent(Context c) {
-        Intent intent = new Intent(c, restaurantDetails.class);
+        Intent intent = new Intent(c, restaurantDetailsActivity.class);
         return intent;
     }
 
@@ -57,7 +52,7 @@ public class restaurantDetails extends AppCompatActivity {
         List<Inspection> inspectionsTemp = new ArrayList<>();
 
         //Finds the specific inspections for restaurant
-        for(int i =0 ; i< InspectionManager.getInstance().getList().size(); i++) {
+        for(int i = 0; i< InspectionManager.getInstance().getList().size(); i++) {
             //checks if tracking numbers are the same
             if(idTag.equals(InspectionManager.getInstance().get(i).getTrackingNum())) {
                 inspectionsTemp.add(InspectionManager.getInstance().get(i));

@@ -57,7 +57,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this);
-                //Sends index of which lens was click on in ViewList
+                //Sends index of which restaurant was click on in ViewList
                 intent.putExtra(INDEX, position);
                 startActivity(intent);
             }
@@ -491,7 +491,9 @@ public class ListActivity extends AppCompatActivity {
                 1, "Low",
                 new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        
+
+
+
         restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
                 "SWOD-APSP3X", -122.75625586,
                 49.19205936, "Surrey",

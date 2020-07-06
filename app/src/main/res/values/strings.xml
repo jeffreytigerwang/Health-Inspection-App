@@ -11,7 +11,7 @@
     <string name="crit">Crit</string>
     <string name="gps_coords">GPS Coords :</string>
     <string name="address">Address :</string>
-    <string name="title_activity_inspection_details">inspectionDetailsActivity</string>
+    <string name="title_activity_inspection_details">Inspection Details</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

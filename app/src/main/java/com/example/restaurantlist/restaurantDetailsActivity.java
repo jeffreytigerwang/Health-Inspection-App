@@ -5,8 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +23,10 @@ import Model.RestaurantsManager;
 import Model.inspectionListAdapter;
 
 public class restaurantDetailsActivity extends AppCompatActivity {
-
+    public static final String INDEX = "index";
     private int index;
+    private InspectionManager inspectionManager;
+    private String trackingNumber;
 
     public static Intent makeLaunchIntent(Context c) {
         Intent intent = new Intent(c, restaurantDetailsActivity.class);
@@ -33,7 +41,7 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         index = intent.getIntExtra(ListActivity.INDEX, -1);
 
-        populateListView();
+
 
         //sets the texts
         TextView name = findViewById(R.id.detail_name);
@@ -44,6 +52,12 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
         TextView gps = findViewById(R.id.detail_gps);
         gps.setText("(" + RestaurantsManager.getInstance().get(index).getLatitude() + " , " + RestaurantsManager.getInstance().get(index).getLongitude() + ")");
+
+        trackingNumber = RestaurantsManager.getInstance().get(index).getTrackingNumber();
+
+        populateListView();
+        registerClickCallback();
+
     }
 
     private void populateListView() {
@@ -59,11 +73,42 @@ public class restaurantDetailsActivity extends AppCompatActivity {
             }
         }
 
-
-
         ListView mListView = (ListView) findViewById(R.id.singleInspectionView);
         inspectionListAdapter adapter = new inspectionListAdapter(this, R.layout.details, (ArrayList<Inspection>) inspectionsTemp);
         mListView.setAdapter(adapter);
+
+    }
+
+    private void registerClickCallback(){
+        //takes user to restaurant details when they click on a restaurant
+        ListView mListView = (ListView) findViewById(R.id.singleInspectionView);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                int i = 0;
+
+                Intent intent = inspectionDetailsActivity.makeLaunchIntent(restaurantDetailsActivity.this);
+                 //Sends index of which inspection was click on in ViewList
+                inspectionManager = InspectionManager.getInstance();
+                for (Inspection inspection : inspectionManager){
+                    if (trackingNumber.equals(inspection.getTrackingNum())) {
+                        break;
+                    }
+                    else {
+                        i++;
+                    }
+
+                }
+                intent.putExtra(INDEX, position + i);
+                startActivity(intent);
+                int positioni = position + i;
+
+
+                //extView textView = (TextView) viewClicked;
+                //String message = "you clicked " + positioni;
+                //Toast.makeText(restaurantDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

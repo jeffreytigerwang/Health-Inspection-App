@@ -733,7 +733,7 @@ public class ListActivity extends AppCompatActivity {
        SimpleDateFormat simplemonthFormat = new SimpleDateFormat("MM");
        SimpleDateFormat simpledayFormat = new SimpleDateFormat("dd");
 
-       //get yeat
+       //get year
        String yeartime = simpleyearFormat.format(calendar.getTime());
        int year = Integer.parseInt(yeartime);
        //get month

@@ -16,6 +16,7 @@ import com.example.restaurantlist.ListActivity;
 import com.example.restaurantlist.R;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -73,65 +74,8 @@ public class inspectionListAdapter extends ArrayAdapter<Inspection> {
             imageHazard.setImageResource(R.drawable.yellow);
         }
 
-        //figuring out which month
-        int finalDay = 0;
-        String writtenMonth = "";
-        if(inspectionDate[1] == 1){
-            writtenMonth = "January";
-        }
-        if(inspectionDate[1] == 2){
-            writtenMonth = "February";
-        }
-        if(inspectionDate[1] == 3){
-            writtenMonth = "March";
-        }
-        if(inspectionDate[1] == 4){
-            writtenMonth = "April";
-        }
-        if(inspectionDate[1] == 5){
-            writtenMonth = "May";
-        }
-        if(inspectionDate[1] == 6){
-            writtenMonth = "June";
-        }
-        if(inspectionDate[1] == 7){
-            writtenMonth = "July";
-        }
-        if(inspectionDate[1] == 8){
-            writtenMonth = "August";
-        }
-        if(inspectionDate[1] == 9){
-            writtenMonth = "September";
-        }
-        if(inspectionDate[1] == 10){
-            writtenMonth = "October";
-        }
-        if(inspectionDate[1] == 11){
-            writtenMonth = "November";
-        }
-        if(inspectionDate[1] == 12){
-            writtenMonth = "December";
-        }
 
-
-        calendar = Calendar.getInstance();
-        //day month year
-        int month = calendar.get(Calendar.MONTH)+1;
-        int day = calendar.get(Calendar.DATE);
-        int year = calendar.get(Calendar.YEAR);
-
-        
-        if(inspectionDate[0] == year){
-            if(inspectionDate[1] == month){
-                finalDay = day-inspectionDate[2];
-                TextHowLong.setText("" + finalDay + " Days ago");
-            }else{
-                TextHowLong.setText(writtenMonth + " " + inspectionDate[2]);
-            }
-        }else{
-            TextHowLong.setText(writtenMonth + " " + inspectionDate[0]);
-        }
-
+        TextHowLong.setText(timefunction(inspectionDate[0], inspectionDate[1], inspectionDate[2]));
 
         TextCrit.setText("# of critical issues found : " + crit);
         TextNonCrit.setText("# of non critical issues found : " + nonCrit);
@@ -142,5 +86,94 @@ public class inspectionListAdapter extends ArrayAdapter<Inspection> {
 
         return convertView;
     }
+
+    //a time function in an intelligent format so that it's easier to understand than dates
+    private String timefunction(int Year, int Month , int Day){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleyearFormat = new SimpleDateFormat("yyyy");
+        SimpleDateFormat simplemonthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat simpledayFormat = new SimpleDateFormat("dd");
+
+        //get year
+        String yeartime = simpleyearFormat.format(calendar.getTime());
+        int year = Integer.parseInt(yeartime);
+        //get month
+        String monthtime =  simplemonthFormat.format(calendar.getTime());
+        int  month = Integer.parseInt(monthtime);
+        //get day
+        String daytime = simpledayFormat.format(calendar.getTime());
+        int  day = Integer.parseInt(daytime);
+
+        //calculate days
+        int amount1 = (Year-2015)*365 + (Month-1)*30 + Day;   // inspection time
+        int amount2 = (year-2015)*365 + (month-1)*30 + day;   // current time
+        String m ;
+        {
+            switch(Month) {
+                case 1:
+                    m="January";
+                    break;
+                case 2:
+                    m="February";
+                    break;
+                case 3:
+                    m="March";
+                    break;
+                case 4:
+                    m="April";
+                    break;
+                case 5:
+                    m="May";
+                    break;
+                case 6:
+                    m="June";
+                    break;
+                case 7:
+                    m="July";
+                    break;
+                case 8:
+                    m="August";
+                    break;
+                case 9:
+                    m="September";
+                    break;
+                case 10:
+                    m="October";
+                    break;
+                case 11:
+                    m="November";
+                    break;
+                default:
+                    m="December";
+            }}
+
+
+
+        if(amount2-amount1<=30)
+        {
+            String T = " days";
+            String t = Integer.toString(amount2-amount1);
+            return t + T ;
+
+        }
+
+        if(amount2-amount1>30&&amount2-amount1<=365) {
+            String space = " ";
+            String d = Integer.toString(Day);
+
+            return m + space + d;
+        }
+
+        else
+        {
+            String space = " ";
+            String y = Integer.toString(Year);
+            return m + space + y ;
+
+        }
+
+
+    }
+
 }
 

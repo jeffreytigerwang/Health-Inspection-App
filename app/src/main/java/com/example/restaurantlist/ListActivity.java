@@ -5,21 +5,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import Model.Inspection;
 import Model.InspectionManager;
@@ -30,7 +28,7 @@ public class ListActivity extends AppCompatActivity {
 
     private RestaurantsManager restaurantsManager;
     private InspectionManager inspectionManager;
-
+    public static final String INDEX = "index";
 
 
 
@@ -48,8 +46,25 @@ public class ListActivity extends AppCompatActivity {
 
         pupulateListView();
 
+        registerClickCallback();
 
     }
+
+    private void registerClickCallback(){
+        //takes user to restaurant details when they click on a restaurant
+        ListView list = findViewById(R.id.listvieww);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this);
+                //Sends index of which lens was click on in ViewList
+                intent.putExtra(INDEX, position);
+                startActivity(intent);
+            }
+        });
+
+    }
+
 
     private void pupulateListView() {
         ArrayAdapter<RestaurantsManager> adapter = new MyListAdapter();
@@ -713,7 +728,7 @@ public class ListActivity extends AppCompatActivity {
        SimpleDateFormat simplemonthFormat = new SimpleDateFormat("MM");
        SimpleDateFormat simpledayFormat = new SimpleDateFormat("dd");
 
-       //get yeat
+       //get year
        String yeartime = simpleyearFormat.format(calendar.getTime());
        int year = Integer.parseInt(yeartime);
        //get month

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import Model.InspectionManager;
@@ -41,8 +42,32 @@ public class inspectionDetailsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         index = intent.getIntExtra(restaurantDetailsActivity.INDEX, -1);
 
-        TextView name = findViewById(R.id.textSetDate);
-        name.setText(InspectionManager.getInstance().get(index).getHazardRating());
+        TextView type = findViewById(R.id.textSetType);
+        type.setText(InspectionManager.getInstance().get(index).getInspType());
+
+        TextView nonCritical = findViewById(R.id.textSetNonCritical);
+        nonCritical.setText("" + InspectionManager.getInstance().get(index).getNumNonCritical());
+
+        TextView Critical = findViewById(R.id.textSetCritical);
+        Critical.setText("" + InspectionManager.getInstance().get(index).getNumCritical());
+
+        TextView hazardLevel = findViewById(R.id.textSetHazardLevel);
+        hazardLevel.setText("" + InspectionManager.getInstance().get(index).getHazardRating());
+
+        TextView color = findViewById(R.id.textSetColor);
+        color.setText("" + InspectionManager.getInstance().get(index).getColour());
+
+        ImageView icon = findViewById(R.id.ImageHazard);
+        if (InspectionManager.getInstance().get(index).getHazardRating().equals("Low")){
+            icon.setImageResource(R.drawable.blue);
+        }
+        else if (InspectionManager.getInstance().get(index).getHazardRating().equals("High")){
+            icon.setImageResource(R.drawable.red);
+        }
+        else{
+            icon.setImageResource(R.drawable.yellow);
+        }
+
 
 
         /***TextView address = findViewById(R.id.detail_address);

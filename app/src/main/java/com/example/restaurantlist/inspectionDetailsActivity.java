@@ -132,7 +132,7 @@ public class inspectionDetailsActivity extends AppCompatActivity {
         }
 
         violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getCViolLump()));
-        violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getNonViolLump()));
+       // violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getNonViolLump()));
 
         populateListView();
         registerClickCallback();

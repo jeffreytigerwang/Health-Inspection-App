@@ -48,8 +48,9 @@ public class ListActivity extends AppCompatActivity {
 
         // add the restaurants to the RestaurantsManager
         if(restaurantsManager.getcount()==0)
-        { addrestaurants();
-          readCSV();
+        { //addrestaurants();
+          readCSVinspections();
+          readCSVrestaurany();
         }
 
         pupulateListView();
@@ -57,7 +58,53 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-    private void readCSV() {
+    private void readCSVinspections() {
+        InputStream is = getResources().openRawResource(R.raw.inspectionreports_itr1);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8")));
+
+        String line="";
+
+        try {
+            //step over headers
+            reader.readLine();
+
+
+            while (((line = reader.readLine()) != null)) {
+                //Spilt by " , "
+                String[] tokens =   line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                //read the data
+                if(tokens[8].length()>0)
+                { inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
+                        new int[]{Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3])},
+                        tokens[4],Integer.parseInt(tokens[5]),Integer.parseInt(tokens[6]),tokens[7],
+                        new String[]{tokens[8],"m"}));   }
+                else
+                {   inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
+                            new int[]{Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3])},
+                            tokens[4],Integer.parseInt(tokens[5]),Integer.parseInt(tokens[6]),tokens[7],
+                            new String[]{"d"}));  }
+
+
+
+
+
+
+
+
+            }
+        } catch (IOException e) {
+            Log.wtf("MyActivity","Error reading data file on line " + line,e);
+            e.printStackTrace();
+        }
+
+
+
+
+
+    }
+
+    private void readCSVrestaurany() {
 
 
         InputStream is = getResources().openRawResource(R.raw.restaurants_itr1);
@@ -75,9 +122,16 @@ public class ListActivity extends AppCompatActivity {
                //Spilt by " , "
                 String[] tokens = line.split(",");
                //read the data
-                restaurantsManager.add(new Restaurant(tokens[1],tokens[2],
-                                                      tokens[0],Double.parseDouble(tokens[6]),
-                        Double.parseDouble(tokens[5]),tokens[3], tokens[4],inspectionManager));
+                restaurantsManager.add(new Restaurant(tokens[1].replace("\"",""),
+                        tokens[2].replace("\"",""),
+                        tokens[0].replace("\"",""),
+                        Double.parseDouble(tokens[6].replace("\"","")),
+                        Double.parseDouble(tokens[6].replace("\"","")),
+                        tokens[3].replace("\"",""),
+                        tokens[4].replace("\"",""),inspectionManager));
+
+
+
 
 
 
@@ -127,7 +181,7 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-    private void addrestaurants() {
+  /*  private void addrestaurants() {
 
                inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2020, 1, 22},
                 "Routine", 2,
@@ -547,7 +601,7 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-      /**  restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
+        restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
                 "SWOD-APSP3X", -122.75625586,
                 49.19205936, "Surrey",
                 "Restaurant", inspectionManager));
@@ -585,13 +639,11 @@ public class ListActivity extends AppCompatActivity {
         restaurantsManager.add(new Restaurant("Zugba Flame Grilled Chicken", "14351 104 Ave",
                 "SPLH-9NEUHG", -122.82418348,
                 49.19172759, "Surrey",
-                "Restaurant", inspectionManager));*/
+                "Restaurant", inspectionManager));
 
         restaurantsManager.setcount(2);
 
-
-
-    }
+    }*/
 
     private class MyListAdapter extends ArrayAdapter<RestaurantsManager> {
         public MyListAdapter() {

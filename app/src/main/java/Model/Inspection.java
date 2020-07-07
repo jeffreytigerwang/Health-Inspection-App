@@ -7,7 +7,7 @@ public class Inspection {
     private int NumCritical;
     private int NumNonCritical;
     private String[] CViolLump;            //Critical ViolLUmp
-    private String[] NonViolLump;          //Non Critical ViolLump
+    //private String[] NonViolLump;          //Non Critical ViolLump
     private String HazardRating;
     private String colour;
 
@@ -22,7 +22,7 @@ public class Inspection {
     }
 
 
-    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String[] cviolLump, String[] nonviolLump) {
+    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String[] cviolLump /*,String[] nonviolLump*/) {
         TrackingNum = trackingNum;
         InspectionDate = inspectionDate;
         InspType = inspType;
@@ -30,7 +30,7 @@ public class Inspection {
         NumNonCritical = numNonCritical;
         HazardRating = hazardRating;
         CViolLump = cviolLump;
-        NonViolLump = nonviolLump;
+      //  NonViolLump = nonviolLump;
         setColour();
 
     }
@@ -88,14 +88,14 @@ public class Inspection {
         CViolLump = violLump;
     }
 
-    public String[] getNonViolLump() {
+  /*  public String[] getNonViolLump() {
         return NonViolLump;
     }
 
     public void setNonViolLump(String[] violLump) {
         NonViolLump = violLump;
     }
-
+*/
 
     public void setColour(){
         if(this.HazardRating=="Low")

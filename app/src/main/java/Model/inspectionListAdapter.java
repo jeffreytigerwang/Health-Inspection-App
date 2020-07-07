@@ -43,9 +43,6 @@ public class inspectionListAdapter extends ArrayAdapter<Inspection> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
 
-
-
-
         String color = inspectionsStorage.get(position).getColour();
         int crit = inspectionsStorage.get(position).getNumCritical();
         int nonCrit = inspectionsStorage.get(position).getNumNonCritical();

@@ -57,7 +57,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this);
-                //Sends index of which lens was click on in ViewList
+                //Sends index of which restaurant was click on in ViewList
                 intent.putExtra(INDEX, position);
                 startActivity(intent);
             }
@@ -491,7 +491,9 @@ public class ListActivity extends AppCompatActivity {
                 1, "Low",
                 new String[]{"302,Critical,Equipment/utensils/food contact surfaces not properly washed and sanitized [s. 17(2)],Not Repeat"},
                 new String[]{"306,Not Critical,Food premises not maintained in a sanitary condition [s. 17(1)],Not Repeat"}));
-        
+
+
+
         restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
                 "SWOD-APSP3X", -122.75625586,
                 49.19205936, "Surrey",
@@ -633,94 +635,7 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-    //a time function in an intelligent format so that it's easier to understand than dates
-   /** private String timefunction(int Year, int Month , int Day){
 
-        // SOURCE: https://stackoverflow.com/questions/36370895/getyear-getmonth-getday-are-deprecated-in-calendar-what-to-use-then
-
-        try{
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-            String inspectiondate = Integer.toString(Year) + Integer.toString(Month) + Integer.toString(Day);
-            Date inspection = simpleDateFormat.parse(inspectiondate);
-            Date currentDate = new Date();
-
-            long diffInMonth = Math.abs(currentDate.getTime() - inspection.getTime());
-            long diffInDay = TimeUnit.DAYS.convert(diffInMonth, TimeUnit.MILLISECONDS);
-            //this.diffInDay = (int) diffInDay;
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(inspection);
-
-            String m ;
-            {
-                switch(Month) {
-                    case 1:
-                        m="January";
-                        break;
-                    case 2:
-                        m="February";
-                        break;
-                    case 3:
-                        m="March";
-                        break;
-                    case 4:
-                        m="April";
-                        break;
-                    case 5:
-                        m="May";
-                        break;
-                    case 6:
-                        m="June";
-                        break;
-                    case 7:
-                        m="July";
-                        break;
-                    case 8:
-                        m="August";
-                        break;
-                    case 9:
-                        m="September";
-                        break;
-                    case 10:
-                        m="October";
-                        break;
-                    case 11:
-                        m="November";
-                        break;
-                    default:
-                        m="December";
-                }}
-
-            if(diffInDay<=30)
-            {
-                String T = " days";
-                String t = Long.toString(diffInDay);
-                return t + T ;
-
-            }
-
-            else if(diffInDay <=365) {
-                String space = " ";
-                String d = Integer.toString(Day);
-
-                return m + space + d;
-            }
-
-            else
-            {
-                String space = " ";
-                String y = Integer.toString(Year);
-                return m + space + y ;
-            }
-
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return "N/A";
-        }
-
-    }
-*/
    //a time function in an intelligent format so that it's easier to understand than dates
    private String timefunction(int Year, int Month , int Day){
        Calendar calendar = Calendar.getInstance();
@@ -805,18 +720,6 @@ public class ListActivity extends AppCompatActivity {
            return m + space + y ;
 
        }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
    }

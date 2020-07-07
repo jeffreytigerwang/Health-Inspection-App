@@ -1,7 +1,10 @@
 package Model;
 
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -10,11 +13,13 @@ import java.util.List;
 
 
 
-public class InspectionManager {
+public class InspectionManager implements Iterable <Inspection> {
     private List<Inspection> inspections = new ArrayList<>();
     private static InspectionManager instance;
 
-
+    private InspectionManager() {
+        // Nothing: ensure this is a singleton.
+    }
 
     public static InspectionManager getInstance() {
         if (instance == null) {
@@ -23,9 +28,7 @@ public class InspectionManager {
         return instance;
     }
 
-    private InspectionManager() {
-        // Nothing: ensure this is a singleton.
-    }
+
 
     public List getList(){
         return inspections;
@@ -37,6 +40,7 @@ public class InspectionManager {
     public void remove(Inspection inspection) {
         inspections.remove(inspection);
     }
+
     public Inspection get(int i) {
         return inspections.get(i);
     }
@@ -46,15 +50,9 @@ public class InspectionManager {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
+    @NonNull
+    @Override
+    public Iterator<Inspection> iterator() {
+        return inspections.iterator();
+    }
 }

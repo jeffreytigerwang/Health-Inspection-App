@@ -7,7 +7,6 @@
     android:padding="12dp"
     >
 
-
     <ImageView
         android:id="@+id/hazard_level"
         android:layout_width="80dp"
@@ -65,3 +64,4 @@
     </LinearLayout>
 
 </LinearLayout>
+

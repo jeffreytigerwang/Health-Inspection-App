@@ -155,6 +155,7 @@ public class inspectionDetailsActivity extends AppCompatActivity {
             super(inspectionDetailsActivity.this, R.layout.violation_details, violations);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public View getView (int position, View convertView, ViewGroup parent) {
 
@@ -196,7 +197,6 @@ public class inspectionDetailsActivity extends AppCompatActivity {
                 violationIcon.setImageResource(R.drawable.blank);
 
             }
-
 
             //Setup severity icon
             if (currentViolation.contains("Not Critical")) {

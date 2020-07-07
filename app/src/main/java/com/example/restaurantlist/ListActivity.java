@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,6 +17,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -42,13 +48,61 @@ public class ListActivity extends AppCompatActivity {
 
         // add the restaurants to the RestaurantsManager
         if(restaurantsManager.getcount()==0)
-        { addrestaurants();}
+        { addrestaurants();
+          readCSV();
+        }
 
         pupulateListView();
-
         registerClickCallback();
 
     }
+
+    private void readCSV() {
+
+
+        InputStream is = getResources().openRawResource(R.raw.restaurants_itr1);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8")));
+
+        String line="";
+
+        try {
+            //step over headers
+            reader.readLine();
+
+
+            while (((line = reader.readLine()) != null)) {
+               //Spilt by " , "
+                String[] tokens = line.split(",");
+               //read the data
+                restaurantsManager.add(new Restaurant(tokens[1],tokens[2],
+                                                      tokens[0],Double.parseDouble(tokens[6]),
+                        Double.parseDouble(tokens[5]),tokens[3], tokens[4],inspectionManager));
+
+
+
+            }
+        } catch (IOException e) {
+            Log.wtf("MyActivity","Error reading data file on line " + line,e);
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
 
     private void registerClickCallback(){
         //takes user to restaurant details when they click on a restaurant
@@ -65,7 +119,6 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-
     private void pupulateListView() {
         ArrayAdapter<RestaurantsManager> adapter = new MyListAdapter();
         ListView listView;
@@ -76,7 +129,7 @@ public class ListActivity extends AppCompatActivity {
 
     private void addrestaurants() {
 
-        inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2020, 1, 22},
+               inspectionManager.add(new Inspection("SWOD-AHZUMF", new int[]{2020, 1, 22},
                 "Routine", 2,
                 3, "Moderate",
                 new String[]{"205,Critical,Cold potentially hazardous food stored/displayed above 4 °C. [s. 14(2)],Not Repeat",
@@ -494,7 +547,7 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-        restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
+      /**  restaurantsManager.add(new Restaurant("104 Sushi & Co.", "10422 168 St",
                 "SWOD-APSP3X", -122.75625586,
                 49.19205936, "Surrey",
                 "Restaurant", inspectionManager));
@@ -532,7 +585,7 @@ public class ListActivity extends AppCompatActivity {
         restaurantsManager.add(new Restaurant("Zugba Flame Grilled Chicken", "14351 104 Ave",
                 "SPLH-9NEUHG", -122.82418348,
                 49.19172759, "Surrey",
-                "Restaurant", inspectionManager));
+                "Restaurant", inspectionManager));*/
 
         restaurantsManager.setcount(2);
 
@@ -635,9 +688,8 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-
-   //a time function in an intelligent format so that it's easier to understand than dates
-   private String timefunction(int Year, int Month , int Day){
+    //a time function in an intelligent format so that it's easier to understand than dates
+    private String timefunction(int Year, int Month , int Day){
        Calendar calendar = Calendar.getInstance();
        SimpleDateFormat simpleyearFormat = new SimpleDateFormat("yyyy");
        SimpleDateFormat simplemonthFormat = new SimpleDateFormat("MM");

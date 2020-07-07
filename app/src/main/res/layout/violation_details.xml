@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -17,7 +18,8 @@
         android:id="@+id/ImageViolation"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/icon" />
+        android:src="@drawable/icon"
+            android:contentDescription="@string/violation_type" />
 
 
         <LinearLayout
@@ -30,15 +32,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Description:"
+                android:text="@string/description"
                 android:textColor="#9a9a9a"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextSetDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="300dp"
+                android:layout_height="20dp"
                 android:layout_margin="5dp"
                 android:text="@string/noncrit"
                 android:textColor="#9a9a9a"
@@ -60,14 +62,15 @@
             android:id="@+id/ImageSeverity"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/icon" />
+            android:src="@drawable/icon"
+            android:contentDescription="@string/severity_icon" />
 
         <TextView
             android:id="@+id/TextSetSeverity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Severity:"
+            android:text="@string/severity"
             android:textColor="#9a9a9a"
             android:textSize="14sp"
             android:textStyle="bold" />

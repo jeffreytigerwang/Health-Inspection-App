@@ -30,7 +30,7 @@ public class Inspection {
         NumNonCritical = numNonCritical;
         HazardRating = hazardRating;
         CViolLump = cviolLump;
-        CViolLump = nonviolLump;
+        NonViolLump = nonviolLump;
         setColour();
 
     }

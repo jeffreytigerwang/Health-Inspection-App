@@ -1,5 +1,6 @@
 package com.example.restaurantlist;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +31,7 @@ import Model.inspectionListAdapter;
 
 public class inspectionDetailsActivity extends AppCompatActivity {
     private int index;
+    private int test1 = 1;
 
     private static final String EXTRA_MESSAGE = "Extra-Message";
     int violationNumber = 0;
@@ -46,6 +50,7 @@ public class inspectionDetailsActivity extends AppCompatActivity {
 
     private ArrayList<String> violations = new ArrayList<>();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,50 @@ public class inspectionDetailsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         index = intent.getIntExtra(restaurantDetailsActivity.INDEX, -1);
+
+        TextView date = findViewById(R.id.textSetDate);
+        int Month = InspectionManager.getInstance().get(index).getInspectionDate()[1];
+        String m ;
+        {
+            switch(Month) {
+                case 1:
+                    m="January";
+                    break;
+                case 2:
+                    m="February";
+                    break;
+                case 3:
+                    m="March";
+                    break;
+                case 4:
+                    m="April";
+                    break;
+                case 5:
+                    m="May";
+                    break;
+                case 6:
+                    m="June";
+                    break;
+                case 7:
+                    m="July";
+                    break;
+                case 8:
+                    m="August";
+                    break;
+                case 9:
+                    m="September";
+                    break;
+                case 10:
+                    m="October";
+                    break;
+                case 11:
+                    m="November";
+                    break;
+                default:
+                    m="December";
+            }}
+        date.setText("" + m + " " + InspectionManager.getInstance().get(index).getInspectionDate()[2] + ", " + InspectionManager.getInstance().get(index).getInspectionDate()[0]);
+
 
         TextView type = findViewById(R.id.textSetType);
         type.setText(InspectionManager.getInstance().get(index).getInspType());
@@ -82,16 +131,11 @@ public class inspectionDetailsActivity extends AppCompatActivity {
             icon.setImageResource(R.drawable.yellow);
         }
 
-        //violationNumber = InspectionManager.getInstance().get(index).getNonViolLump().length + InspectionManager.getInstance().get(index).getCViolLump().length;
-
-        //violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getNonViolLump()));
-        //violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getCViolLump()));
-        //violations.add(InspectionManager.getInstance().get(index).getNonViolLump()[0]);
-
-        violations.add("303,Not Critical,Equipment/facilities/hot & cold water for sanitary maintenance not adequate [s. 17(3); s. 4(1)(f)],Not Repeat");
+        violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getCViolLump()));
+        violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getNonViolLump()));
 
         populateListView();
-
+        registerClickCallback();
 
     }
 
@@ -121,24 +165,73 @@ public class inspectionDetailsActivity extends AppCompatActivity {
 
             String currentViolation = violations.get(position);
 
-            //ImageView imageView = (ImageView) itemView.findViewById(R.id.ImageViolation);
+            ImageView violationIcon = (ImageView) itemView.findViewById(R.id.ImageViolation);
             ImageView severityImage = (ImageView) itemView.findViewById(R.id.ImageSeverity);
+            TextView severityText = (TextView) itemView.findViewById(R.id.TextSetSeverity);
+
+
+            //Setup violation type icon
+            if (violations.get(position).contains("pests") || violations.get(position).contains("Pests")) {
+
+                violationIcon.setImageResource(R.drawable.pest);
+
+            } else if (violations.get(position).contains("Equipment") || violations.get(position).contains("equipment")) {
+
+                violationIcon.setImageResource(R.drawable.equipment);
+
+            } else if (violations.get(position).contains("food") || violations.get(position).contains("Food")) {
+
+                violationIcon.setImageResource(R.drawable.food);
+
+            } else if (violations.get(position).contains("Sanitized") || violations.get(position).contains("sanitized") || violations.get(position).contains("washed") || violations.get(position).contains("Washed")) {
+
+                violationIcon.setImageResource(R.drawable.sanitized);
+
+            } else if (violations.get(position).contains("handwashing") || violations.get(position).contains("Handwashing") || violations.get(position).contains("wash hands") || violations.get(position).contains("Wash hands")) {
+
+                violationIcon.setImageResource(R.drawable.wash);
+
+            } else {
+
+                violationIcon.setImageResource(R.drawable.blank);
+
+            }
+
 
             //Setup severity icon
             if (currentViolation.contains("Not Critical")) {
                 severityImage.setImageResource(R.drawable.noncritical_violation);
+                severityText.setText("Severity: Not Critical");
+
             }
             else if (currentViolation.contains("Critical")) {
                 severityImage.setImageResource(R.drawable.critical_violation);
+                severityText.setText("Severity: Critical");
             }
             else {
-                severityImage.setImageResource(R.drawable.critical_violation);
+                severityImage.setImageResource(R.drawable.blank);
             }
 
+            TextView description = (TextView) itemView.findViewById(R.id.TextSetDescription);
+            description.setText(currentViolation);
 
             return itemView;
         }
 
+    }
+
+    private void registerClickCallback() {
+        ListView list = findViewById(R.id.ViewViolationDetails);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                View itemView = view;
+                TextView getDescription = (TextView) itemView.findViewById(R.id.TextSetDescription);
+                String fullDescription = getDescription.getText().toString();
+
+                Toast.makeText(inspectionDetailsActivity.this, fullDescription, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

@@ -635,94 +635,7 @@ public class ListActivity extends AppCompatActivity {
 
     }
 
-    //a time function in an intelligent format so that it's easier to understand than dates
-   /** private String timefunction(int Year, int Month , int Day){
 
-        // SOURCE: https://stackoverflow.com/questions/36370895/getyear-getmonth-getday-are-deprecated-in-calendar-what-to-use-then
-
-        try{
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-            String inspectiondate = Integer.toString(Year) + Integer.toString(Month) + Integer.toString(Day);
-            Date inspection = simpleDateFormat.parse(inspectiondate);
-            Date currentDate = new Date();
-
-            long diffInMonth = Math.abs(currentDate.getTime() - inspection.getTime());
-            long diffInDay = TimeUnit.DAYS.convert(diffInMonth, TimeUnit.MILLISECONDS);
-            //this.diffInDay = (int) diffInDay;
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(inspection);
-
-            String m ;
-            {
-                switch(Month) {
-                    case 1:
-                        m="January";
-                        break;
-                    case 2:
-                        m="February";
-                        break;
-                    case 3:
-                        m="March";
-                        break;
-                    case 4:
-                        m="April";
-                        break;
-                    case 5:
-                        m="May";
-                        break;
-                    case 6:
-                        m="June";
-                        break;
-                    case 7:
-                        m="July";
-                        break;
-                    case 8:
-                        m="August";
-                        break;
-                    case 9:
-                        m="September";
-                        break;
-                    case 10:
-                        m="October";
-                        break;
-                    case 11:
-                        m="November";
-                        break;
-                    default:
-                        m="December";
-                }}
-
-            if(diffInDay<=30)
-            {
-                String T = " days";
-                String t = Long.toString(diffInDay);
-                return t + T ;
-
-            }
-
-            else if(diffInDay <=365) {
-                String space = " ";
-                String d = Integer.toString(Day);
-
-                return m + space + d;
-            }
-
-            else
-            {
-                String space = " ";
-                String y = Integer.toString(Year);
-                return m + space + y ;
-            }
-
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return "N/A";
-        }
-
-    }
-*/
    //a time function in an intelligent format so that it's easier to understand than dates
    private String timefunction(int Year, int Month , int Day){
        Calendar calendar = Calendar.getInstance();
@@ -807,18 +720,6 @@ public class ListActivity extends AppCompatActivity {
            return m + space + y ;
 
        }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
    }

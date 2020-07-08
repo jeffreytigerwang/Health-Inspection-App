@@ -7,9 +7,9 @@ public class Inspection {
     private int NumCritical;
     private int NumNonCritical;
     private String[] CViolLump;            //Critical ViolLUmp
-    private String[] NonViolLump;          //Non Critical ViolLump
     private String HazardRating;
     private String colour;
+    private String testdate;
 
     public Inspection(String trackingNum) {
         this.TrackingNum=trackingNum;
@@ -22,19 +22,32 @@ public class Inspection {
     }
 
 
-    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String[] cviolLump, String[] nonviolLump) {
+    public Inspection(String trackingNum, int fulldate, String inspType, int numCritical, int numNonCritical, String hazardRating, String wholecviolLump /*,String[] nonviolLump*/) {
         TrackingNum = trackingNum;
-        InspectionDate = inspectionDate;
+        InspectionDate = parseDate(fulldate);
         InspType = inspType;
         NumCritical = numCritical;
         NumNonCritical = numNonCritical;
         HazardRating = hazardRating;
-        CViolLump = cviolLump;
-        NonViolLump = nonviolLump;
+        CViolLump = paseviolLump(wholecviolLump);
+        testdate = Integer.toString (fulldate);
         setColour();
 
     }
 
+    private int[] parseDate(int fulldate) {
+        String year = String.valueOf(fulldate).substring(0,4);
+        String month = String.valueOf(fulldate).substring(4,6);
+        String day = String.valueOf(fulldate).substring(6,8);
+        int[] parsedDate = {Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)};
+
+        return parsedDate;
+    }
+
+    private String[] paseviolLump(String wholecviolLump) {
+
+        return  wholecviolLump.replace(",",", ").split("\\|");
+    }
 
     public String getTrackingNum() {
         return TrackingNum;
@@ -88,25 +101,17 @@ public class Inspection {
         CViolLump = violLump;
     }
 
-    public String[] getNonViolLump() {
-        return NonViolLump;
-    }
-
-    public void setNonViolLump(String[] violLump) {
-        NonViolLump = violLump;
-    }
-
 
     public void setColour(){
-        if(this.HazardRating=="Low")
+        if(this.HazardRating.equals("Low"))
         {
             this.colour="blue";
         }
-        else if(this.HazardRating=="Moderate")
+        else if(this.HazardRating.equals("Moderate"))
         {
             this.colour="yellow";
         }
-        else if(this.HazardRating=="High")
+        else if(this.HazardRating.equals("High"))
         {
             this.colour="red";
         }
@@ -114,4 +119,10 @@ public class Inspection {
     public String getColour(){
         return colour;
     }
+
+
+    public String getTestdate() {
+        return testdate;
+    }
+
 }

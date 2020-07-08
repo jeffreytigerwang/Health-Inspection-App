@@ -102,6 +102,7 @@ public class ListActivity extends AppCompatActivity {
         };
 
         Collections.sort(restaurantsManager.get(), compareByName); //Sort arraylist
+        restaurantsManager.setcount(5);
     }
 
     private void readCSVinspections() {

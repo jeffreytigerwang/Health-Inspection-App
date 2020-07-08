@@ -11,8 +11,6 @@ import java.util.List;
  * Data model: Store a collection of inspectionmanager.
  */
 
-
-
 public class InspectionManager implements Iterable <Inspection> {
     private List<Inspection> inspections = new ArrayList<>();
     private static InspectionManager instance;

@@ -31,13 +31,9 @@ import com.example.restaurantlist.R;
 
 
 
-
-
-
-
 public class inspectionDetailsActivity extends AppCompatActivity {
     private int index;
-    private int test1 = 1;
+
 
     private static final String EXTRA_MESSAGE = "Extra-Message";
     int violationNumber = 0;
@@ -66,7 +62,8 @@ public class inspectionDetailsActivity extends AppCompatActivity {
         ActionBar back = getSupportActionBar();
         back.setDisplayHomeAsUpEnabled(true);
 
-        index = RestaurantsManager.getInstance().getCurrentRestaurant();
+        Intent intent = getIntent();
+        index = intent.getIntExtra(restaurantDetailsActivity.INDEX, -1);
 
         TextView date = findViewById(R.id.textSetDate);
         int Month = InspectionManager.getInstance().get(index).getInspectionDate()[1];
@@ -199,7 +196,12 @@ public class inspectionDetailsActivity extends AppCompatActivity {
 
                 violationIcon.setImageResource(R.drawable.wash);
 
-            } else {
+            } else if (violations.get(position).contains("FOODSAFE")) {
+
+                violationIcon.setImageResource(R.drawable.foodsafe);
+            }
+
+            else{
 
                 violationIcon.setImageResource(R.drawable.blank);
 
@@ -208,19 +210,60 @@ public class inspectionDetailsActivity extends AppCompatActivity {
             //Setup severity icon
             if (currentViolation.contains("Not Critical")) {
                 severityImage.setImageResource(R.drawable.noncritical_violation);
-                severityText.setText("Severity: Not Critical");
+                severityText.setText(R.string.not_critical);
 
             }
             else if (currentViolation.contains("Critical")) {
                 severityImage.setImageResource(R.drawable.critical_violation);
-                severityText.setText("Severity: Critical");
+                severityText.setText(R.string.critical);
             }
             else {
                 severityImage.setImageResource(R.drawable.blank);
             }
 
+            String[] short_description = getResources().getStringArray(R.array.my_array);
+
             TextView description = (TextView) itemView.findViewById(R.id.TextSetDescription);
-            description.setText(currentViolation);
+            if (currentViolation.contains("101") || currentViolation.contains("102") ||
+                    currentViolation.contains("103") || currentViolation.contains("104")) {
+                description.setText(short_description[0]);
+
+            }
+            else if (currentViolation.contains("201") || currentViolation.contains("202") ||
+                    currentViolation.contains("203") || currentViolation.contains("204") ||
+                    currentViolation.contains("205") || currentViolation.contains("206") ||
+                    currentViolation.contains("208") || currentViolation.contains("209") ||
+                    currentViolation.contains("210") || currentViolation.contains("211") ||
+                    currentViolation.contains("212")) {
+                description.setText(short_description[1]);
+            }
+
+            else if (currentViolation.contains("301") || currentViolation.contains("302") ||
+                    currentViolation.contains("303") || currentViolation.contains("304") ||
+                    currentViolation.contains("305") || currentViolation.contains("306") ||
+                    currentViolation.contains("307") || currentViolation.contains("308") ||
+                    currentViolation.contains("309") || currentViolation.contains("310") ||
+                    currentViolation.contains("311") || currentViolation.contains("312") ||
+                    currentViolation.contains("313") || currentViolation.contains("314") ||
+                    currentViolation.contains("315")) {
+                description.setText(short_description[2]);
+            }
+
+            else if (currentViolation.contains("401") || currentViolation.contains("402") ||
+                    currentViolation.contains("403") || currentViolation.contains("404")) {
+                description.setText(short_description[3]);
+            }
+
+            else if (currentViolation.contains("501") || currentViolation.contains("502")) {
+                description.setText(short_description[4]);
+            }
+
+            else {
+                description.setText("");
+
+            }
+
+
 
             return itemView;
         }
@@ -233,8 +276,8 @@ public class inspectionDetailsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 View itemView = view;
-                TextView getDescription = (TextView) itemView.findViewById(R.id.TextSetDescription);
-                String fullDescription = getDescription.getText().toString();
+                String currentViolation = violations.get(position);
+                String fullDescription = currentViolation;
 
                 Toast.makeText(inspectionDetailsActivity.this, fullDescription, Toast.LENGTH_SHORT).show();
             }

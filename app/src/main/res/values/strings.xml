@@ -33,15 +33,15 @@
     <string name="hazard_icon">Hazard Icon</string>
     <string name="severity_icon">Severity Icon</string>
     <string name="violation_type">Violation Type</string>
+    <string name="not_critical">Severity: Not Critical</string>
+    <string name="critical">Severity: Critical</string>
 
 
-    <string-array name="countries_array">
-        <item>Bahrain</item>
-        <item>Bangladesh</item>
-        <item>Barbados</item>
-        <item>Belarus</item>
-        <item>Belgium</item>
-        <item>Belize</item>
-        <item>Benin</item>
+    <string-array name="my_array">
+        <item>Regulatory failure </item>
+        <item>Inappropriate processes of food</item>
+        <item>Equipment/utensils sanitary issue</item>
+        <item>Employee sanitary issue</item>
+        <item>Missing FOODSAFE Level 1 or equivalent</item>
     </string-array>
 </resources>

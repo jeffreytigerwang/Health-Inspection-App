@@ -1,5 +1,6 @@
 package com.example.restaurantlist.UI;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -42,9 +43,11 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_details);
 
-        Intent intent = getIntent();
-        index = intent.getIntExtra(ListActivity.INDEX, -1);
 
+        index = RestaurantsManager.getInstance().getCurrentRestaurant();
+        getSupportActionBar().setTitle("Restaurant Details");
+        ActionBar back = getSupportActionBar();
+        back.setDisplayHomeAsUpEnabled(true);
 
 
         //sets the texts

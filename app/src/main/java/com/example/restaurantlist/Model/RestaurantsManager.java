@@ -15,6 +15,16 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     private static RestaurantsManager instance;
     private int count=0;
 
+    private int currentRestaurant;
+
+    public void setCurrentRestaurant(int index){
+        currentRestaurant = index;
+    }
+    public int getCurrentRestaurant(){
+        return currentRestaurant;
+    }
+
+
     public void setcount(int i){
         count=i;
     }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.example.restaurantlist.Model.InspectionManager;
+import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 
 /**
@@ -59,11 +61,12 @@ public class inspectionDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspection_details);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        Intent intent = getIntent();
-        index = intent.getIntExtra(restaurantDetailsActivity.INDEX, -1);
+        getSupportActionBar().setTitle("Inspection Details");
+        ActionBar back = getSupportActionBar();
+        back.setDisplayHomeAsUpEnabled(true);
+
+        index = RestaurantsManager.getInstance().getCurrentRestaurant();
 
         TextView date = findViewById(R.id.textSetDate);
         int Month = InspectionManager.getInstance().get(index).getInspectionDate()[1];

@@ -12,12 +12,15 @@
         <activity
             android:name=".UI.inspectionDetailsActivity"
             android:label="@string/title_activity_inspection_details"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".UI.restaurantDetailsActivity"/>
 
-        <activity android:name=".UI.restaurantDetailsActivity" />
+        <activity
+            android:name=".UI.restaurantDetailsActivity"
+            android:parentActivityName=".UI.ListActivity"/>
         <activity
             android:name=".UI.ListActivity"
-            android:label="Restaurant ListView" />
+            android:label="Restaurant ListView"
+            android:parentActivityName=".UI.MenuActivity" />
         <activity android:name=".UI.MenuActivity" />
         <activity android:name=".UI.welcomeActivity">
             <intent-filter>

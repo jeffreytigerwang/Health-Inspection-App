@@ -2,6 +2,7 @@ package com.example.restaurantlist.UI;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -54,17 +55,21 @@ public class ListActivity extends AppCompatActivity {
         restaurantsManager = RestaurantsManager.getInstance();
         inspectionManager = InspectionManager.getInstance();
 
+        getSupportActionBar().setTitle("Restaurant List");
+        ActionBar back = getSupportActionBar();
+        back.setDisplayHomeAsUpEnabled(true);
+
 
         // add the restaurants to the RestaurantsManager
         if(restaurantsManager.getcount()==0)
         {
             readCSVinspections();
             sortInspectionByName();
-            readCSVrestaurany();
+            readCSVrestaurant();
             sortRestaurantsByName();
         }
 
-        pupulateListView();
+        populateListView();
         registerClickCallback();
 
     }
@@ -138,7 +143,7 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
-    private void readCSVrestaurany() {
+    private void readCSVrestaurant() {
 
 
         InputStream is = getResources().openRawResource(R.raw.restaurants_itr1);
@@ -186,14 +191,14 @@ public class ListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this);
                 //Sends index of which restaurant was click on in ViewList
-                intent.putExtra(INDEX, position);
+                RestaurantsManager.getInstance().setCurrentRestaurant(position);
                 startActivity(intent);
             }
         });
 
     }
 
-    private void pupulateListView() {
+    private void populateListView() {
         ArrayAdapter<RestaurantsManager> adapter = new MyListAdapter();
         ListView listView;
         listView = findViewById(R.id.listvieww);

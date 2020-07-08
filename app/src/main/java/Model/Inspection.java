@@ -10,6 +10,7 @@ public class Inspection {
     //private String[] NonViolLump;          //Non Critical ViolLump
     private String HazardRating;
     private String colour;
+    private String testdate;
 
     public Inspection(String trackingNum) {
         this.TrackingNum=trackingNum;
@@ -30,6 +31,7 @@ public class Inspection {
         NumNonCritical = numNonCritical;
         HazardRating = hazardRating;
         CViolLump = paseviolLump(wholecviolLump);
+        testdate = Integer.toString (fulldate);
         //  NonViolLump = nonviolLump;
         setColour();
 
@@ -77,6 +79,7 @@ public class Inspection {
     public void setNumCritical(int numCritical) {
         NumCritical = numCritical;
     }
+
 
     public int getNumNonCritical() {
         return NumNonCritical;
@@ -128,4 +131,10 @@ public class Inspection {
     public String getColour(){
         return colour;
     }
+
+
+    public String getTestdate() {
+        return testdate;
+    }
+
 }

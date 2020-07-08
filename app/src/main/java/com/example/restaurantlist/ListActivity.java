@@ -52,6 +52,7 @@ public class ListActivity extends AppCompatActivity {
         if(restaurantsManager.getcount()==0)
         { //addrestaurants();
             readCSVinspections();
+            sortInspectionByName();
             readCSVrestaurany();
             sortRestaurantsByName();
         }
@@ -59,6 +60,24 @@ public class ListActivity extends AppCompatActivity {
         pupulateListView();
         registerClickCallback();
 
+    }
+
+
+    public void sortInspectionByName() {
+        Comparator<Inspection> compareByTracking = new Comparator<Inspection>() { //Compares restaurant names
+            @Override
+            public int compare(Inspection i1, Inspection i2) {
+                int c;
+                c = i1.getTrackingNum().compareTo(i2.getTrackingNum());
+                if (c==0){
+                    c = i1.getTestdate().compareTo(i2.getTestdate());
+                }
+                return c;
+            }
+
+        };
+
+        Collections.sort(inspectionManager.getList(), compareByTracking.reversed()); //Sort arraylist
     }
 
 

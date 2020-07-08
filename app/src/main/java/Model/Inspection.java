@@ -22,17 +22,22 @@ public class Inspection {
     }
 
 
-    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String[] cviolLump /*,String[] nonviolLump*/) {
+    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String wholecviolLump /*,String[] nonviolLump*/) {
         TrackingNum = trackingNum;
         InspectionDate = inspectionDate;
         InspType = inspType;
         NumCritical = numCritical;
         NumNonCritical = numNonCritical;
         HazardRating = hazardRating;
-        CViolLump = cviolLump;
+        CViolLump = paseviolLump(wholecviolLump);
       //  NonViolLump = nonviolLump;
         setColour();
 
+    }
+
+    private String[] paseviolLump(String wholecviolLump) {
+
+        return  wholecviolLump.replace(",",", ").split("\\|");
     }
 
 
@@ -98,15 +103,15 @@ public class Inspection {
 */
 
     public void setColour(){
-        if(this.HazardRating=="Low")
+        if(this.HazardRating.equals("Low"))
         {
             this.colour="blue";
         }
-        else if(this.HazardRating=="Moderate")
+        else if(this.HazardRating.equals("Moderate"))
         {
             this.colour="yellow";
         }
-        else if(this.HazardRating=="High")
+        else if(this.HazardRating.equals("High"))
         {
             this.colour="red";
         }

@@ -72,20 +72,23 @@ public class ListActivity extends AppCompatActivity {
 
             while (((line = reader.readLine()) != null)) {
                 //Spilt by " , "
-                 String[] tokens =  line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                // String[] tokens =  line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                String[] tokens = line.split(",",9);
                 //read the data
                 if(tokens[8].length()>0)
                 { inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
                         new int[]{Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3])},
-                        tokens[4].replace("\"",""),Integer.parseInt(tokens[5]),Integer.parseInt(tokens[6]),
+                        tokens[4].replace("\"",""),
+                        Integer.parseInt(tokens[5]),
+                        Integer.parseInt(tokens[6]),
                         tokens[7].replace("\"",""),
-                        new String[]{tokens[8],"m"}));   }
+                        tokens[8].replace("\"","") ));}
                 else
                 {   inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
                         new int[]{Integer.parseInt(tokens[1]),Integer.parseInt(tokens[2]),Integer.parseInt(tokens[3])},
                         tokens[4].replace("\"",""),Integer.parseInt(tokens[5]),Integer.parseInt(tokens[6]),
                         tokens[7].replace("\"",""),
-                        new String[]{"m"}));   }
+                        ""));   }
 
 
 
@@ -128,7 +131,7 @@ public class ListActivity extends AppCompatActivity {
                         tokens[2].replace("\"",""),
                         tokens[0].replace("\"",""),
                         Double.parseDouble(tokens[6].replace("\"","")),
-                        Double.parseDouble(tokens[6].replace("\"","")),
+                        Double.parseDouble(tokens[5].replace("\"","")),
                         tokens[3].replace("\"",""),
                         tokens[4].replace("\"",""),inspectionManager));
 

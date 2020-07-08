@@ -33,6 +33,12 @@ import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 
+/**
+ *  this activity show all restaurants with some information
+ */
+
+
+
 public class ListActivity extends AppCompatActivity {
 
     private RestaurantsManager restaurantsManager;
@@ -51,7 +57,7 @@ public class ListActivity extends AppCompatActivity {
 
         // add the restaurants to the RestaurantsManager
         if(restaurantsManager.getcount()==0)
-        { //addrestaurants();
+        {
             readCSVinspections();
             sortInspectionByName();
             readCSVrestaurany();

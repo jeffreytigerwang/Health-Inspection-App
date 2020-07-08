@@ -1,5 +1,7 @@
 package com.example.restaurantlist.Model;
 
+
+
 public class Inspection {
     private String TrackingNum;
     private int[] InspectionDate;

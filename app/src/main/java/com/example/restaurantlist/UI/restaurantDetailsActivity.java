@@ -19,6 +19,13 @@ import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.Model.inspectionListAdapter;
 import com.example.restaurantlist.R;
 
+/**
+ * show detail ( all inspections ) of a restaurant
+ */
+
+
+
+
 public class restaurantDetailsActivity extends AppCompatActivity {
     public static final String INDEX = "index";
     private int index;

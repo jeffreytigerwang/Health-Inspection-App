@@ -23,6 +23,16 @@ import java.util.Arrays;
 import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.R;
 
+/**
+ * show all detail of a specific inspection
+ */
+
+
+
+
+
+
+
 public class inspectionDetailsActivity extends AppCompatActivity {
     private int index;
     private int test1 = 1;

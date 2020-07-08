@@ -107,7 +107,7 @@ public class ListActivity extends AppCompatActivity {
 
             while (((line = reader.readLine()) != null)) {
                 //Spilt by " , "
-                // String[] tokens =  line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+               
                 String[] tokens = line.split(",",7);
                 //read the data
                 if(tokens[6].length()>0)

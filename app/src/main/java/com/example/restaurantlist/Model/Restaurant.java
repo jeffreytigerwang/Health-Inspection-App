@@ -1,4 +1,4 @@
-package Model;
+package com.example.restaurantlist.Model;
 
 public class Restaurant {
     private String restaurantName;

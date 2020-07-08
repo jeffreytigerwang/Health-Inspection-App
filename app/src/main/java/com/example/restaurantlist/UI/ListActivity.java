@@ -1,4 +1,4 @@
-package com.example.restaurantlist;
+package com.example.restaurantlist.UI;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +19,11 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import Model.Inspection;
-import Model.InspectionManager;
-import Model.Restaurant;
-import Model.RestaurantsManager;
+import com.example.restaurantlist.Model.Inspection;
+import com.example.restaurantlist.Model.InspectionManager;
+import com.example.restaurantlist.Model.Restaurant;
+import com.example.restaurantlist.Model.RestaurantsManager;
+import com.example.restaurantlist.R;
 
 public class ListActivity extends AppCompatActivity {
 

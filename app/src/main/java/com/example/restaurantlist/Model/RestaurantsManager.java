@@ -1,8 +1,6 @@
-package Model;
+package com.example.restaurantlist.Model;
 
 import androidx.annotation.NonNull;
-
-import com.example.restaurantlist.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;

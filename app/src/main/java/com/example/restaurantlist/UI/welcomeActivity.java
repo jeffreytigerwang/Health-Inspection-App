@@ -1,15 +1,15 @@
-package com.example.restaurantlist;
+package com.example.restaurantlist.UI;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
+
+import com.example.restaurantlist.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -48,7 +48,7 @@ public class welcomeActivity extends AppCompatActivity {
                 {
 
                     time.cancel();
-                    Intent intent= new Intent(welcomeActivity.this,MenuActivity.class);
+                    Intent intent= new Intent(welcomeActivity.this, MenuActivity.class);
                     startActivity(intent);
                     finish();
                 }

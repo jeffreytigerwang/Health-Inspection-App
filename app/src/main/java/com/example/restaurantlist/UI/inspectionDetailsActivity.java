@@ -1,12 +1,9 @@
-package com.example.restaurantlist;
+package com.example.restaurantlist.UI;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,12 +19,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import Model.Inspection;
-import Model.InspectionManager;
-import Model.RestaurantsManager;
-import Model.inspectionListAdapter;
+import com.example.restaurantlist.Model.InspectionManager;
+import com.example.restaurantlist.R;
 
 public class inspectionDetailsActivity extends AppCompatActivity {
     private int index;

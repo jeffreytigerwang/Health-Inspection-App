@@ -1,4 +1,4 @@
-package com.example.restaurantlist;
+package com.example.restaurantlist.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,20 +7,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Inspection;
-import Model.InspectionManager;
-import Model.RestaurantsManager;
-import Model.inspectionListAdapter;
+import com.example.restaurantlist.Model.Inspection;
+import com.example.restaurantlist.Model.InspectionManager;
+import com.example.restaurantlist.Model.RestaurantsManager;
+import com.example.restaurantlist.Model.inspectionListAdapter;
+import com.example.restaurantlist.R;
 
 public class restaurantDetailsActivity extends AppCompatActivity {
     public static final String INDEX = "index";

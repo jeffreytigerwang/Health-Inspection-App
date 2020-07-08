@@ -10,16 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".inspectionDetailsActivity"
+            android:name=".UI.inspectionDetailsActivity"
             android:label="@string/title_activity_inspection_details"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".restaurantDetailsActivity" />
+        <activity android:name=".UI.restaurantDetailsActivity" />
         <activity
-            android:name=".ListActivity"
+            android:name=".UI.ListActivity"
             android:label="Restaurant ListView" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".welcomeActivity">
+        <activity android:name=".UI.MenuActivity" />
+        <activity android:name=".UI.welcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

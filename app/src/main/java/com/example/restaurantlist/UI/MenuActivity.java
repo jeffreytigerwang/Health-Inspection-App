@@ -1,17 +1,13 @@
-package com.example.restaurantlist;
+package com.example.restaurantlist.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 
-import Model.Inspection;
-import Model.InspectionManager;
-import Model.Restaurant;
-import Model.RestaurantsManager;
+import com.example.restaurantlist.R;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -31,7 +27,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 linearLayout.setBackground(getDrawable(R.drawable.btn_list_item));
-                Intent intent= new Intent(MenuActivity.this,ListActivity.class);
+                Intent intent= new Intent(MenuActivity.this, ListActivity.class);
                 startActivity(intent);
             }
         });

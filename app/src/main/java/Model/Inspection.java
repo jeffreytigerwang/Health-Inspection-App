@@ -7,7 +7,6 @@ public class Inspection {
     private int NumCritical;
     private int NumNonCritical;
     private String[] CViolLump;            //Critical ViolLUmp
-    //private String[] NonViolLump;          //Non Critical ViolLump
     private String HazardRating;
     private String colour;
     private String testdate;
@@ -32,7 +31,6 @@ public class Inspection {
         HazardRating = hazardRating;
         CViolLump = paseviolLump(wholecviolLump);
         testdate = Integer.toString (fulldate);
-        //  NonViolLump = nonviolLump;
         setColour();
 
     }
@@ -50,7 +48,6 @@ public class Inspection {
 
         return  wholecviolLump.replace(",",", ").split("\\|");
     }
-
 
     public String getTrackingNum() {
         return TrackingNum;
@@ -80,7 +77,6 @@ public class Inspection {
         NumCritical = numCritical;
     }
 
-
     public int getNumNonCritical() {
         return NumNonCritical;
     }
@@ -105,14 +101,6 @@ public class Inspection {
         CViolLump = violLump;
     }
 
-  /*  public String[] getNonViolLump() {
-        return NonViolLump;
-    }
-
-    public void setNonViolLump(String[] violLump) {
-        NonViolLump = violLump;
-    }
-*/
 
     public void setColour(){
         if(this.HazardRating.equals("Low"))

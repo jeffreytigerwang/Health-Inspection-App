@@ -22,17 +22,26 @@ public class Inspection {
     }
 
 
-    public Inspection(String trackingNum, int[] inspectionDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String wholecviolLump /*,String[] nonviolLump*/) {
+    public Inspection(String trackingNum, int fulldate, String inspType, int numCritical, int numNonCritical, String hazardRating, String wholecviolLump /*,String[] nonviolLump*/) {
         TrackingNum = trackingNum;
-        InspectionDate = inspectionDate;
+        InspectionDate = parseDate(fulldate);
         InspType = inspType;
         NumCritical = numCritical;
         NumNonCritical = numNonCritical;
         HazardRating = hazardRating;
         CViolLump = paseviolLump(wholecviolLump);
-      //  NonViolLump = nonviolLump;
+        //  NonViolLump = nonviolLump;
         setColour();
 
+    }
+
+    private int[] parseDate(int fulldate) {
+        String year = String.valueOf(fulldate).substring(0,4);
+        String month = String.valueOf(fulldate).substring(4,6);
+        String day = String.valueOf(fulldate).substring(6,8);
+        int[] parsedDate = {Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)};
+
+        return parsedDate;
     }
 
     private String[] paseviolLump(String wholecviolLump) {

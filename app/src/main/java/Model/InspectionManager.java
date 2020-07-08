@@ -49,6 +49,9 @@ public class InspectionManager implements Iterable <Inspection> {
         return inspections.size();
     }
 
+    public int getSize() {
+        return inspections.size();
+    }
 
     @NonNull
     @Override

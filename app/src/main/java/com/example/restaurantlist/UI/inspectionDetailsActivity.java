@@ -26,23 +26,13 @@ import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 
 /**
- * show all detail of a specific inspection
+ * Detail of a specific inspection
  */
-
 
 
 public class inspectionDetailsActivity extends AppCompatActivity {
     private int index;
 
-
-    private static final String EXTRA_MESSAGE = "Extra-Message";
-    int violationNumber = 0;
-
-/***    public static Intent makeLaunchIntent(Context c, String message) {
-        Intent intent = new Intent(c, inspectionDetailsActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        return intent;
-    }***/
 
     public static Intent makeLaunchIntent(Context c) {
         Intent intent = new Intent(c, inspectionDetailsActivity.class);
@@ -136,7 +126,6 @@ public class inspectionDetailsActivity extends AppCompatActivity {
         }
 
         violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getCViolLump()));
-       // violations.addAll(Arrays.asList(InspectionManager.getInstance().get(index).getNonViolLump()));
 
         populateListView();
         registerClickCallback();

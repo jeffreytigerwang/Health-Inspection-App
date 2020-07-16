@@ -48,7 +48,7 @@ public class welcomeActivity extends AppCompatActivity {
                 {
 
                     time.cancel();
-                    Intent intent= new Intent(welcomeActivity.this, MenuActivity.class);
+                    Intent intent= new Intent(welcomeActivity.this, MapsActivity.class);
                     startActivity(intent);
                     finish();
                 }

@@ -44,4 +44,5 @@
         <item>Employee sanitary issue</item>
         <item>Missing FOODSAFE Level 1 or equivalent</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>

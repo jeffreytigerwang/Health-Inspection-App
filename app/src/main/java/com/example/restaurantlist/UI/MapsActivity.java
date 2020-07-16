@@ -68,6 +68,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
+                            LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            mMap.addMarker(new MarkerOptions().position(current).title("your position"));
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM);
 
@@ -86,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void moveCamera(LatLng latLng, float zoom) {
-        Log.d(TAG, "moveCamera : moveing the camera to: lat" + latLng.latitude + ", lng:" + latLng.longitude);
+        Log.d(TAG, "moveCamera : moving the camera to: lat" + latLng.latitude + ", lng:" + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
@@ -100,11 +102,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for (int i = 0; i < grantResults.length; i++) {
                         if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
                             mLocationPermissionsGrandted = false;
-                            Log.d(TAG, "onRequestPermissionResult: permsssion failed");
+                            Log.d(TAG, "onRequestPermissionResult: permission failed");
                             return;
                         }
                     }
-                    Log.d(TAG, "onRequestPermissionResult: permsssion granted");
+                    Log.d(TAG, "onRequestPermissionResult: permission granted");
                     mLocationPermissionsGrandted = true;
                     //initalize our map
                     initMap();
@@ -169,12 +171,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             mMap.setMyLocationEnabled(true);
        }
-
-
-
-
-
-
 
 
         /*// Add a marker in Sydney and move the camera

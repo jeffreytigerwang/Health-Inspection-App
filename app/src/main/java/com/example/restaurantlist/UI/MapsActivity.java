@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
 
 import com.example.restaurantlist.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+   // private FusedLocationProviderClient
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

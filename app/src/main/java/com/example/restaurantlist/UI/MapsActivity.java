@@ -9,6 +9,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AppComponentFactory;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -60,6 +61,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //widgets
     private EditText searchText;
     private ImageButton deviceGPS;
+    private ImageButton changelist;
+
 
     
     //vars
@@ -71,8 +74,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         searchText = (EditText)findViewById(R.id.input_search);
         deviceGPS  = (ImageButton) findViewById(R.id.ic_device);
+        changelist = (ImageButton)  findViewById(R.id.ic_change);
         getLocationPremission();
-
+        changelist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MapsActivity.this, ListActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -102,6 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getDeviceLocation();
             }
         });
+
         hideSoftKeyboard(this);
 }
 
@@ -251,6 +263,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mMap.setMyLocationEnabled(true);
             initsearch();
+
        }
     }
 

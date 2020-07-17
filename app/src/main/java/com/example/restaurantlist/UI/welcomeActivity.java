@@ -3,13 +3,19 @@ package com.example.restaurantlist.UI;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.restaurantlist.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.api.GoogleApiActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,6 +23,9 @@ import java.util.TimerTask;
 public class welcomeActivity extends AppCompatActivity {
     ProgressBar progressBar;
     int count=0;
+
+    private static final String TAG="welcomeActivity";
+    private static final int ERROR_DIALOG_REQUEST=9001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,11 +34,35 @@ public class welcomeActivity extends AppCompatActivity {
         //hide hideNavigationBar, let it full screen.
         hideNavigationBar();
 
+
+
+        if(isServicesOK()){
+            init();
+        }
+
+
+    }
+    private void init(){
         //set up the ProgressBar
         setupprog();
 
-
-
+    }
+    public boolean isServicesOK(){
+        Log.d(TAG,"isServicesOK: checking google services version");
+        int availalve = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(welcomeActivity.this);
+        if(availalve== ConnectionResult.SUCCESS){
+            Log.d(TAG,"isServicesOK: Google Play Services is working");
+            return true;
+        }
+        else if (GoogleApiAvailability.getInstance().isUserResolvableError(availalve)){
+            Log.d(TAG,"isServicesOK: an error occured but we can fix it");
+            Dialog dialog =GoogleApiAvailability.getInstance().getErrorDialog(welcomeActivity.this,availalve,ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }
+        else {
+            Toast.makeText(this,"You can't make map requests", Toast.LENGTH_SHORT).show();
+        }
+        return false;
     }
 
 

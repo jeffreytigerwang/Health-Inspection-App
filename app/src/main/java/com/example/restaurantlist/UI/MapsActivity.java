@@ -42,7 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
 
     //vars
-    private Boolean mLocationPermissionsGrandted = true;
+    private Boolean mLocationPermissionsGrandted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +61,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             if (mLocationPermissionsGrandted) {
 
-                final Task location = mfusedLocationProviderClient.getLastLocation();
+                 Task location = mfusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
-                            LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(current).title("your position"));
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM);
+                           // LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                           // mMap.addMarker(new MarkerOptions().position(current).title("your position"));
+                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())
+                                   , DEFAULT_ZOOM);
 
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
@@ -88,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void moveCamera(LatLng latLng, float zoom) {
-        Log.d(TAG, "moveCamera : moving the camera to: lat" + latLng.latitude + ", lng:" + latLng.longitude);
+        Log.d(TAG, "moveCamera : moving the camera to: lat " + latLng.latitude + ", lng:" + latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
@@ -173,8 +173,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
        }
 
 
-        /*// Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        // Add a marker in Sydney and move the camera
+       /* LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }

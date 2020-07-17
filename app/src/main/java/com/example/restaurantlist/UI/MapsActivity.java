@@ -23,9 +23,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.nio.channels.ScatteringByteChannel;
@@ -36,7 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mfusedLocationProviderClient;
 
     private static final String TAG = "MapsActivity";
-    private static final float DEFAULT_ZOOM = 15f;
+    private static final float DEFAULT_ZOOM = 13f;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
@@ -54,6 +56,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+
     private void getDeviceLocation() {
         Log.d(TAG, " getDeviceLocation: getting the current devices location");
         mfusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -61,17 +64,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             if (mLocationPermissionsGrandted) {
 
-                 Task location = mfusedLocationProviderClient.getLastLocation();
+             Task location = mfusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
+
                            // LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                            // mMap.addMarker(new MarkerOptions().position(current).title("your position"));
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())
                                    , DEFAULT_ZOOM);
+
 
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
@@ -89,6 +94,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void moveCamera(LatLng latLng, float zoom) {
         Log.d(TAG, "moveCamera : moving the camera to: lat " + latLng.latitude + ", lng:" + latLng.longitude);
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
     }
 
@@ -167,8 +173,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-                return;
+               return;
             }
+
             mMap.setMyLocationEnabled(true);
        }
 

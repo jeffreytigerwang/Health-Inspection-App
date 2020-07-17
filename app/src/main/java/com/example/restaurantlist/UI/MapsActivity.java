@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,7 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     
     //widgets
     private EditText searchText;
-    private ImageView deviceGPS;
+    private ImageButton deviceGPS;
 
     
     //vars
@@ -69,7 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         searchText = (EditText)findViewById(R.id.input_search);
-        deviceGPS  = (ImageView)findViewById(R.id.ic_device);
+        deviceGPS  = (ImageButton) findViewById(R.id.ic_device);
         getLocationPremission();
 
 

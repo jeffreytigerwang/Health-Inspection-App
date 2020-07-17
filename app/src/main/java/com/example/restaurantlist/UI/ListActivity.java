@@ -61,20 +61,20 @@ public class ListActivity extends AppCompatActivity {
 
 
         // add the restaurants to the RestaurantsManager
-        if(restaurantsManager.getcount()==0)
+   /*     if(restaurantsManager.getcount()==0)
         {
             readCSVinspections();
             sortInspectionByName();
             readCSVrestaurant();
             sortRestaurantsByName();
-        }
+        }*/
 
         populateListView();
         registerClickCallback();
 
     }
 
-
+/*
     public void sortInspectionByName() {
         Comparator<Inspection> compareByTracking = new Comparator<Inspection>() { //Compares restaurant names
             @Override
@@ -179,7 +179,7 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
 
 

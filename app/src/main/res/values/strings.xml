@@ -35,6 +35,8 @@
     <string name="violation_type">Violation Type</string>
     <string name="not_critical">Severity: Not Critical</string>
     <string name="critical">Severity: Critical</string>
+    <string name="upgrade">Upgrade</string>
+    <string name="update">update</string>
 
 
     <string-array name="my_array">

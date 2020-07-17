@@ -47,5 +47,18 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="391dp"
+        android:layout_height="366dp"
+        android:text="hi"
+        android:textSize="8sp" />
+
+    <Button
+        android:id="@+id/update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update" />
+
 
 </LinearLayout>

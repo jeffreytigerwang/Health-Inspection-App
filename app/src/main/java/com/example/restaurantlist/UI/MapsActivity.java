@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     
     //widgets
     private EditText searchText;
+    private ImageView deviceGPS;
 
     
     //vars
@@ -66,7 +68,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        searchText = (EditText)findViewById(R.id.input_search); 
+        searchText = (EditText)findViewById(R.id.input_search);
+        deviceGPS  = (ImageView)findViewById(R.id.ic_device);
         getLocationPremission();
 
 
@@ -90,7 +93,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return false;
             }
 
-           
+        });
+        deviceGPS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"onClick: clicked device icon");
+                getDeviceLocation();
+            }
         });
         hideSoftKeyboard(this);
 }

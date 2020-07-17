@@ -41,12 +41,14 @@
         android:hint="@string/enter_address_city_or_zip_code"
         android:imeOptions="actionSearch"/>
 
-
-
-
-
 </RelativeLayout>
-
-
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/ic_device"
+        android:src="@drawable/ic_device"/>
 </RelativeLayout>
-

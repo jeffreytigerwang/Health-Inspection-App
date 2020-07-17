@@ -10,9 +10,18 @@ import android.app.Activity;
 import android.app.AppComponentFactory;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.restaurantlist.R;
@@ -30,7 +39,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
 import java.nio.channels.ScatteringByteChannel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -38,11 +50,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mfusedLocationProviderClient;
 
     private static final String TAG = "MapsActivity";
-    private static final float DEFAULT_ZOOM = 13f;
+    private static final float DEFAULT_ZOOM = 16f;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    
+    //widgets
+    private EditText searchText;
 
+    
     //vars
     private Boolean mLocationPermissionsGrandted = false;
 
@@ -50,12 +66,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        searchText = (EditText)findViewById(R.id.input_search); 
         getLocationPremission();
 
 
     }
 
+    private void initsearch(){
+        Log.d(TAG,"initsearch: initializing");
+
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH
+                ||actionId == EditorInfo.IME_ACTION_DONE
+                ||event.getAction() == event.ACTION_DOWN
+                ||event.getAction() == event.KEYCODE_ENTER)   {
+                    
+                    //execute our method for searching
+                    geolocate();
+                }
+                
+                return false;
+            }
+
+           
+        });
+        hideSoftKeyboard(this);
+}
+
+    private void geolocate() {
+        Log.d(TAG,"geoLocate: geolocating");
+        String searchstring =searchText.getText().toString();
+        Geocoder geocoder = new Geocoder(MapsActivity.this);
+        List<Address> list = new ArrayList<>();
+        try {
+            list = geocoder.getFromLocationName(searchstring,1);
+        }catch (IOException e){
+            Log.e(TAG,"geoLocate: IOException:  " + e.getMessage());
+        }
+        if (list.size()>0){
+            Address address = list.get(0);
+            Log.d(TAG,"geoLocate: found a location: " + address.toString());
+            //Toast.makeText(this,address.toString(),Toast.LENGTH_SHORT).show();
+            moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM,address.getAddressLine(0));
+        }
+    }
 
     private void getDeviceLocation() {
         Log.d(TAG, " getDeviceLocation: getting the current devices location");
@@ -75,7 +131,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                            // LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
                            // mMap.addMarker(new MarkerOptions().position(current).title("your position"));
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())
-                                   , DEFAULT_ZOOM);
+                                   , DEFAULT_ZOOM
+                            ,"My Location");
 
 
                         } else {
@@ -92,10 +149,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    private void moveCamera(LatLng latLng, float zoom) {
+    private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera : moving the camera to: lat " + latLng.latitude + ", lng:" + latLng.longitude);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
+        if(!title.equals("My Location")){
+        MarkerOptions options = new MarkerOptions()
+                .position(latLng)
+                .title(title);
+        mMap.addMarker(options);
+        }
+        hideSoftKeyboard(this);
     }
 
     @Override
@@ -142,8 +206,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     }
-
-
+    
     private void initMap() {
         Log.d(TAG, "initMap: initializing map");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -177,12 +240,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
             mMap.setMyLocationEnabled(true);
+            initsearch();
        }
-
-
-        // Add a marker in Sydney and move the camera
-       /* LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
+
+
+   // code found from  https://juejin.im/post/58d8ccb45c497d005702dae6
+    public static void hideSoftKeyboard(Activity activity) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+
+
+
+
+
 }

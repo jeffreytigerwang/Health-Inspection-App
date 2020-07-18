@@ -154,20 +154,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (mLocationPermissionsGrandted) {
 
              Task location = mfusedLocationProviderClient.getLastLocation();
+
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
+
+                        if (task.isSuccessful()&&task.getResult() != null) {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
 
-                           // LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                           // mMap.addMarker(new MarkerOptions().position(current).title("your position"));
+                            assert currentLocation != null;
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())
                                    , DEFAULT_ZOOM
                             ,"My Location");
-
-
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();

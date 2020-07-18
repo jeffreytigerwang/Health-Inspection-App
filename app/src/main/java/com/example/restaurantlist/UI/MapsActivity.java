@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.restaurantlist.Model.InspectionManager;
+import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -51,9 +53,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mfusedLocationProviderClient;
+    private RestaurantsManager restaurants;
 
     private static final String TAG = "MapsActivity";
-    private static final float DEFAULT_ZOOM = 16f;
+    private static final float DEFAULT_ZOOM = 15f;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
@@ -75,6 +78,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         searchText = (EditText)findViewById(R.id.input_search);
         deviceGPS  = (ImageButton) findViewById(R.id.ic_device);
         changelist = (ImageButton)  findViewById(R.id.ic_change);
+        restaurants= RestaurantsManager.getInstance();
+
         getLocationPremission();
         changelist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,14 +262,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mLocationPermissionsGrandted) {
             getDeviceLocation();
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
                return;
             }
-
             mMap.setMyLocationEnabled(true);
-            initsearch();
+            initsearch(); }
+        for(int i=0;i< restaurants.getNumRestaurants();i++) {
+            LatLng sydney = new LatLng(restaurants.get(i).getLatitude(), restaurants.get(i).getLongitude());
+            mMap.addMarker(new MarkerOptions().position(sydney).title("marker in " + restaurants.get(i).getRestaurantName()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        }
 
-       }
+
     }
 
 

@@ -60,7 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RestaurantsManager restaurants;
     private InspectionManager inspections;
 
-
     private static final String TAG = "MapsActivity";
     private static final float DEFAULT_ZOOM = 15f;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -93,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onClick(View v) {
                 Intent intent= new Intent(MapsActivity.this, ListActivity.class);
                 startActivity(intent);
-                finish();
+
             }
         });
 

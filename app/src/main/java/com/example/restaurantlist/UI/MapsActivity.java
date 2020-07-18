@@ -39,6 +39,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -49,11 +50,16 @@ import java.nio.channels.ScatteringByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+      GoogleMap.OnInfoWindowClickListener
+
+{
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mfusedLocationProviderClient;
     private RestaurantsManager restaurants;
+    private InspectionManager inspections;
+
 
     private static final String TAG = "MapsActivity";
     private static final float DEFAULT_ZOOM = 15f;
@@ -79,6 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         deviceGPS  = (ImageButton) findViewById(R.id.ic_device);
         changelist = (ImageButton)  findViewById(R.id.ic_change);
         restaurants= RestaurantsManager.getInstance();
+        inspections= InspectionManager.getInstance();
 
         getLocationPremission();
         changelist.setOnClickListener(new View.OnClickListener() {
@@ -266,12 +273,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
             mMap.setMyLocationEnabled(true);
             initsearch(); }
+
+        //mark restaurants on the map
         for(int i=0;i< restaurants.getNumRestaurants();i++) {
             LatLng sydney = new LatLng(restaurants.get(i).getLatitude(), restaurants.get(i).getLongitude());
-            mMap.addMarker(new MarkerOptions().position(sydney).title("marker in " + restaurants.get(i).getRestaurantName()));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+           // mMap.addMarker(new MarkerOptions().position(sydney).title("marker in " + restaurants.get(i).getRestaurantName()));
+           // MarkerOptions markerOptions;
+           // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            String color ="blue";
+            for(int j=0;j<inspections.getSize();j++) {
+                if(restaurants.get(i).getTrackingNumber().equals(inspections.get(j).getTrackingNum()))
+                { color = inspections.get(j).getColour();
+                    break;}
+            }
+              String detail="Address: "
+                      +restaurants.get(i).getAddress()
+                      +"\r"
+                      +". Hazard level: "
+                      +color;
+              mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,DEFAULT_ZOOM));
+              MarkerOptions markerOptions = new MarkerOptions().position(sydney).title(restaurants.get(i).getRestaurantName()).snippet(detail);
+
+
+
+            switch (color){
+                case "blue" :
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    break;
+                case "red" :
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    break;
+                default:
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    break;
+            }
+            mMap.addMarker(markerOptions);
         }
 
+          // if user click the info window, they can see all inspections
+          mMap.setOnInfoWindowClickListener(this);
 
     }
 
@@ -286,8 +326,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        int count=0;
+        for (int i = 0; i < restaurants.getNumRestaurants(); i++) {
+            if (marker.getPosition().longitude == restaurants.get(i).getLongitude()){
+                count=i;
+                break;
+            }
+        }
+        Intent intent = restaurantDetailsActivity.makeLaunchIntent(MapsActivity.this);
+        //Sends index of which restaurant was click on in ViewList
+        RestaurantsManager.getInstance().setCurrentRestaurant(count);
+        startActivity(intent);
 
-
-
-
+    }
 }

@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.Model.MyClusterItem;
+import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -45,7 +46,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
+import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
 import java.io.IOException;
 import java.nio.channels.ScatteringByteChannel;
@@ -74,6 +77,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private EditText searchText;
     private ImageButton deviceGPS;
     private ImageButton changelist;
+
 
 
     
@@ -267,6 +271,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady: map is ready");
         mMap = googleMap;
+        mClusterManager = new ClusterManager<>(this, mMap);
+
+        //Clustering
+        setUpClusterer();
+
+        //Set Custom InfoWindow Adapter
+
 
         if (mLocationPermissionsGrandted) {
             getDeviceLocation();
@@ -317,14 +328,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-/***    private void setUpClusterer() {
-        mMap.setOnCameraIdleListener(mClusterManager);
-        getItems();
-        mClusterManager.cluster();
-        mClusterManager.setRenderer(new MarkerClusterRenderer(getApplicationContext(), mMap, mClusterManager));
-    }
 
-***/
+private void setUpClusterer() {
+    mMap.setOnCameraIdleListener(mClusterManager);
+    //addItems();
+    mClusterManager.cluster();
+    //not necessary
+    mClusterManager.setRenderer(new MarkerClusterRenderer(getApplicationContext(), mMap, mClusterManager));
+
+
+}
+
+
+//just for testing purpose
+    private void addItems() {
+
+        // Set some lat/lng coordinates to start with.
+        double lat = 51.5145160;
+        double lng = -0.1270060;
+
+        // Add ten cluster items in close proximity, for purposes of this example.
+        for (int i = 0; i < 10; i++) {
+            double offset = i / 60d;
+            lat = lat + offset;
+            lng = lng + offset;
+            MyClusterItem offsetItem = new MyClusterItem(lat, lng);
+            mClusterManager.addItem(offsetItem);
+        }
+    }
 
    // code found from  https://juejin.im/post/58d8ccb45c497d005702dae6
     public static void hideSoftKeyboard(Activity activity) {
@@ -350,5 +381,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         RestaurantsManager.getInstance().setCurrentRestaurant(count);
         startActivity(intent);
 
+    }
+
+
+
+    private class MarkerClusterRenderer extends DefaultClusterRenderer<MyClusterItem> {
+
+        public MarkerClusterRenderer(Context context, GoogleMap map,
+                                     ClusterManager<MyClusterItem> clusterManager) {
+            super(context, map, mClusterManager);
+        }
+
+        @Override
+        protected void onBeforeClusterItemRendered(MyClusterItem item, MarkerOptions markerOptions) {
+            // use this to make your change to the marker option
+            // for the marker before it gets render on the map
+            markerOptions.icon(item.getHazard());
+            markerOptions.title(item.getTitle());
+            super.onBeforeClusterItemRendered(item, markerOptions);
+        }
     }
 }

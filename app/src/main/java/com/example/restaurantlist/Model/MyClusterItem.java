@@ -10,10 +10,10 @@ public class MyClusterItem implements ClusterItem {
     private LatLng mPosition;
     private String mTitle;
     private String mSnippet;
-    private BitmapDescriptorFactory mHazard;
+    private BitmapDescriptor mHazard;
 
 
-    public MyClusterItem(double lat, double lng, String mTitle, BitmapDescriptorFactory mHazard) {
+    public MyClusterItem(double lat, double lng, String mTitle, BitmapDescriptor mHazard) {
         this.mPosition = new LatLng(lat, lng);
         this.mTitle = mTitle;
         this.mHazard = mHazard;
@@ -39,7 +39,7 @@ public class MyClusterItem implements ClusterItem {
         return "";
     }
 
-    public BitmapDescriptorFactory getHazard() {
+    public BitmapDescriptor getHazard() {
         return mHazard;
     }
 }

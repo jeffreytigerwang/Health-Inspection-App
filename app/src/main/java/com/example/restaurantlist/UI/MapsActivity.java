@@ -28,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.restaurantlist.Model.InspectionManager;
+import com.example.restaurantlist.Model.MyClusterItem;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -44,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.maps.android.clustering.ClusterManager;
 
 import java.io.IOException;
 import java.nio.channels.ScatteringByteChannel;
@@ -59,6 +61,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mfusedLocationProviderClient;
     private RestaurantsManager restaurants;
     private InspectionManager inspections;
+    private ClusterManager<MyClusterItem> mClusterManager;
+
 
     private static final String TAG = "MapsActivity";
     private static final float DEFAULT_ZOOM = 15f;
@@ -313,6 +317,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+/***    private void setUpClusterer() {
+        mMap.setOnCameraIdleListener(mClusterManager);
+        getItems();
+        mClusterManager.cluster();
+        mClusterManager.setRenderer(new MarkerClusterRenderer(getApplicationContext(), mMap, mClusterManager));
+    }
+
+***/
 
    // code found from  https://juejin.im/post/58d8ccb45c497d005702dae6
     public static void hideSoftKeyboard(Activity activity) {

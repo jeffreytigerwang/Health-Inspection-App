@@ -429,6 +429,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         Intent intent = restaurantDetailsActivity.makeLaunchIntent(MapsActivity.this, EXTRA_MESSAGE);
+
         //Sends index of which restaurant was click on in ViewList
         RestaurantsManager.getInstance().setCurrentRestaurant(count);
         startActivity(intent);

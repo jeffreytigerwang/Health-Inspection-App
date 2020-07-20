@@ -102,11 +102,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent intent= new Intent(MapsActivity.this, ListActivity.class);
                 finish();
                 startActivity(intent);
-
             }
         });
-
-
     }
 
     private void initsearch(){
@@ -188,8 +185,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (SecurityException e) {
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
         }
-
-
     }
 
     private void moveCamera(LatLng latLng, float zoom, String title) {
@@ -257,7 +252,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapsActivity.this);
 
-
     }
 
     /**
@@ -293,56 +287,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             initsearch();
         }
 
-/***
-        Intent i_receive = getIntent();
-        String resID = i_receive.getStringExtra(EXTRA_MESSAGE);
-
-        if (resID != null) {
-            HandleReceivingCoordinates(resID);
-        }
-
- ***/
-
-/***
-        //mark restaurants on the map
-        for(int i=0;i< restaurants.getNumRestaurants();i++) {
-            LatLng sydney = new LatLng(restaurants.get(i).getLatitude(), restaurants.get(i).getLongitude());
-           // mMap.addMarker(new MarkerOptions().position(sydney).title("marker in " + restaurants.get(i).getRestaurantName()));
-           // MarkerOptions markerOptions;
-           // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-            String color ="blue";
-            for(int j=0;j<inspections.getSize();j++) {
-                if(restaurants.get(i).getTrackingNumber().equals(inspections.get(j).getTrackingNum()))
-                { color = inspections.get(j).getColour();
-                    break;}
-            }
-              String detail="Address: "
-                      +restaurants.get(i).getAddress()
-                      +"\r"
-                      +". Hazard level: "
-                      +color;
-              mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,DEFAULT_ZOOM));
-              MarkerOptions markerOptions = new MarkerOptions().position(sydney).title(restaurants.get(i).getRestaurantName()).snippet(detail);
-
-
-
-            switch (color){
-                case "blue" :
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                    break;
-                case "red" :
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    break;
-                default:
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                    break;
-            }
-            mMap.addMarker(markerOptions);
-        }
-***/
-          // if user click the info window, they can see all inspections
-          mMap.setOnInfoWindowClickListener(this);
-
+        // if user click the info window, they can see all inspections
+        mMap.setOnInfoWindowClickListener(this);
     }
 
     private class CustomInfoAdapter implements GoogleMap.InfoWindowAdapter {
@@ -398,9 +344,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-                ImageView hazard = itemView.findViewById(R.id.info_item_hazardImage);
-                //hazard.setImageResource(mostRecentInspection.getHazardIcon());
-
+                ImageView hazard = itemView.findViewById(R.id.imgMapHazard);
+                if (mostRecentInspection.getHazardRating().equals("Low")){
+                    hazard.setImageResource(R.drawable.blue);
+                }
+                else if(mostRecentInspection.getHazardRating().equals("High")){
+                    hazard.setImageResource(R.drawable.red);
+                }
+                else{
+                    hazard.setImageResource(R.drawable.yellow);
+                }
             }
 
             return itemView;
@@ -449,9 +402,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             temp, BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                     break;
             }
-          /*  MyClusterItem newItem = new MyClusterItem(restaurant.getLatitude(),
-                    restaurant.getLongitude(),
-                    temp, BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));*/
+
 
             mClusterManager.addItem(newItem);
         }
@@ -483,42 +434,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(intent);
 
     }
-
-    /***
-    private void HandleReceivingCoordinates(String resID) {
-        RestaurantsManager manager = RestaurantsManager.getInstance();
-
-        Restaurant goToRes = null;
-        boolean found = false;
-        int i = 0;
-        for (Restaurant temp : manager) {
-            if (resID.equals(temp.getTrackingNumber())) {
-                goToRes = temp;
-                found = true;
-                break;
-            }
-            i++;
-        }
-
-        if (found) {
-            mClusterManager.clearItems();
-            moveCamera(new LatLng(goToRes.getLatitude(),
-                    goToRes.getLongitude()), DEFAULT_ZOOM, null);
-            String temp = goToRes.getRestaurantName();
-
-            MarkerOptions options = new MarkerOptions().
-                    position(new LatLng(goToRes.getLatitude(),
-                            goToRes.getLongitude())).
-                    title(temp);
-
-            mMarker = mMap.addMarker(options);
-            mMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-            mMarker.showInfoWindow();
-            moveCamera(new LatLng(goToRes.getLatitude(),
-                    goToRes.getLongitude()), DEFAULT_ZOOM, null);
-        }
-    }
-    ***/
 
 
     private class MarkerClusterRenderer extends DefaultClusterRenderer<MyClusterItem> {

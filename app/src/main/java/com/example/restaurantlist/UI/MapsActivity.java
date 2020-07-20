@@ -424,9 +424,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             String temp = restaurant.getRestaurantName();
 
-            MyClusterItem newItem = new MyClusterItem(restaurant.getLatitude(),
+            String color ="blue";
+            for(int j=0;j<inspections.getSize();j++) {
+                if(restaurant.getTrackingNumber().equals(inspections.get(j).getTrackingNum()))
+                { color = inspections.get(j).getColour();
+                    break;}
+            }
+            MyClusterItem newItem;
+            switch (color){
+                case "blue" :
+                     newItem = new MyClusterItem(restaurant.getLatitude(),
+                            restaurant.getLongitude(),
+                            temp, BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    break;
+                case "red" :
+                     newItem = new MyClusterItem(restaurant.getLatitude(),
+                            restaurant.getLongitude(),
+                            temp, BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    break;
+                default:
+                     newItem = new MyClusterItem(restaurant.getLatitude(),
+                            restaurant.getLongitude(),
+                            temp, BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    break;
+            }
+          /*  MyClusterItem newItem = new MyClusterItem(restaurant.getLatitude(),
                     restaurant.getLongitude(),
-                    temp, BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    temp, BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));*/
 
             mClusterManager.addItem(newItem);
         }

@@ -9,9 +9,7 @@ public class MyClusterItem implements ClusterItem {
 
     private LatLng mPosition;
     private String mTitle;
-    private String mSnippet;
     private BitmapDescriptor mHazard;
-
 
     public MyClusterItem(double lat, double lng, String mTitle, BitmapDescriptor mHazard) {
         this.mPosition = new LatLng(lat, lng);
@@ -23,23 +21,22 @@ public class MyClusterItem implements ClusterItem {
         mPosition = new LatLng(lat, lng);
     }
 
-
     @Override
     public LatLng getPosition() {
-        return null;
+        return mPosition;
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return mTitle;
+    }
+
+    public BitmapDescriptor getHazard() {
+        return mHazard;
     }
 
     @Override
     public String getSnippet() {
         return "";
-    }
-
-    public BitmapDescriptor getHazard() {
-        return mHazard;
     }
 }

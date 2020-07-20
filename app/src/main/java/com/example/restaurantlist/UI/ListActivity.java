@@ -45,6 +45,7 @@ public class ListActivity extends AppCompatActivity {
     private RestaurantsManager restaurantsManager;
     private InspectionManager inspectionManager;
     public static final String INDEX = "index";
+    private static final String EXTRA_MESSAGE = "ExtraMessage";
 
 
 
@@ -190,7 +191,7 @@ public class ListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this);
+                Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this, EXTRA_MESSAGE);
                 //Sends index of which restaurant was click on in ViewList
                 RestaurantsManager.getInstance().setCurrentRestaurant(position);
                 startActivity(intent);

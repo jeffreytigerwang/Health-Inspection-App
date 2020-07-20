@@ -32,9 +32,12 @@ public class restaurantDetailsActivity extends AppCompatActivity {
     private int index;
     private InspectionManager inspectionManager;
     private String trackingNumber;
+    private static final String EXTRA_MESSAGE = "ExtraMessage";
 
-    public static Intent makeLaunchIntent(Context c) {
+
+    public static Intent makeLaunchIntent(Context c, String message) {
         Intent intent = new Intent(c, restaurantDetailsActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, message);
         return intent;
     }
 

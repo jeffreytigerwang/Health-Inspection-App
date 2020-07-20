@@ -4,11 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -45,6 +49,7 @@ public class ListActivity extends AppCompatActivity {
     private RestaurantsManager restaurantsManager;
     private InspectionManager inspectionManager;
     public static final String INDEX = "index";
+    private static final String EXTRA_MESSAGE = "ExtraMessage";
 
 
 
@@ -54,133 +59,14 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         restaurantsManager = RestaurantsManager.getInstance();
         inspectionManager = InspectionManager.getInstance();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("Restaurant List");
-        ActionBar back = getSupportActionBar();
-        back.setDisplayHomeAsUpEnabled(true);
-
-
-        // add the restaurants to the RestaurantsManager
-        if(restaurantsManager.getcount()==0)
-        {
-            readCSVinspections();
-            sortInspectionByName();
-            readCSVrestaurant();
-            sortRestaurantsByName();
-        }
 
         populateListView();
         registerClickCallback();
 
     }
-
-
-    public void sortInspectionByName() {
-        Comparator<Inspection> compareByTracking = new Comparator<Inspection>() { //Compares restaurant names
-            @Override
-            public int compare(Inspection i1, Inspection i2) {
-                int c;
-                c = i1.getTrackingNum().compareTo(i2.getTrackingNum());
-                if (c==0){
-                    c = i1.getTestdate().compareTo(i2.getTestdate());
-                }
-                return c;
-            }
-
-        };
-
-        Collections.sort(inspectionManager.getList(), compareByTracking.reversed()); //Sort arraylist
-    }
-
-
-    public void sortRestaurantsByName() {
-        Comparator<Restaurant> compareByName = new Comparator<Restaurant>() { //Compares restaurant names
-            @Override
-            public int compare(Restaurant r1, Restaurant r2) {
-                return r1.getRestaurantName().compareTo(r2.getRestaurantName());
-            }
-        };
-
-        Collections.sort(restaurantsManager.get(), compareByName); //Sort arraylist
-        restaurantsManager.setcount(5);
-    }
-
-    private void readCSVinspections() {
-        InputStream is = getResources().openRawResource(R.raw.inspectionreports_itr1);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8")));
-
-        String line="";
-
-        try {
-            //step over headers
-            reader.readLine();
-
-
-            while (((line = reader.readLine()) != null)) {
-                //Spilt by " , "
-               
-                String[] tokens = line.split(",",7);
-                //read the data
-                if(tokens[6].length()>0)
-                { inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
-                        Integer.parseInt(tokens[1]),
-                        tokens[2].replace("\"",""),
-                        Integer.parseInt(tokens[3]),
-                        Integer.parseInt(tokens[4]),
-                        tokens[5].replace("\"",""),
-                        tokens[6].replace("\"","") ));}
-                else
-                {   inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
-                        Integer.parseInt(tokens[1]),
-                        tokens[2].replace("\"",""),Integer.parseInt(tokens[3]),Integer.parseInt(tokens[4]),
-                        tokens[5].replace("\"",""),
-                        ""));   }
-
-            }
-        } catch (IOException e) {
-            Log.wtf("MyActivity","Error reading data file on line " + line,e);
-            e.printStackTrace();
-        }
-    }
-
-    private void readCSVrestaurant() {
-
-
-        InputStream is = getResources().openRawResource(R.raw.restaurants_itr1);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8")));
-
-        String line="";
-
-        try {
-            //step over headers
-            reader.readLine();
-
-
-            while (((line = reader.readLine()) != null)) {
-                //Spilt by " , "
-                String[] tokens = line.split(",");
-                //read the data
-                restaurantsManager.add(new Restaurant(tokens[1].replace("\"",""),
-                        tokens[2].replace("\"",""),
-                        tokens[0].replace("\"",""),
-                        Double.parseDouble(tokens[6].replace("\"","")),
-                        Double.parseDouble(tokens[5].replace("\"","")),
-                        tokens[3].replace("\"",""),
-                        tokens[4].replace("\"",""),inspectionManager));
-
-
-            }
-        } catch (IOException e) {
-            Log.wtf("MyActivity","Error reading data file on line " + line,e);
-            e.printStackTrace();
-        }
-
-
-
-    }
-
 
 
 
@@ -190,7 +76,7 @@ public class ListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this);
+                Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this, EXTRA_MESSAGE);
                 //Sends index of which restaurant was click on in ViewList
                 RestaurantsManager.getInstance().setCurrentRestaurant(position);
                 startActivity(intent);
@@ -392,6 +278,29 @@ public class ListActivity extends AppCompatActivity {
 
 
     }
+
+    public static Intent makeIntent(Context context) {
+        return new Intent(context, ListActivity.class);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_item,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id=item.getItemId();
+        if(id==R.id.main_map_icon){
+            Intent intent=new Intent(ListActivity.this,MapsActivity.class);
+            finish();
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
 

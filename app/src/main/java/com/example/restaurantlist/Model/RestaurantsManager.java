@@ -62,7 +62,17 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     public int getNumRestaurants() {
         return restaurants.size();
     }
-    //test
+
+
+    public Restaurant findRestaurantByLatLng(double latitude, double longitude) {
+        for (Restaurant res: restaurants) {
+            if (res.getLatitude() == latitude && res.getLongitude() == longitude) {
+                return res;
+            }
+        }
+        return null;
+    }
+
 
     @NonNull
     @Override

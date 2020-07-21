@@ -135,6 +135,10 @@ public class ListActivity extends AppCompatActivity {
                     }
 
                     //fill the view
+                    ImageView resticon = itemview.findViewById(R.id.icon);
+                    resticon.setImageResource(currentrestaurant.getIcon());
+
+
                     TextView t1 = itemview.findViewById(R.id.text11);
                     t1.setText(currentrestaurant.getRestaurantName());
 

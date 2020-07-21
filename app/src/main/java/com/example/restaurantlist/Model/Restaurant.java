@@ -1,7 +1,11 @@
 package com.example.restaurantlist.Model;
 
+import com.example.restaurantlist.R;
+
 public class Restaurant {
     private String restaurantName;
+    private String restaurantNameL;
+
     private String address;
     private String trackingNumber;
     private double longitude;
@@ -9,6 +13,9 @@ public class Restaurant {
     private String physicalCity;
     private String facType;
     private InspectionManager inspections;
+    private int icon;
+
+
 
     public Restaurant() {
         this.restaurantName="";
@@ -30,6 +37,7 @@ public class Restaurant {
         this.physicalCity = physicalCity;
         this.facType = facType;
         this.inspections = inspections;
+        this.icon = matchLogo();
     }
 
     public String getRestaurantName() {
@@ -103,6 +111,39 @@ public class Restaurant {
         }
 
         return null;
+    }
+
+    private int matchLogo(){
+        restaurantNameL = this.getRestaurantName().toLowerCase();
+        if (restaurantNameL.contains("a&w")){
+            return R.drawable.aw_canada_logo;
+        }
+        else if (restaurantNameL.contains("lee yuen seafood")){
+            return R.drawable.lee_yuen_logo;
+        }
+        else if (restaurantNameL.contains("unfindable")){
+            return R.drawable.icon;
+        }
+        else if (restaurantNameL.contains("top in town pizza")){
+            return R.drawable.top_in_town_pizza;
+        }
+        else if (restaurantNameL.contains("104 sushi")){
+            return R.drawable.sushi_104;
+        }
+        else if (restaurantNameL.contains("zugba flame")){
+            return R.drawable.zugba_flame;
+        }
+        else{
+            return R.drawable.red;
+        }
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 
 }

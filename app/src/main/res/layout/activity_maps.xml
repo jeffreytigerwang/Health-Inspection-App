@@ -27,7 +27,7 @@
         android:id="@+id/icon"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/icon"
+        android:src="@drawable/icon1"
         />
     <EditText
         android:layout_width="match_parent"

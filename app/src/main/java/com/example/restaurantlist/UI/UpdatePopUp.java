@@ -3,6 +3,7 @@ package com.example.restaurantlist.UI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +28,10 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -45,6 +49,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static android.widget.Toast.LENGTH_LONG;
 import static com.example.restaurantlist.UI.MenuActivity.CHECK;
 import static com.example.restaurantlist.UI.MenuActivity.DATE;
 import static com.example.restaurantlist.UI.MenuActivity.URLdata;
@@ -137,9 +142,27 @@ public class UpdatePopUp extends Activity {
                         public void run() {
                             //Toast toast = Toast.makeText(getApplicationContext() , myResponse,Toast.LENGTH_SHORT);
                             //toast.show();
-                            loadData(myResponse);
+                             try{
+                                 FileOutputStream fOut = openFileOutput(FILE_NAME,MODE_PRIVATE);
+                                 fOut.write(myResponse.getBytes());
+                                 fOut.close();
+                                 //File fileDir =new File(getFilesDir(),FILE_NAME);
+                                 //Toast.makeText(getBaseContext(), ""+fileDir, LENGTH_LONG ).show();
+
+                                 Intent intent = MenuActivity.makeLaunchIntent(UpdatePopUp.this);
+                                 intent.putExtra(CHECK, 1);
+                                 startActivity(intent);
+
+                             }catch(Exception e){
+                                 e.printStackTrace();
+                             }
+
+                            obtainData();
+                            saveData();
                         }
                     });
+
+
                 }
             }
         });
@@ -151,12 +174,49 @@ public class UpdatePopUp extends Activity {
 
     }
 
+    private void saveData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(RestaurantsManager.getInstance());
+        editor.putString("RestaurantsManager", json);
+        editor.apply();
+    }
 
-    private void loadData(String theResponse){
+    private void obtainData() {
+        try{
 
 
+            FileInputStream fIn = openFileInput(FILE_NAME);
+            InputStreamReader isr = new InputStreamReader(fIn);
+            BufferedReader reader = new BufferedReader(isr);
 
-        String[] lines = theResponse.split(System.getProperty("line.separator"));
+            String line="";
+            reader.readLine();
+
+
+            while (((line = reader.readLine()) != null)) {
+
+            String[] tokens = line.split(",");
+            //Toast.makeText(getBaseContext(), ""+ tokens[0] , LENGTH_LONG ).show();
+            //Toast.makeText(getBaseContext(), ""+ tokens[1] , LENGTH_LONG ).show();
+            restaurantsManager.add(new Restaurant(
+                    tokens[1],
+                    tokens[2],
+                    tokens[0],
+                    Double.parseDouble(tokens[6]),
+                    Double.parseDouble(tokens[5]),
+                    tokens[3],
+                    tokens[4],
+                    inspectionManager));
+            }
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+/*
+        //String[] lines = theResponse.split(System.getProperty("line.separator"));
         //Toast toast = Toast.makeText(getApplicationContext() , lines[0],Toast.LENGTH_SHORT);
         //toast.show();
 
@@ -180,7 +240,7 @@ public class UpdatePopUp extends Activity {
                     inspectionManager));
 
         }
-
+*/
     }
 
 

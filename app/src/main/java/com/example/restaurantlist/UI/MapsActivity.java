@@ -71,6 +71,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    private static final String Message = "Message";
     
     //widgets
     private EditText searchText;
@@ -84,6 +85,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Boolean mLocationPermissionsGrandted = false;
     private static final String EXTRA_MESSAGE = "ExtraMessage";
 
+    // the Lat from restaurantDetailActvity
+    private double passLat ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         changelist = (ImageButton)  findViewById(R.id.ic_change);
         restaurants= RestaurantsManager.getInstance();
         inspections= InspectionManager.getInstance();
+        extractDataFromIntent();
+       /* for(int i=0;i<restaurants.getcount();i++)
+        {
+
+        }*/
+
+
+
+
 
         getLocationPremission();
         changelist.setOnClickListener(new View.OnClickListener() {
@@ -287,6 +300,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             initsearch();
         }
 
+
         // if user click the info window, they can see all inspections
         mMap.setOnInfoWindowClickListener(this);
     }
@@ -454,11 +468,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public static Intent makeIntent(Context context){
-
-        return new Intent(context,MapsActivity.class);
+    public static Intent makeIntent(Context context, double Lat){
+          Intent intent = new Intent(context,MapsActivity.class);
+          intent.putExtra(Message,Lat);
+        return intent;
     }
 
+    private  void extractDataFromIntent(){
+        Intent intent = getIntent();
+        String message = intent.getStringExtra(Message);
+        passLat = intent.getDoubleExtra(Message,0);
+
+
+    }
 
 
 

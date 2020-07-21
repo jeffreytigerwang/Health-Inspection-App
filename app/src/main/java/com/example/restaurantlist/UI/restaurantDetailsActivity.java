@@ -67,7 +67,7 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this);
+                Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this,RestaurantsManager.getInstance().get(index).getLatitude());
                 startActivity(intent);
             }
         });

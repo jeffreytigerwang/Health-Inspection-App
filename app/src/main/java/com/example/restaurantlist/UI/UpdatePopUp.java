@@ -5,24 +5,45 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Comparator;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.example.restaurantlist.UI.MenuActivity.CHECK;
 import static com.example.restaurantlist.UI.MenuActivity.DATE;
@@ -39,13 +60,12 @@ public class UpdatePopUp extends Activity {
     public static String dataURL;
     private RequestQueue mQueue;
     private String date;
-    private String data;
+
     public static Intent makeLaunchIntent(Context c){
         Intent intent = new Intent(c, UpdatePopUp .class);
         return intent;
     }
-
-    TextView test;
+    //TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -82,157 +102,89 @@ public class UpdatePopUp extends Activity {
         now.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //RestaurantsManager.getInstance().clearList();
-                //RestaurantsManager.getInstance().setUpdate(date);
-
-                saveData();
+                readData();
             }
         });
 
 
     }
 
-    private void saveData() {
-
-        //test.setText(date.toString());
-
-        String url = dataURL;
-        //test = findViewById(R.id.texttest);
-        //test.setText(dataURL);
-/*
-        try {
-
-            URL url = new URL(dataURL);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String line = "";
-            reader.readLine();
-
-            while (((line = reader.readLine()) != null)) {
-
-                //Spilt by " , "
-                String[] tokens = line.split(",");
-                //read the data
-                restaurantsManager.add(new Restaurant(tokens[1].replace("\"", ""),
-                        tokens[2].replace("\"", ""),
-                        tokens[0].replace("\"", ""),
-                        Double.parseDouble(tokens[6].replace("\"", "")),
-                        Double.parseDouble(tokens[5].replace("\"", "")),
-                        tokens[3].replace("\"", ""),
-                        tokens[4].replace("\"", ""), inspectionManager));
+    private void readData() {
 
 
-            }
+        final String url = dataURL;
+        Toast toast = Toast.makeText(getApplicationContext() ,url ,Toast.LENGTH_SHORT);
+        toast.show();
 
+        OkHttpClient client = new OkHttpClient();
 
-            startActivity(new Intent(UpdatePopUp.this, ListActivity.class));
-        }catch(MalformedURLException e){
-            e.printStackTrace();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-*/
-/*
-        FileOutputStream fos = null;
-        try {
-            fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-            fos.write(url.getBytes());
-
-            loadData();
-            startActivity(new Intent(UpdatePopUp.this, ListActivity.class));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally{
-            if(fos != null){
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-*/
-
-/*
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-
-                            test.setText(response.toString());
-                            //startActivity(new Intent(UpdatePopUp.this, MenuActivity.class));
-
-                        } //catch (JSONException e) {
-                        catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        // e.printStackTrace();
-                        //}
-
-                    }
-                }, new Response.ErrorListener() {
+        okhttp3.Request request = new Request.Builder()
+                .url(url)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.isSuccessful()){
+                    final String myResponse = response.body().string();
+
+                    UpdatePopUp.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //Toast toast = Toast.makeText(getApplicationContext() , myResponse,Toast.LENGTH_SHORT);
+                            //toast.show();
+                            loadData(myResponse);
+                        }
+                    });
+                }
             }
         });
 
-        mQueue.add(request);
 
-*/
+
+
 
 
     }
 
 
-    private void loadData(){
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput(FILE_NAME);
+    private void loadData(String theResponse){
 
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader reader = new BufferedReader(isr);
 
-            String line="";
-            reader.readLine();
 
-            while (((line = reader.readLine()) != null)) {
-                //Spilt by " , "
-                String[] tokens = line.split(",");
-                //read the data
-                restaurantsManager.add(new Restaurant(tokens[1].replace("\"",""),
-                        tokens[2].replace("\"",""),
-                        tokens[0].replace("\"",""),
-                        Double.parseDouble(tokens[6].replace("\"","")),
-                        Double.parseDouble(tokens[5].replace("\"","")),
-                        tokens[3].replace("\"",""),
-                        tokens[4].replace("\"",""),inspectionManager));
-            }
+        String[] lines = theResponse.split(System.getProperty("line.separator"));
+        //Toast toast = Toast.makeText(getApplicationContext() , lines[0],Toast.LENGTH_SHORT);
+        //toast.show();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(fis!= null){
-                try{
-                    fis.close();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            }
+
+
+        for(int i=1 ; i< lines.length ; i++) {
+
+
+            String[] tokens = lines[i].split(",");
+            //Toast toast = Toast.makeText(getApplicationContext() , tokens[0],Toast.LENGTH_SHORT);
+            //toast.show();
+
+            restaurantsManager.add(new Restaurant(
+                    tokens[1],
+                    tokens[2],
+                    tokens[0],
+                    Double.parseDouble(tokens[6]),
+                    Double.parseDouble(tokens[5]),
+                    tokens[3],
+                    tokens[4],
+                    inspectionManager));
+
         }
 
     }
 
 
-    public void sortRestaurantsByName() {
+    public void sortRestaurantsByName(){
         Comparator<Restaurant> compareByName = new Comparator<Restaurant>() { //Compares restaurant names
             @Override
             public int compare(Restaurant r1, Restaurant r2) {

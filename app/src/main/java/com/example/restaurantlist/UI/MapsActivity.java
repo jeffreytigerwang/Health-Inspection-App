@@ -453,4 +453,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             super.onBeforeClusterItemRendered(item, markerOptions);
         }
     }
+
+    public static Intent makeIntent(Context context){
+
+        return new Intent(context,MapsActivity.class);
+    }
+
+
+
+
+
 }

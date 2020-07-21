@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.InspectionManager;
@@ -62,6 +63,14 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
         TextView gps = findViewById(R.id.detail_gps);
         gps.setText("(" + RestaurantsManager.getInstance().get(index).getLatitude() + " , " + RestaurantsManager.getInstance().get(index).getLongitude() + ")");
+
+        gps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this);
+                startActivity(intent);
+            }
+        });
 
         trackingNumber = RestaurantsManager.getInstance().get(index).getTrackingNumber();
 

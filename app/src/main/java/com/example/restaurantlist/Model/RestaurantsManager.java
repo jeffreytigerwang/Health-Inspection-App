@@ -14,8 +14,12 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     private List<Restaurant> restaurants = new ArrayList<>();
     private static RestaurantsManager instance;
     private int count=0;
-
+    private String update = "";
     private int currentRestaurant;
+
+    public void clearList(){
+        restaurants.clear();
+    }
 
     public void setCurrentRestaurant(int index){
         currentRestaurant = index;
@@ -24,6 +28,12 @@ public class RestaurantsManager implements Iterable<Restaurant> {
         return currentRestaurant;
     }
 
+    public String getUpdate(){
+        return update;
+    }
+    public void setUpdate(String d){
+        update = d;
+    }
 
     public void setcount(int i){
         count=i;
@@ -43,6 +53,10 @@ public class RestaurantsManager implements Iterable<Restaurant> {
 
     private RestaurantsManager() {
         // Nothing: ensure this is a singleton.
+    }
+
+    public void setRestaurantsManager(RestaurantsManager save){
+        instance = save;
     }
 
     public void add(Restaurant restaurant) {

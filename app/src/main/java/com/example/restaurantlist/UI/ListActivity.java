@@ -61,6 +61,7 @@ public class ListActivity extends AppCompatActivity {
 
 
         // add the restaurants to the RestaurantsManager
+
         if(restaurantsManager.getcount()==0)
         {
             readCSVinspections();
@@ -68,6 +69,7 @@ public class ListActivity extends AppCompatActivity {
             readCSVrestaurant();
             sortRestaurantsByName();
         }
+
 
         populateListView();
         registerClickCallback();

@@ -94,7 +94,7 @@
         android:layout_height="80dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/icon"
+        android:src="@drawable/icon1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/hazard_icon" />

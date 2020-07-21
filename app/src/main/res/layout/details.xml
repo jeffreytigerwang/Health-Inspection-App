@@ -11,7 +11,7 @@
         android:id="@+id/hazard_level"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/icon" />
+        android:src="@drawable/icon1" />
 
     <LinearLayout
         android:id="@+id/row"

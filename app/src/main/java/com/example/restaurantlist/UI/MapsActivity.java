@@ -282,7 +282,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Clustering
         setUpClusterer();
 
-        //Set Custom InfoWindow Adapter
         CustomInfoAdapter adapter = new CustomInfoAdapter(MapsActivity.this);
         mMap.setInfoWindowAdapter(adapter);
 
@@ -323,8 +322,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double lng = latLng0.longitude;
             Restaurant restaurant = manager.findRestaurantByLatLng(lat, lng);
 
-            ImageView logo = itemView.findViewById(R.id.info_item_restaurantLogo);
-            //logo.setImageResource(restaurant.getIcon());
+
 
             TextView restaurantNameText = itemView.findViewById(R.id.info_item_restaurantName);
             String temp = restaurant.getRestaurantName();
@@ -342,9 +340,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     mostRecentInspection = inspections.get(j);
                     break;
                 }
-
-
             }
+
+            ImageView logo = itemView.findViewById(R.id.info_item_restaurantLogo);
+            logo.setImageResource(restaurant.getIcon());
+
             if (mostRecentInspection != null) {
                 TextView numNonCriticalText = itemView.findViewById(R.id.textSetMapHazard);
                 numNonCriticalText.setText(mostRecentInspection.getHazardRating());
@@ -383,7 +383,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //just for testing purpose
     private void addItems() {
         RestaurantsManager manager = RestaurantsManager.getInstance();
-        //List<Restaurant> restaurants = manager.getRestaurants();
+
         for (Restaurant restaurant : manager) {
 
             String temp = restaurant.getRestaurantName();
@@ -394,7 +394,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 { color = inspections.get(j).getColour();
                     break;}
             }
+
             MyClusterItem newItem;
+
             switch (color){
                 case "blue" :
                      newItem = new MyClusterItem(restaurant.getLatitude(),

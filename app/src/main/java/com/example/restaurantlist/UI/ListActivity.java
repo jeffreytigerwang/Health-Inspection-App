@@ -49,6 +49,8 @@ public class ListActivity extends AppCompatActivity {
     private RestaurantsManager restaurantsManager;
     private InspectionManager inspectionManager;
     public static final String INDEX = "index";
+
+    
     private static final String EXTRA_MESSAGE = "ExtraMessage";
 
 

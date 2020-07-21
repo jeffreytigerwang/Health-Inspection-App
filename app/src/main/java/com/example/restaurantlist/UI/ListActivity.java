@@ -50,7 +50,7 @@ public class ListActivity extends AppCompatActivity {
     private InspectionManager inspectionManager;
     public static final String INDEX = "index";
 
-    
+
     private static final String EXTRA_MESSAGE = "ExtraMessage";
 
 
@@ -88,6 +88,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     private void populateListView() {
+        
         ArrayAdapter<RestaurantsManager> adapter = new MyListAdapter();
         ListView listView;
         listView = findViewById(R.id.listvieww);

@@ -343,7 +343,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 numCriticalText.setText(restaurant.getAddress());
 
 
-
+                // add color image 
                 ImageView hazard = itemView.findViewById(R.id.imgMapHazard);
                 if (mostRecentInspection.getHazardRating().equals("Low")){
                     hazard.setImageResource(R.drawable.blue);

@@ -99,11 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         restaurants= RestaurantsManager.getInstance();
         inspections= InspectionManager.getInstance();
         extractDataFromIntent();
-       /* for(int i=0;i<restaurants.getcount();i++)
-        {
-
-        }*/
-
+      
 
 
 
@@ -471,7 +467,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public static Intent makeIntent(Context context, double Lat){
           Intent intent = new Intent(context,MapsActivity.class);
           intent.putExtra(Message,Lat);
-        return intent;
+          return intent;
     }
 
     private  void extractDataFromIntent(){

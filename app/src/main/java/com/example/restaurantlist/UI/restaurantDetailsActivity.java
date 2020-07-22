@@ -3,6 +3,7 @@ package com.example.restaurantlist.UI;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -64,6 +65,7 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         TextView gps = findViewById(R.id.detail_gps);
         gps.setText("(" + RestaurantsManager.getInstance().get(index).getLatitude() + " , " + RestaurantsManager.getInstance().get(index).getLongitude() + ")");
 
+        /***
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +73,7 @@ public class restaurantDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+***/
         trackingNumber = RestaurantsManager.getInstance().get(index).getTrackingNumber();
 
         populateListView();
@@ -129,6 +131,24 @@ public class restaurantDetailsActivity extends AppCompatActivity {
             }
         });
 
+        TextView latLng = findViewById(R.id.detail_gps);
+        latLng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMapsActivity();
+            }
+        });
+
     }
+
+    private void goToMapsActivity() {
+        Intent i = new Intent();
+        i.putExtra("result", 1);
+        i.putExtra("resID", RestaurantsManager.getInstance().get(index).getTrackingNumber());
+        setResult(Activity.RESULT_OK, i);
+        finish();
+    }
+
+
 
 }

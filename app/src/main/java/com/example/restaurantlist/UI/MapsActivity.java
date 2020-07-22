@@ -1,6 +1,7 @@
 package com.example.restaurantlist.UI;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -43,6 +44,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
@@ -190,20 +192,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
 
-                        Collection<Marker> clusters = mClusterManager.getMarkerCollection().getMarkers();
-                        extractDataFromIntent();
-                        Toast.makeText(MapsActivity.this,clusters.size()+" ",Toast.LENGTH_SHORT).show();
-                        for(Marker m : clusters ){
-                            if(m.getPosition().latitude==passLat){
-                                m.showInfoWindow();
-                                movecamera(m.getPosition(),DEFAULT_ZOOM);
-                                break;
-                            }
-                        }
-
-
-
-
 
 
 
@@ -221,6 +209,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    //move to user's location
     private void moveCamera(LatLng latLng, float zoom, String title) {
         Log.d(TAG, "moveCamera : moving the camera to: lat " + latLng.latitude + ", lng:" + latLng.longitude);
 
@@ -304,21 +293,47 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mClusterManager = new ClusterManager<>(this, mMap);
 
+
+        registerClickCallback();
         //Clustering
         setUpClusterer();
 
         CustomInfoAdapter adapter = new CustomInfoAdapter(MapsActivity.this);
         mMap.setInfoWindowAdapter(adapter);
 
-        if (mLocationPermissionsGrandted) {
-            getDeviceLocation();
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-               return;
+        /***Collection<Marker> clusters = mClusterManager.getMarkerCollection().getMarkers();
+        extractDataFromIntent();
+        Toast.makeText(MapsActivity.this,clusters.size()+" ",Toast.LENGTH_SHORT).show();
+        for(Marker m : clusters ){
+            if(m.getPosition().latitude==passLat){
+                m.showInfoWindow();
+                movecamera(m.getPosition(),DEFAULT_ZOOM);
+                break;
+            }
+        }***/
+
+        Intent i_receive = getIntent();
+        String resID = i_receive.getStringExtra(EXTRA_MESSAGE);
+
+        if (resID != null){
+            HandleReceivingCoordinates(resID);
+
+        }
+        else{
+            if (mLocationPermissionsGrandted) {
+                getDeviceLocation();
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    return;
+                }
+
+                mMap.setMyLocationEnabled(true);
+                initsearch();
             }
 
-            mMap.setMyLocationEnabled(true);
-            initsearch();
         }
+
+
+
 
 
         // if user click the info window, they can see all inspections
@@ -446,6 +461,60 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    private void registerClickCallback() {
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                // Find the restaurant to work with.
+                LatLng latLng0 = marker.getPosition();
+                double lat = latLng0.latitude;
+                double lng = latLng0.longitude;
+                Restaurant restaurant = manager.findRestaurantByLatLng(lat, lng);
+
+                String message = restaurant.toString();
+                Intent intent = restaurantDetailsActivity.makeLaunchIntent(MapsActivity.this, "RestaurantActivity");
+                intent.putExtra("Extra", message);
+                MapsActivity.this.startActivityForResult(intent, 451);
+            }
+        });
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                movecamera(marker.getPosition(), DEFAULT_ZOOM);
+                marker.showInfoWindow();
+                return true;
+            }
+        });
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                // Clear everything
+                mClusterManager.clearItems();
+
+                // Clear the currently open marker
+                mMap.clear();
+
+                // Reinitialize clusterManager
+                setUpClusterer();
+
+                // Focus map on the position that was clicked on map
+                movecamera(latLng, 15f);
+            }
+        });
+
+        mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<MyClusterItem>() {
+            @Override
+            public boolean onClusterClick(Cluster<MyClusterItem> cluster) {
+                movecamera(cluster.getPosition(), -10f);
+                return true;
+            }
+        });
+    }
+
+
+
    // code found from  https://juejin.im/post/58d8ccb45c497d005702dae6
     public static void hideSoftKeyboard(Activity activity) {
         View view = activity.getCurrentFocus();
@@ -505,7 +574,52 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    private void HandleReceivingCoordinates(String resID) {
+        Restaurant goToRes = restaurants.get(0);
+        boolean found = false;
+        for (Restaurant temp : manager) {
+            if (resID.equals(temp.getTrackingNumber())) {
+                goToRes = temp;
+                found = true;
+                break;
+            }
+        }
 
+        if (found) {
+            mClusterManager.clearItems();
+            movecamera(new LatLng(goToRes.getLatitude(),
+                    goToRes.getLongitude()), DEFAULT_ZOOM);
+
+            String temp = goToRes.getRestaurantName();
+
+            MarkerOptions options = new MarkerOptions().
+                    position(new LatLng(goToRes.getLatitude(),
+                            goToRes.getLongitude())).
+                    title(temp);
+
+            mMarker = mMap.addMarker(options);
+            //mMarker.setIcon(getHazardIcon(goToRes));
+            mMarker.showInfoWindow();
+            movecamera(new LatLng(goToRes.getLatitude(),
+                    goToRes.getLongitude()), DEFAULT_ZOOM);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 451:
+                String resID = data.getStringExtra("resID");
+                int answer = data.getIntExtra("result", 0);
+
+                if (answer == 1) {
+                    HandleReceivingCoordinates(resID);
+                }
+                break;
+
+        }
+    }
 
 
 }

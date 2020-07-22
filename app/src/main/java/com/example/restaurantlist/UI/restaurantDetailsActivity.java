@@ -1,10 +1,8 @@
 package com.example.restaurantlist.UI;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -66,15 +64,15 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         TextView gps = findViewById(R.id.detail_gps);
         gps.setText("(" + RestaurantsManager.getInstance().get(index).getLatitude() + " , " + RestaurantsManager.getInstance().get(index).getLongitude() + ")");
 
-        /***
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this,RestaurantsManager.getInstance().get(index).getLatitude());
+                Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this,49.19205936);
                 startActivity(intent);
             }
         });
-***/
+        //this,RestaurantsManager.getInstance().get(index).getLatitude()
+
         trackingNumber = RestaurantsManager.getInstance().get(index).getTrackingNumber();
 
         populateListView();
@@ -110,7 +108,7 @@ public class restaurantDetailsActivity extends AppCompatActivity {
                 int i = 0;
 
                 Intent intent = inspectionDetailsActivity.makeLaunchIntent(restaurantDetailsActivity.this);
-                 //Sends index of which inspection was click on in ViewList
+                //Sends index of which inspection was click on in ViewList
                 inspectionManager = InspectionManager.getInstance();
                 for (Inspection inspection : inspectionManager){
                     if (trackingNumber.equals(inspection.getTrackingNum())) {
@@ -132,24 +130,6 @@ public class restaurantDetailsActivity extends AppCompatActivity {
             }
         });
 
-        TextView latLng = findViewById(R.id.detail_gps);
-        latLng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMapsActivity();
-            }
-        });
-
     }
-
-    private void goToMapsActivity() {
-        Intent i = new Intent();
-        i.putExtra("result", 1);
-        i.putExtra("resID", RestaurantsManager.getInstance().get(index).getTrackingNumber());
-        setResult(Activity.RESULT_OK, i);
-        finish();
-    }
-
-
 
 }

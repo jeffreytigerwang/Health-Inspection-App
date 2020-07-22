@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +34,9 @@ import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -64,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     private FusedLocationProviderClient mfusedLocationProviderClient;
+    private LocationCallback mLocationCallback;
     private RestaurantsManager restaurants;
     private InspectionManager inspections;
     private ClusterManager<MyClusterItem> mClusterManager;
@@ -107,14 +112,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         changelist = (ImageButton)  findViewById(R.id.ic_change);
         restaurants= RestaurantsManager.getInstance();
         inspections= InspectionManager.getInstance();
-       // extractDataFromIntent();
-
-
-
-
         setDefaultIntent();
-
         getLocationPremission();
+
+        mLocationCallback= new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                Location location = locationResult.getLastLocation();
+                Log.d(TAG, "onLocationResult: Location is: " + location.getLatitude() + "  " + location.getLongitude());
+            }
+        };
+
+
+
+
+
+
         changelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -346,6 +362,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
+        getLocationUpdates();
 
 
 
@@ -635,5 +652,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    @SuppressLint("MissingPermission")
+    private void getLocationUpdates() {
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(3000);
+
+        mfusedLocationProviderClient.requestLocationUpdates(locationRequest, mLocationCallback, null);
+    }
 
 }

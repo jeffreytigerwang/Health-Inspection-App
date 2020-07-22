@@ -15,7 +15,6 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     private static RestaurantsManager instance;
     private int count=0;
     private String updateRestaurant = "";
-    private String updateInspections = "";
     private int currentRestaurant;
 
     public void clearList(){

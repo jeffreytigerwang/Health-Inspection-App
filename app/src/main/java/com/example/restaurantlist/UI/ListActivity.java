@@ -140,6 +140,7 @@ public class ListActivity extends AppCompatActivity {
                         ""));   }
 
             }
+
         } catch (IOException e) {
             Log.wtf("MyActivity","Error reading data file on line " + line,e);
             e.printStackTrace();

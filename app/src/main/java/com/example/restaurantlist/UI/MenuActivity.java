@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.android.volley.Request;
@@ -21,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
@@ -45,8 +49,12 @@ public class MenuActivity extends AppCompatActivity {
     private String recentDate;
     public static final String CHECK = "check";
     public static final String DATE = "date";
+    public static final String IDATE = "Idate";
+    public static final String IURLdata = "Iurl";
     private int check = 0;
     public static final String URLdata = "url";
+    private String recentUpdateDate2 = "";
+    private String updateInspData2 = "";
 
     public static Intent makeLaunchIntent(Context c){
         Intent intent = new Intent(c, MenuActivity.class);
@@ -64,12 +72,22 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = getIntent();
         check = intent.getIntExtra(CHECK, 0);
 
-     //   loadData();
 
 
-        if(check != 1) {
-            RestaurantsManager.getInstance().clearList();
-            checkUpdate();
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+
+            checkInspectionUpdate();
+
+            if(check != 1) {
+                RestaurantsManager.getInstance().clearList();
+                InspectionManager.getInstance().clearInspectionList();
+                checkUpdate();
+
+            }
+
         }
 
 
@@ -109,12 +127,19 @@ public class MenuActivity extends AppCompatActivity {
                             String updateData = resource.getString("url");
                             recentDate = RestaurantsManager.getInstance().getUpdate();
 
-                            if(recentDate.equals("") || !recentDate.equals(recentUpdateDate)){
+                            String insp = InspectionManager.getInstance().getInspectionDate();
+
+
+                            if(recentDate.equals("") || !recentDate.equals(recentUpdateDate) || !insp.equals(recentUpdateDate2)){
+
 
                                 Intent intentDATE = UpdatePopUp.makeLaunchIntent(MenuActivity.this);
+                                intentDATE.putExtra(IDATE, recentUpdateDate2);
+                                intentDATE.putExtra(IURLdata, updateInspData2);
                                 intentDATE.putExtra(DATE, recentUpdateDate);
                                 intentDATE.putExtra(URLdata, updateData);
                                 startActivity(intentDATE);
+
                             }
 
 
@@ -135,6 +160,41 @@ public class MenuActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
+    private void checkInspectionUpdate(){
+
+        final String urlInspection = "http://data.surrey.ca/api/3/action/package_show?id=fraser-health-restaurant-inspection-reports";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, urlInspection, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+
+
+                            JSONObject result = response.getJSONObject("result");
+                            JSONArray resources = result.getJSONArray("resources");
+
+                            JSONObject resource = resources.getJSONObject(0);
+                            recentUpdateDate2 = resource.getString("last_modified");
+                            updateInspData2 = resource.getString("url");
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mQueue.add(request);
+    }
+
+
     private void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
 
@@ -143,9 +203,6 @@ public class MenuActivity extends AppCompatActivity {
 
         RestaurantsManager obj  = gson.fromJson(json, RestaurantsManager.class);
         RestaurantsManager.getInstance().setRestaurantsManager(obj);
-
-
-
 
 
     }

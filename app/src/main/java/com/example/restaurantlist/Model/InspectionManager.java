@@ -14,11 +14,15 @@ import java.util.List;
 public class InspectionManager implements Iterable <Inspection> {
     private List<Inspection> inspections = new ArrayList<>();
     private static InspectionManager instance;
+    private String updateInspectionsD = "";
 
     private InspectionManager() {
         // Nothing: ensure this is a singleton.
     }
 
+    public void clearInspectionList(){
+        inspections.clear();
+    }
     public static InspectionManager getInstance() {
         if (instance == null) {
             instance = new InspectionManager();
@@ -26,7 +30,13 @@ public class InspectionManager implements Iterable <Inspection> {
         return instance;
     }
 
+    public void setInspectionDate(String update){
+        updateInspectionsD = update;
+    }
 
+    public String getInspectionDate(){
+        return updateInspectionsD;
+    }
 
     public List getList(){
         return inspections;

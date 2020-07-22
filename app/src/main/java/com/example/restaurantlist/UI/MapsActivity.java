@@ -48,6 +48,7 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
@@ -98,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         changelist = (ImageButton)  findViewById(R.id.ic_change);
         restaurants= RestaurantsManager.getInstance();
         inspections= InspectionManager.getInstance();
-        extractDataFromIntent();
+       // extractDataFromIntent();
       
 
 
@@ -188,12 +189,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapsActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
                         }
+
+                        Collection<Marker> clusters = mClusterManager.getMarkerCollection().getMarkers();
+                        extractDataFromIntent();
+                        Toast.makeText(MapsActivity.this,clusters.size()+" ",Toast.LENGTH_SHORT).show();
+                        for(Marker m : clusters ){
+                            if(m.getPosition().latitude==passLat){
+                                m.showInfoWindow();
+                                movecamera(m.getPosition(),DEFAULT_ZOOM);
+                                break;
+                            }
+                        }
+
+
+
+
+
+
+
                     }
                 });
             }
         } catch (SecurityException e) {
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
         }
+    }
+
+    private void movecamera(LatLng latLng, float zoom){
+        Log.d(TAG, "moveCamera : moving the camera to: lat " + latLng.latitude + ", lng:" + latLng.longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
+
     }
 
     private void moveCamera(LatLng latLng, float zoom, String title) {

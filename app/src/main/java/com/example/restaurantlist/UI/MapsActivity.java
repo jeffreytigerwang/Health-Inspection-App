@@ -91,6 +91,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // the Lat from restaurantDetailActvity
     private double passLat ;
 
+    public static Intent makeLaunchIntent(Context c, String message) {
+        Intent i1 = new Intent(c, MapsActivity.class);
+        i1.putExtra(EXTRA_MESSAGE, message);
+        return i1;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,10 +108,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         restaurants= RestaurantsManager.getInstance();
         inspections= InspectionManager.getInstance();
        // extractDataFromIntent();
-      
 
 
 
+
+        setDefaultIntent();
 
         getLocationPremission();
         changelist.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +124,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+    private void setDefaultIntent() {
+        Intent i = new Intent();
+        i.putExtra("result", 1);
+        setResult(Activity.RESULT_OK, i);
+    }
+
 
     private void initsearch(){
         Log.d(TAG,"initsearch: initializing");
@@ -205,7 +219,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void movecamera(LatLng latLng, float zoom){
         Log.d(TAG, "moveCamera : moving the camera to: lat " + latLng.latitude + ", lng:" + latLng.longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
 
     }
 
@@ -575,7 +589,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void HandleReceivingCoordinates(String resID) {
-        Restaurant goToRes = restaurants.get(0);
+        Restaurant goToRes = null;
         boolean found = false;
         for (Restaurant temp : manager) {
             if (resID.equals(temp.getTrackingNumber())) {

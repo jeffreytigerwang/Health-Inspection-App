@@ -1,5 +1,6 @@
 package com.example.restaurantlist.UI;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 

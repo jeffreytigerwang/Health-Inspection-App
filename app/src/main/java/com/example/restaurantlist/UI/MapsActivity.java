@@ -278,7 +278,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else {
             ActivityCompat.requestPermissions(this, permission, LOCATION_PERMISSION_REQUEST_CODE);
         }
-
+//test
 
     }
     

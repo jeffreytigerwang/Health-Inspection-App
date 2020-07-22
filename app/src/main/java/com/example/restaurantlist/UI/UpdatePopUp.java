@@ -49,7 +49,7 @@ import static com.example.restaurantlist.UI.MenuActivity.URLdata;
 
 public class UpdatePopUp extends Activity {
     private ProgressBar progressBar;
-
+    private Button cancel;
 
     private static final String FILE_NAME = "restaurants.txt";
 
@@ -58,6 +58,7 @@ public class UpdatePopUp extends Activity {
     private RequestQueue mQueue;
     public static String date;
     public static String dateInspection;
+    public int cancelData = 0;
 
     public static Intent makeLaunchIntent(Context c){
         Intent intent = new Intent(c, UpdatePopUp .class);
@@ -101,6 +102,9 @@ public class UpdatePopUp extends Activity {
             }
         });
 
+        cancel = findViewById(R.id.cancel);
+
+
 
     }
 
@@ -123,17 +127,25 @@ public class UpdatePopUp extends Activity {
                 return;
             }
             activity.progressBar.setVisibility(View.VISIBLE);
+            activity.cancel.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
-            UpdatePopUp activity = activityWeakReference.get();
+            final UpdatePopUp activity = activityWeakReference.get();
             if(activity == null || activity.isFinishing()){
                 return;
             }
             activity.progressBar.setProgress(values[0]);
-
+            activity.cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.setVisibility(View.INVISIBLE);
+                    Toast.makeText(activity.getApplicationContext(), "Cancelling...", Toast.LENGTH_LONG).show();
+                    activity.cancelData = 1;
+                }
+            });
         }
 
         @Override
@@ -143,13 +155,19 @@ public class UpdatePopUp extends Activity {
             if(activity == null || activity.isFinishing()){
                 return;
             }
-            Toast.makeText(activity.getApplicationContext(),"Done!", LENGTH_LONG).show();
+
             activity.progressBar.setProgress(0);
             activity.progressBar.setVisibility(View.INVISIBLE);
+            if(activity.cancelData != 1) {
+                Toast.makeText(activity.getApplicationContext(),"Done!", LENGTH_LONG).show();
+                activity.saveInspectionData();
+                activity.saveData();
+            }
         }
 
         @Override
         protected String doInBackground(Integer... integers) {
+
             UpdatePopUp activity = activityWeakReference.get();
             if(activity == null || activity.isFinishing()){
                 return "Finished!";
@@ -250,7 +268,7 @@ public class UpdatePopUp extends Activity {
                                 e.printStackTrace();
                             }
                             sortInspectionByName();
-                            saveInspectionData();
+                            //saveInspectionData();
 
                         }
                     });
@@ -338,7 +356,7 @@ public class UpdatePopUp extends Activity {
                             RestaurantsManager.getInstance().setcount(1);
                             //RestaurantsManager.getInstance().setUpdate(date);
                             sortRestaurantsByName();
-                            saveData();
+                            //saveData();
                         }
                     });
 

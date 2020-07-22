@@ -162,6 +162,8 @@ public class ListActivity extends AppCompatActivity {
 
             while (((line = reader.readLine()) != null)) {
                 //Spilt by " , "
+
+
                 String[] tokens = line.split(",");
                 //read the data
                 restaurantsManager.add(new Restaurant(tokens[1].replace("\"",""),
@@ -225,6 +227,7 @@ public class ListActivity extends AppCompatActivity {
             if (itemview == null) {
                 itemview = getLayoutInflater().inflate(R.layout.item, parent, false);
             }
+
             Restaurant currentrestaurant = restaurantsManager.get(position);
 
             inspectionManager = InspectionManager.getInstance();

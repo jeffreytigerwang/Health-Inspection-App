@@ -11,6 +11,8 @@
 
         android:id="@+id/listvieww"
         android:layout_width="match_parent"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:layout_height="match_parent" />
 
 

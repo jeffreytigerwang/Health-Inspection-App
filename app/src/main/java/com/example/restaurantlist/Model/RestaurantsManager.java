@@ -14,7 +14,8 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     private List<Restaurant> restaurants = new ArrayList<>();
     private static RestaurantsManager instance;
     private int count=0;
-    private String update = "";
+    private String updateRestaurant = "";
+    private String updateInspections = "";
     private int currentRestaurant;
 
     public void clearList(){
@@ -29,10 +30,10 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     }
 
     public String getUpdate(){
-        return update;
+        return updateRestaurant;
     }
     public void setUpdate(String d){
-        update = d;
+        updateRestaurant = d;
     }
 
     public void setcount(int i){

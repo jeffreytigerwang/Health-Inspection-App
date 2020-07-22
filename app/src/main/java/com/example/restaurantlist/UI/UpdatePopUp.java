@@ -35,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.SoftReference;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -57,8 +58,7 @@ import static com.example.restaurantlist.UI.MenuActivity.URLdata;
 
 public class UpdatePopUp extends Activity {
 
-    private RestaurantsManager restaurantsManager;
-    private InspectionManager inspectionManager;
+
 
     private static final String FILE_NAME = "restaurants.txt";
 
@@ -70,7 +70,7 @@ public class UpdatePopUp extends Activity {
         Intent intent = new Intent(c, UpdatePopUp .class);
         return intent;
     }
-    //TextView test;
+    TextView cunt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -91,7 +91,7 @@ public class UpdatePopUp extends Activity {
         date = intent.getStringExtra(DATE);
         dataURL = intent.getStringExtra(URLdata);
 
-
+        cunt = findViewById(R.id.fatcunt);
 
         Button later = findViewById(R.id.later);
         later.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +118,8 @@ public class UpdatePopUp extends Activity {
 
 
         final String url = dataURL;
-        Toast toast = Toast.makeText(getApplicationContext() ,url ,Toast.LENGTH_SHORT);
-        toast.show();
+        //Toast toast = Toast.makeText(getApplicationContext() ,url ,Toast.LENGTH_SHORT);
+        //toast.show();
 
         OkHttpClient client = new OkHttpClient();
 
@@ -140,24 +140,56 @@ public class UpdatePopUp extends Activity {
                     UpdatePopUp.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            //Toast toast = Toast.makeText(getApplicationContext() , myResponse,Toast.LENGTH_SHORT);
+                            //Toast toast = Toast.makeText(getApplicationContext() , myResponse, LENGTH_LONG);
                             //toast.show();
                              try{
-                                 FileOutputStream fOut = openFileOutput(FILE_NAME,MODE_PRIVATE);
-                                 fOut.write(myResponse.getBytes());
-                                 fOut.close();
+                                 //cunt.setText(myResponse);
+                                 //String[] lines = myResponse.split(System.getProperty("line.separator"));
+                                 //FileOutputStream fOut = openFileOutput(FILE_NAME,MODE_PRIVATE);
+                                 //fOut.write(myResponse.getBytes());
+                                 //fOut.close();
                                  //File fileDir =new File(getFilesDir(),FILE_NAME);
                                  //Toast.makeText(getBaseContext(), ""+fileDir, LENGTH_LONG ).show();
 
-                                 Intent intent = MenuActivity.makeLaunchIntent(UpdatePopUp.this);
-                                 intent.putExtra(CHECK, 1);
-                                 startActivity(intent);
+                                 //Intent intent = MenuActivity.makeLaunchIntent(UpdatePopUp.this);
+                                 //intent.putExtra(CHECK, 1);
+                                 //startActivity(intent);
+                                 //(lines);
+                                 //Toast.makeText(getBaseContext(), ""+ lines.length, LENGTH_LONG ).show();
+/*
+                                 for(int i = 0 ; i<lines.length; i++){
+                                     if(lines[i].indexOf('"') != -1) {
+                                         //Toast.makeText(getBaseContext(), ""+ "EOFHWOEF" , Toast.LENGTH_SHORT ).show();
 
+                                         int firstIndex = lines[i].indexOf('"');
+                                         int commalocation = lines[i].indexOf(',', firstIndex);
+
+                                         lines[i] = lines[i].substring(0, commalocation) + lines[i].substring(commalocation+1);
+                                         lines[i] = lines[i].substring(0,firstIndex) + lines[i].substring(firstIndex+1);
+                                         firstIndex = lines[i].indexOf('"');
+                                         lines[i] = lines[i].substring(0,firstIndex) + lines[i].substring(firstIndex+1);
+                                         //Toast.makeText(getBaseContext(), ""+ lines[i], Toast.LENGTH_SHORT ).show();
+
+
+                                     }
+
+                                     String[] tokens = lines[i].split(",");
+                                     Toast.makeText(getBaseContext(), ""+ lines[i] , Toast.LENGTH_SHORT ).show();
+                                     //Toast.makeText(getBaseContext(), ""+ tokens[1] , LENGTH_LONG ).show();
+                                     RestaurantsManager.getInstance().add(new Restaurant(tokens[1], tokens[2], tokens[0], Double.parseDouble(tokens[6]),
+                                             Double.parseDouble(tokens[5]), tokens[3], tokens[4], InspectionManager.getInstance()));
+
+                                 }
+*/
+                                obtainData(myResponse);
                              }catch(Exception e){
                                  e.printStackTrace();
                              }
 
-                            obtainData();
+
+                            RestaurantsManager.getInstance().setcount(1);
+                            //RestaurantsManager.getInstance().setUpdate(date);
+                            sortRestaurantsByName();
                             saveData();
                         }
                     });
@@ -183,64 +215,56 @@ public class UpdatePopUp extends Activity {
         editor.apply();
     }
 
-    private void obtainData() {
-        try{
+    private void obtainData(String result) {
 
 
-            FileInputStream fIn = openFileInput(FILE_NAME);
-            InputStreamReader isr = new InputStreamReader(fIn);
-            BufferedReader reader = new BufferedReader(isr);
+        try {
 
-            String line="";
+            InputStream inputStream = new ByteArrayInputStream(result.getBytes(Charset.forName("UTF-8")));
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(inputStream)
+            );
+
+
+            String line = "";
             reader.readLine();
 
 
             while (((line = reader.readLine()) != null)) {
 
-            String[] tokens = line.split(",");
-            //Toast.makeText(getBaseContext(), ""+ tokens[0] , LENGTH_LONG ).show();
-            //Toast.makeText(getBaseContext(), ""+ tokens[1] , LENGTH_LONG ).show();
-            restaurantsManager.add(new Restaurant(
-                    tokens[1],
-                    tokens[2],
-                    tokens[0],
-                    Double.parseDouble(tokens[6]),
-                    Double.parseDouble(tokens[5]),
-                    tokens[3],
-                    tokens[4],
-                    inspectionManager));
-            }
+                    if(line.indexOf('"') != -1) {
+                        //Toast.makeText(getBaseContext(), ""+ "EOFHWOEF" , Toast.LENGTH_SHORT ).show();
 
+                        int firstIndex = line.indexOf('"');
+                        int commalocation = line.indexOf(',', firstIndex);
+
+                        line = line.substring(0, commalocation) + line.substring(commalocation+1);
+                        line = line.substring(0,firstIndex) + line.substring(firstIndex+1);
+                        firstIndex = line.indexOf('"');
+                        line = line.substring(0,firstIndex) + line.substring(firstIndex+1);
+                        //Toast.makeText(getBaseContext(), ""+ lines[i], Toast.LENGTH_SHORT ).show();
+
+
+                    }
+
+                    String[] tokens = line.split(",");
+                    //Toast.makeText(getBaseContext(), ""+ tokens[0] , LENGTH_LONG ).show();
+                    //Toast.makeText(getBaseContext(), ""+ tokens[1] , LENGTH_LONG ).show();
+                    RestaurantsManager.getInstance().add(new Restaurant(tokens[1], tokens[2], tokens[0], Double.parseDouble(tokens[6]),
+                            Double.parseDouble(tokens[5]), tokens[3], tokens[4], InspectionManager.getInstance()));
+
+
+
+
+            }
         }
         catch(Exception e){
-            e.printStackTrace();
-        }
-/*
-        //String[] lines = theResponse.split(System.getProperty("line.separator"));
-        //Toast toast = Toast.makeText(getApplicationContext() , lines[0],Toast.LENGTH_SHORT);
-        //toast.show();
+                Log.wtf("myactivity", "error reading data file on line", e);
+                e.printStackTrace();
+            }
 
 
-
-        for(int i=1 ; i< lines.length ; i++) {
-
-
-            String[] tokens = lines[i].split(",");
-            //Toast toast = Toast.makeText(getApplicationContext() , tokens[0],Toast.LENGTH_SHORT);
-            //toast.show();
-
-            restaurantsManager.add(new Restaurant(
-                    tokens[1],
-                    tokens[2],
-                    tokens[0],
-                    Double.parseDouble(tokens[6]),
-                    Double.parseDouble(tokens[5]),
-                    tokens[3],
-                    tokens[4],
-                    inspectionManager));
-
-        }
-*/
     }
 
 
@@ -252,8 +276,8 @@ public class UpdatePopUp extends Activity {
             }
         };
 
-        Collections.sort(restaurantsManager.get(), compareByName); //Sort arraylist
-        restaurantsManager.setcount(5);
+        Collections.sort(RestaurantsManager.getInstance().get(), compareByName); //Sort arraylist
+        RestaurantsManager.getInstance().setcount(5);
     }
 
 }

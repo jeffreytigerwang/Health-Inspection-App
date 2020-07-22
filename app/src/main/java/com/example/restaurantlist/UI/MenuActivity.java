@@ -64,10 +64,14 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = getIntent();
         check = intent.getIntExtra(CHECK, 0);
 
-        loadData();
+     //   loadData();
+
+
         if(check != 1) {
+            RestaurantsManager.getInstance().clearList();
             checkUpdate();
         }
+
 
 
 
@@ -112,6 +116,7 @@ public class MenuActivity extends AppCompatActivity {
                                 intentDATE.putExtra(URLdata, updateData);
                                 startActivity(intentDATE);
                             }
+
 
 
 

@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.InspectionManager;
@@ -23,25 +23,13 @@ import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.ref.SoftReference;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.lang.ref.WeakReference;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -60,7 +48,7 @@ import static com.example.restaurantlist.UI.MenuActivity.URLdata;
 
 
 public class UpdatePopUp extends Activity {
-
+    private ProgressBar progressBar;
 
 
     private static final String FILE_NAME = "restaurants.txt";
@@ -68,7 +56,7 @@ public class UpdatePopUp extends Activity {
     public static String dataURL;
     public static String InspectionURL;
     private RequestQueue mQueue;
-    private String date;
+    public static String date;
     public static String dateInspection;
 
     public static Intent makeLaunchIntent(Context c){
@@ -81,6 +69,7 @@ public class UpdatePopUp extends Activity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popupwindow);
+        progressBar = findViewById(R.id.progressBarUpdate);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -112,29 +101,82 @@ public class UpdatePopUp extends Activity {
             }
         });
 
-        Button now = findViewById(R.id.now);
-        now.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                if(InspectionManager.getInstance().getInspectionDate() != dateInspection && date != RestaurantsManager.getInstance().getUpdate()) {
-                    //Both
-//                }
-                if(RestaurantsManager.getInstance().getUpdate() != date){
-                    //restaurant needs to be changed
 
-                    readRestaurantData();
-                }
+    }
 
-                if(InspectionManager.getInstance().getInspectionDate() != dateInspection){
-                    //inspection needs to be changed
-                    readInspectionData();
-                }
+    public void startAsyncTask(View v){
+        DataAsyncTask task = new DataAsyncTask(this);
+        task.execute(10);
+    }
+    private static class DataAsyncTask extends AsyncTask<Integer, Integer, String> {
+        private WeakReference<UpdatePopUp> activityWeakReference;
 
+        DataAsyncTask(UpdatePopUp activity){
+            activityWeakReference = new WeakReference<UpdatePopUp>(activity);
+        }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            UpdatePopUp activity = activityWeakReference.get();
+            if(activity == null || activity.isFinishing()){
+                return;
             }
-        });
+            activity.progressBar.setVisibility(View.VISIBLE);
+        }
 
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            UpdatePopUp activity = activityWeakReference.get();
+            if(activity == null || activity.isFinishing()){
+                return;
+            }
+            activity.progressBar.setProgress(values[0]);
 
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            UpdatePopUp activity = activityWeakReference.get();
+            if(activity == null || activity.isFinishing()){
+                return;
+            }
+            Toast.makeText(activity.getApplicationContext(),"Done!", LENGTH_LONG).show();
+            activity.progressBar.setProgress(0);
+            activity.progressBar.setVisibility(View.INVISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(Integer... integers) {
+            UpdatePopUp activity = activityWeakReference.get();
+            if(activity == null || activity.isFinishing()){
+                return "Finished!";
+            }
+
+            if(RestaurantsManager.getInstance().getUpdate() != date){
+                //restaurant needs to be changed
+
+                activity.readRestaurantData();
+            }
+
+            if(InspectionManager.getInstance().getInspectionDate() != dateInspection){
+                //inspection needs to be changed
+
+                activity.readInspectionData();
+            }
+
+            for(int i =0; i<integers[0] ; i++){
+                publishProgress((i*100)/integers[0]);
+                try{
+                    Thread.sleep(1000);
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
     }
 
     private void readInspectionData(){
@@ -161,7 +203,7 @@ public class UpdatePopUp extends Activity {
                             try {
                                 String[] lines = myResponse2.split(System.getProperty("line.separator"));
                                 //Toast.makeText(getBaseContext(), lines[0], Toast.LENGTH_SHORT ).show();
-                                for(int i = 1 ; i<2; i++) {
+                                for(int i = 1 ; i<1000; i++) {
 
                                     //Toast.makeText(getBaseContext(), lines[i], Toast.LENGTH_SHORT ).show();
                                     if(lines[i].indexOf('"') != -1) {
@@ -202,7 +244,7 @@ public class UpdatePopUp extends Activity {
 
                                 }
 
-                                InspectionManager.getInstance().add(new Inspection("SWOD-APSP3X", 20200220,"Routine", 1,1,"Low",""));
+                                //InspectionManager.getInstance().add(new Inspection("SWOD-APSP3X", 20200220,"Routine", 1,1,"Low",""));
                                 //obtainInspectionData(myResponse2);
                             } catch (Exception e) {
                                 e.printStackTrace();

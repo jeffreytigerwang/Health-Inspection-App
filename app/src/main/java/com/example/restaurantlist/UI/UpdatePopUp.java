@@ -108,9 +108,10 @@ public class UpdatePopUp extends Activity {
 
     }
 
-    public void startAsyncTask(View v){
+    public void startAsyncTask(View v) {
         DataAsyncTask task = new DataAsyncTask(this);
         task.execute(10);
+
     }
     private static class DataAsyncTask extends AsyncTask<Integer, Integer, String> {
         private WeakReference<UpdatePopUp> activityWeakReference;
@@ -158,11 +159,11 @@ public class UpdatePopUp extends Activity {
 
             activity.progressBar.setProgress(0);
             activity.progressBar.setVisibility(View.INVISIBLE);
+            activity.cancel.setVisibility(View.INVISIBLE);
             if(activity.cancelData != 1) {
                 Toast.makeText(activity.getApplicationContext(),"Done!", LENGTH_LONG).show();
-                activity.saveInspectionData();
-                activity.saveData();
             }
+
         }
 
         @Override

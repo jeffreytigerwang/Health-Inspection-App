@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,29 +64,13 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
         trackingNumber = RestaurantsManager.getInstance().get(index).getTrackingNumber();
 
-        populateListView();
+
         registerClickCallback();
-
+        DataAsyncTask task = new DataAsyncTask(this);
+        task.execute();
     }
 
-    private void populateListView() {
 
-        String idTag = RestaurantsManager.getInstance().get(index).getTrackingNumber();
-        List<Inspection> inspectionsTemp = new ArrayList<>();
-
-        //Finds the specific inspections for restaurant
-        for(int i = 0; i< InspectionManager.getInstance().getList().size(); i++) {
-            //checks if tracking numbers are the same
-            if(idTag.equals(InspectionManager.getInstance().get(i).getTrackingNum())) {
-                inspectionsTemp.add(InspectionManager.getInstance().get(i));
-            }
-        }
-
-        ListView mListView = (ListView) findViewById(R.id.singleInspectionView);
-        inspectionListAdapter adapter = new inspectionListAdapter(this, R.layout.details, (ArrayList<Inspection>) inspectionsTemp);
-        mListView.setAdapter(adapter);
-
-    }
 
     private void registerClickCallback(){
         //takes user to restaurant details when they click on a restaurant
@@ -119,4 +105,47 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
     }
 
+
+    private static class DataAsyncTask extends AsyncTask<Integer, Integer, String> {
+
+        private WeakReference<restaurantDetailsActivity> activityWeakReference;
+        DataAsyncTask(restaurantDetailsActivity activity){
+            activityWeakReference = new WeakReference<restaurantDetailsActivity>(activity);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(Integer... integers) {
+
+            restaurantDetailsActivity activity = activityWeakReference.get();
+            if(activity == null || activity.isFinishing()){
+                return null;
+            }
+
+
+
+            String idTag = RestaurantsManager.getInstance().get(activity.index).getTrackingNumber();
+            List<Inspection> inspectionsTemp = new ArrayList<>();
+
+            //Finds the specific inspections for restaurant
+            for(int i = 0; i < InspectionManager.getInstance().getSize(); i++) {
+                //checks if tracking numbers are the same
+                if(idTag.equals(InspectionManager.getInstance().get(i).getTrackingNum())) {
+                    inspectionsTemp.add(InspectionManager.getInstance().get(i));
+                }
+            }
+
+            ListView mListView = (ListView) activity.findViewById(R.id.singleInspectionView);
+            inspectionListAdapter adapter = new inspectionListAdapter(activity.getApplicationContext(), R.layout.details, (ArrayList<Inspection>) inspectionsTemp);
+            mListView.setAdapter(adapter);
+
+
+            return null;
+
+        }
+    }
 }

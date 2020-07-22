@@ -18,13 +18,6 @@ public class Restaurant {
 
 
     public Restaurant() {
-        this.restaurantName="";
-        this.address="";
-        this.trackingNumber="";
-        this.longitude=0;
-        this.latitude=0;
-        this.physicalCity="";
-        this.facType="";
 
     }
 
@@ -102,6 +95,13 @@ public class Restaurant {
 
     public InspectionManager getInspections() {
         return inspections;
+    }
+    public Inspection getInspection(int inspection) {
+        if (inspections.getSize() <= inspection || inspection < 0){
+            return null;
+        }
+
+        return inspections.get(inspection);
     }
 
     public Restaurant getRestaurant(String trackingNumber){

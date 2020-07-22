@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.InspectionManager;
+import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.Model.inspectionListAdapter;
 import com.example.restaurantlist.R;
@@ -30,6 +32,9 @@ import com.example.restaurantlist.R;
 
 public class restaurantDetailsActivity extends AppCompatActivity {
     public static final String INDEX = "index";
+    public static final String RESTAURANT_LATITUDE= "restaurant latitude";
+    public static final String RESTAURANT_LONGITUDE = "restaurant longitude";
+    public static final String RESTAURANT_NAME= "restaurant name";
     private int index;
     private InspectionManager inspectionManager;
     private String trackingNumber;
@@ -71,12 +76,38 @@ public class restaurantDetailsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        RestaurantsManager manager;
+        manager = RestaurantsManager.getInstance();
+        Restaurant restaurant = null;
+        int restaurantIndex = getIntent().getIntExtra(ListActivity.RESTAURANT_INDEX,-1);
+        if (restaurantIndex == -1) {
+            Log.e("Restaurant Activity", "Activity open with no restaurant");
+        } else {
+            restaurant = manager.get(restaurantIndex);
+        }
+
+        assert restaurant != null;
 
         trackingNumber = RestaurantsManager.getInstance().get(index).getTrackingNumber();
-
+        CoordsTextClick(restaurant);
         populateListView();
         registerClickCallback();
 
+    }
+
+
+    private void CoordsTextClick(final Restaurant restaurant) {
+        TextView txtViewCoords = findViewById(R.id.detail_gps);
+        txtViewCoords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this,RestaurantsManager.getInstance().get(index).getLatitude());
+                intent.putExtra(RESTAURANT_LATITUDE, restaurant.getLatitude());
+                intent.putExtra(RESTAURANT_LONGITUDE, restaurant.getLongitude());
+                intent.putExtra(RESTAURANT_NAME, restaurant.getRestaurantName());
+                startActivity(intent);
+            }
+        });
     }
 
     private void populateListView() {

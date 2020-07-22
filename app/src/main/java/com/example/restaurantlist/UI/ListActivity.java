@@ -49,6 +49,7 @@ public class ListActivity extends AppCompatActivity {
     private RestaurantsManager restaurantsManager;
     private InspectionManager inspectionManager;
     public static final String INDEX = "index";
+    public static final String RESTAURANT_INDEX = "restaurant Index";
     private static final String EXTRA_MESSAGE = "ExtraMessage";
 
 
@@ -79,6 +80,7 @@ public class ListActivity extends AppCompatActivity {
                 Intent intent = restaurantDetailsActivity.makeLaunchIntent(ListActivity.this, EXTRA_MESSAGE);
                 //Sends index of which restaurant was click on in ViewList
                 RestaurantsManager.getInstance().setCurrentRestaurant(position);
+                intent.putExtra(RESTAURANT_INDEX, position);
                 startActivity(intent);
             }
         });

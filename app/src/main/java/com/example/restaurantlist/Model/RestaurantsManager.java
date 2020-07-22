@@ -64,9 +64,9 @@ public class RestaurantsManager implements Iterable<Restaurant> {
     }
 
 
-    public Restaurant findRestaurantByLatLng(double latitude, double longitude) {
+    public Restaurant findRestaurantByLatLng(double latitude, double longitude,String name) {
         for (Restaurant res: restaurants) {
-            if (res.getLatitude() == latitude && res.getLongitude() == longitude) {
+            if (res.getLatitude() == latitude && res.getLongitude() == longitude&& res.getRestaurantName()==name) {
                 return res;
             }
         }

@@ -25,6 +25,7 @@ import com.google.android.gms.common.api.GoogleApiActivity;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -66,13 +67,16 @@ public class welcomeActivity extends AppCompatActivity {
          restaurantsManager = RestaurantsManager.getInstance();
          inspectionManager = InspectionManager.getInstance();
 
-        readCSVrestaurantt();
-        readCSVinspections();
-        //readCSVinspectionss();
-        readCSVrestaurant();
-        sortInspectionByName();
-        sortRestaurantsByName();
+        if(restaurantsManager.getcount()==0) {
+            readCSVrestaurantt();
+            readCSVinspections();
+            //readCSVinspectionss();
+            //readCSVrestaurant();
+            sortInspectionByName();
+            sortRestaurantsByName();
+            restaurantsManager.setcount(5);
 
+        }
 
 
         //hide hideNavigationBar, let it full screen.
@@ -228,6 +232,7 @@ public class welcomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void readCSVinspectionss() {
         InputStream is = getResources().openRawResource(R.raw.inspectionreports_itr2);
         BufferedReader reader = new BufferedReader(
@@ -266,40 +271,50 @@ public class welcomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void readCSVrestaurant() {
 
 
-        InputStream is = getResources().openRawResource(R.raw.restaurants_itr1);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8")));
-
-        String line="";
-
         try {
-            //step over headers
+
+            InputStream inputStream = getResources().openRawResource(R.raw.restaurants_itr2);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,Charset.forName("UTF-8")));
+
+
+            String line = "";
             reader.readLine();
 
 
             while (((line = reader.readLine()) != null)) {
-                //Spilt by " , "
+
+                if (line.indexOf('"') != -1) {
+                    //Toast.makeText(getBaseContext(), ""+ "EOFHWOEF" , Toast.LENGTH_SHORT ).show();
+
+                    int firstIndex = line.indexOf('"');
+                    int commalocation = line.indexOf(',', firstIndex);
+
+                    line = line.substring(0, commalocation) + line.substring(commalocation + 1);
+                    line = line.substring(0, firstIndex) + line.substring(firstIndex + 1);
+                    firstIndex = line.indexOf('"');
+                    line = line.substring(0, firstIndex) + line.substring(firstIndex + 1);
+                    //Toast.makeText(getBaseContext(), ""+ lines[i], Toast.LENGTH_SHORT ).show();
+
+
+                }
+
                 String[] tokens = line.split(",");
-                //read the data
-                restaurantsManager.add(new Restaurant(tokens[1].replace("\"",""),
-                        tokens[2].replace("\"",""),
-                        tokens[0].replace("\"",""),
-                        Double.parseDouble(tokens[6].replace("\"","")),
-                        Double.parseDouble(tokens[5].replace("\"","")),
-                        tokens[3].replace("\"",""),
-                        tokens[4].replace("\"",""),inspectionManager));
+                //Toast.makeText(getBaseContext(), ""+ tokens[0] , LENGTH_LONG ).show();
+                //Toast.makeText(getBaseContext(), ""+ tokens[1] , LENGTH_LONG ).show();
+                RestaurantsManager.getInstance().add(new Restaurant(tokens[1].replace("\"",""), tokens[2].replace("\"",""), tokens[0].replace("\"",""), Double.parseDouble(tokens[6].replace("\"","")),
+                        Double.parseDouble(tokens[5].replace("\"","")), tokens[3].replace("\"",""), tokens[4].replace("\"",""), InspectionManager.getInstance()));
 
 
             }
-        } catch (IOException e) {
-            Log.wtf("MyActivity","Error reading data file on line " + line,e);
+        } catch (Exception e) {
+            Log.wtf("myactivity", "error reading data file on line", e);
             e.printStackTrace();
         }
-
-
 
     }
     private void readCSVrestaurantt() {
@@ -347,6 +362,7 @@ public class welcomeActivity extends AppCompatActivity {
         }
 
     }
+
 
 
 }

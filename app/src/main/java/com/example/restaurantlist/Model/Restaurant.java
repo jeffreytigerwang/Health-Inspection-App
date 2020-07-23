@@ -115,7 +115,7 @@ public class Restaurant {
 
     private int matchLogo(){
         restaurantNameL = this.getRestaurantName().toLowerCase();
-        if (restaurantNameL.contains("a&w")){
+        if (restaurantNameL.contains("a&w") || restaurantNameL.contains("a & w")){
             return R.drawable.aw_canada_logo;
         }
         else if (restaurantNameL.contains("lee yuen seafood")){
@@ -133,8 +133,32 @@ public class Restaurant {
         else if (restaurantNameL.contains("zugba flame")){
             return R.drawable.zugba_flame;
         }
+        else if (restaurantNameL.contains("5 star catering")){
+            return R.drawable.logo5;
+        }
+        else if (restaurantNameL.contains("mcdonald")){
+            return R.drawable.mcdonald;
+        }
+        else if (restaurantNameL.contains("7-eleven")){
+            return R.drawable.seven_eleven;
+        }
+        else if (restaurantNameL.contains("pizza hut")){
+            return R.drawable.pizza_hut;
+        }
+        else if (restaurantNameL.contains("kfc")){
+            return R.drawable.kfc;
+        }
+        else if (restaurantNameL.contains("subway")){
+            return R.drawable.subway;
+        }
+        else if (restaurantNameL.contains("burger king")){
+            return R.drawable.burger_king;
+        }
+        else if (restaurantNameL.contains("boston pizza")){
+            return R.drawable.bp_pizza;
+        }
         else{
-            return R.drawable.red;
+            return R.drawable.icon1;
         }
     }
 

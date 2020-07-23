@@ -30,6 +30,9 @@ public class InspectionManager implements Iterable <Inspection> {
         return instance;
     }
 
+    public void setInspectionManager(InspectionManager save){
+        instance = save;
+    }
     public void setInspectionDate(String update){
         updateInspectionsD = update;
     }

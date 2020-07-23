@@ -72,7 +72,7 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = getIntent();
         check = intent.getIntExtra(CHECK, 0);
 
-
+        //loadData();
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
@@ -200,10 +200,13 @@ public class MenuActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         String json = sharedPreferences.getString("RestaurantsManager", "");
+        String pson = sharedPreferences.getString("InspectionManager", "");
 
         RestaurantsManager obj  = gson.fromJson(json, RestaurantsManager.class);
         RestaurantsManager.getInstance().setRestaurantsManager(obj);
 
+        InspectionManager pojb = gson.fromJson(pson,InspectionManager.class);
+        InspectionManager.getInstance().setInspectionManager(pojb);
 
     }
 

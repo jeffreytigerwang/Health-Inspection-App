@@ -78,6 +78,8 @@ public class inspectionListAdapter extends ArrayAdapter<Inspection> {
 
 
         return convertView;
+
+
     }
 
     //a time function in an intelligent format so that it's easier to understand than dates

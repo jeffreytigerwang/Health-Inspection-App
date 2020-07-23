@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,16 +23,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
+import com.example.restaurantlist.Model.inspectionListAdapter;
 import com.example.restaurantlist.R;
 
 /**
@@ -60,6 +65,7 @@ public class ListActivity extends AppCompatActivity {
         back.setDisplayHomeAsUpEnabled(true);
 
 
+
         // add the restaurants to the RestaurantsManager
 
         if(restaurantsManager.getcount()==0)
@@ -73,6 +79,7 @@ public class ListActivity extends AppCompatActivity {
 
         populateListView();
         registerClickCallback();
+
 
     }
 

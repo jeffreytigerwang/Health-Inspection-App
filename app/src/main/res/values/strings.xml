@@ -40,6 +40,7 @@
     <string name="more_recent_data_can_be_updated">More recent data can be updated</string>
     <string name="updatee">UPDATE</string>
     <string name="next_time">Next time</string>
+    <string name="returntomenu">return</string>
 
 
     <string-array name="my_array">

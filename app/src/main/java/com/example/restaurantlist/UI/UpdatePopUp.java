@@ -64,7 +64,7 @@ public class UpdatePopUp extends Activity {
         Intent intent = new Intent(c, UpdatePopUp .class);
         return intent;
     }
-    TextView cunt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -89,7 +89,7 @@ public class UpdatePopUp extends Activity {
         dateInspection = intent.getStringExtra(IDATE);
         InspectionURL = intent.getStringExtra(IURLdata);
 
-        cunt = findViewById(R.id.fatcunt);
+
         //Toast.makeText(getApplicationContext(), dateInspection, Toast.LENGTH_SHORT).show();
 
         Button later = findViewById(R.id.later);
@@ -110,6 +110,7 @@ public class UpdatePopUp extends Activity {
 
     public void startAsyncTask(View v) {
         DataAsyncTask task = new DataAsyncTask(this);
+        v.setVisibility(View.INVISIBLE);
         task.execute(10);
 
     }
@@ -129,6 +130,7 @@ public class UpdatePopUp extends Activity {
             }
             activity.progressBar.setVisibility(View.VISIBLE);
             activity.cancel.setVisibility(View.VISIBLE);
+
         }
 
         @Override
@@ -162,6 +164,12 @@ public class UpdatePopUp extends Activity {
             activity.cancel.setVisibility(View.INVISIBLE);
             if(activity.cancelData != 1) {
                 Toast.makeText(activity.getApplicationContext(),"Done!", LENGTH_LONG).show();
+
+                //RestaurantsManager.getInstance().setcount(1);
+                //RestaurantsManager.getInstance().setUpdate(date);
+                //activity.saveData();
+                //InspectionManager.getInstance().setInspectionDate(dateInspection);
+                //activity.saveInspectionData();
             }
 
         }
@@ -222,8 +230,8 @@ public class UpdatePopUp extends Activity {
                             try {
                                 String[] lines = myResponse2.split(System.getProperty("line.separator"));
                                 //Toast.makeText(getBaseContext(), lines[0], Toast.LENGTH_SHORT ).show();
-                                for(int i = 1 ; i<1000; i++) {
-
+                                for(int i = 1 ; i<lines.length; i++) {
+                                    String middle = "";
                                     //Toast.makeText(getBaseContext(), lines[i], Toast.LENGTH_SHORT ).show();
                                     if(lines[i].indexOf('"') != -1) {
 
@@ -232,15 +240,17 @@ public class UpdatePopUp extends Activity {
 
                                         String start = lines[i].substring(0, firstIndex+1);
                                         //Toast.makeText(getBaseContext(), start, Toast.LENGTH_SHORT ).show();
-                                        String middle = lines[i].substring(firstIndex+1,lastIndex);
+
+                                        middle = lines[i].substring(firstIndex+1,lastIndex);
                                         //Toast.makeText(getBaseContext(), middle, Toast.LENGTH_SHORT ).show();
+
                                         String end = lines[i].substring(lastIndex);
                                         //Toast.makeText(getBaseContext(), end, Toast.LENGTH_SHORT ).show();
 
-                                        middle = middle.replaceAll(",", " ");
+                                        //middle = middle.replaceAll(",", " ");
                                         //Toast.makeText(getBaseContext(), middle, Toast.LENGTH_SHORT).show();
 
-                                        lines[i] = start + middle + end;
+                                        lines[i] = start + " " + end;
                                         //Toast.makeText(getBaseContext(),lines[i], Toast.LENGTH_LONG).show();
 
                                         lines[i] = lines[i].substring(0,firstIndex) + lines[i].substring(firstIndex+1);
@@ -248,14 +258,16 @@ public class UpdatePopUp extends Activity {
                                         lines[i] = lines[i].substring(0,firstIndex) + lines[i].substring(firstIndex+1);
                                         //Toast.makeText(getBaseContext(), lines[i], Toast.LENGTH_SHORT ).show();
 
-                                    }
+                                        //Toast.makeText(getBaseContext(),middle, Toast.LENGTH_LONG).show();
 
+                                    }
+                                    //Toast.makeText(getBaseContext(),middle, Toast.LENGTH_LONG).show();
 
                                     String[] tokens = lines[i].split(",");
-                                    //Toast.makeText(getBaseContext(), tokens[5], Toast.LENGTH_SHORT ).show();
+                                    //Toast.makeText(getBaseContext(), tokens[3], Toast.LENGTH_SHORT ).show();
 
-                                    if(tokens[5].length()>0) {
-                                        InspectionManager.getInstance().add(new Inspection(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), tokens[6], tokens[5]));
+                                    if(middle.length()>0) {
+                                        InspectionManager.getInstance().add(new Inspection(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), tokens[6], middle));
                                     }else{
                                         InspectionManager.getInstance().add(new Inspection(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), tokens[6], ""));
                                     }
@@ -269,7 +281,7 @@ public class UpdatePopUp extends Activity {
                                 e.printStackTrace();
                             }
                             sortInspectionByName();
-                            //saveInspectionData();
+
 
                         }
                     });
@@ -310,52 +322,15 @@ public class UpdatePopUp extends Activity {
                             //Toast toast = Toast.makeText(getApplicationContext() , myResponse, LENGTH_LONG);
                             //toast.show();
                              try{
-                                 //cunt.setText(myResponse);
-                                 //String[] lines = myResponse.split(System.getProperty("line.separator"));
-                                 //FileOutputStream fOut = openFileOutput(FILE_NAME,MODE_PRIVATE);
-                                 //fOut.write(myResponse.getBytes());
-                                 //fOut.close();
-                                 //File fileDir =new File(getFilesDir(),FILE_NAME);
-                                 //Toast.makeText(getBaseContext(), ""+fileDir, LENGTH_LONG ).show();
-
-                                 //Intent intent = MenuActivity.makeLaunchIntent(UpdatePopUp.this);
-                                 //intent.putExtra(CHECK, 1);
-                                 //startActivity(intent);
-                                 //(lines);
-                                 //Toast.makeText(getBaseContext(), ""+ lines.length, LENGTH_LONG ).show();
-/*
-                                 for(int i = 0 ; i<lines.length; i++){
-                                     if(lines[i].indexOf('"') != -1) {
-                                         //Toast.makeText(getBaseContext(), ""+ "EOFHWOEF" , Toast.LENGTH_SHORT ).show();
-
-                                         int firstIndex = lines[i].indexOf('"');
-                                         int commalocation = lines[i].indexOf(',', firstIndex);
-
-                                         lines[i] = lines[i].substring(0, commalocation) + lines[i].substring(commalocation+1);
-                                         lines[i] = lines[i].substring(0,firstIndex) + lines[i].substring(firstIndex+1);
-                                         firstIndex = lines[i].indexOf('"');
-                                         lines[i] = lines[i].substring(0,firstIndex) + lines[i].substring(firstIndex+1);
-                                         //Toast.makeText(getBaseContext(), ""+ lines[i], Toast.LENGTH_SHORT ).show();
 
 
-                                     }
-
-                                     String[] tokens = lines[i].split(",");
-                                     Toast.makeText(getBaseContext(), ""+ lines[i] , Toast.LENGTH_SHORT ).show();
-                                     //Toast.makeText(getBaseContext(), ""+ tokens[1] , LENGTH_LONG ).show();
-                                     RestaurantsManager.getInstance().add(new Restaurant(tokens[1], tokens[2], tokens[0], Double.parseDouble(tokens[6]),
-                                             Double.parseDouble(tokens[5]), tokens[3], tokens[4], InspectionManager.getInstance()));
-
-                                 }
-*/
                                 obtainData(myResponse);
                              }catch(Exception e){
                                  e.printStackTrace();
                              }
 
 
-                            RestaurantsManager.getInstance().setcount(1);
-                            //RestaurantsManager.getInstance().setUpdate(date);
+
                             sortRestaurantsByName();
                             //saveData();
                         }
@@ -390,42 +365,9 @@ public class UpdatePopUp extends Activity {
         editor.apply();
     }
 
-    private void obtainInspectionData(String result2) {
-        String[] lines = result2.split(System.getProperty("line.separator"));
-        Toast.makeText(getBaseContext(), lines.length, Toast.LENGTH_SHORT ).show();
-        /*
-        for(int i = 0 ; i<lines.length; i++){
-
-            if(lines[i].indexOf('"') != -1) {
-
-                int firstIndex = lines[i].indexOf('"');
-                int lastIndex = lines[i].lastIndexOf('"');
-
-                while(lines[i].indexOf(',') != -1 && lines[i].indexOf(',') < lines[i].lastIndexOf('"')) {
-                    int commalocation = lines[i].indexOf(',', firstIndex);
-                    lines[i] = lines[i].substring(0, commalocation) + lines[i].substring(commalocation+1);
-
-                }
-
-       //         lines[i] = lines[i].substring(0,firstIndex) + lines[i].substring(firstIndex+1);
-        //        lines[i] = lines[i].substring(0,lastIndex) + lines[i].substring(lastIndex+1);
 
 
 
-            }
-            Toast.makeText(getBaseContext(), ""+"gu", Toast.LENGTH_SHORT ).show();
-            String[] tokens = lines[i].split(",");
-            if(tokens[5].length()>0) {
-                InspectionManager.getInstance().add(new Inspection(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), tokens[6], tokens[5]));
-            }else{
-                InspectionManager.getInstance().add(new Inspection(tokens[0], Integer.parseInt(tokens[1]), tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), tokens[6], ""));
-            }
-
-        }
-
-*/
-
-    }
 
     private void obtainData(String result) {
 

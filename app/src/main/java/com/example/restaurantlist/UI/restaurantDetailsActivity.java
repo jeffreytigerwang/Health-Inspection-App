@@ -97,7 +97,7 @@ public class restaurantDetailsActivity extends AppCompatActivity {
                 int positioni = position + i;
 
 
-                //extView textView = (TextView) viewClicked;
+                //textView textView = (TextView) viewClicked;
                 //String message = "you clicked " + positioni;
                 //Toast.makeText(restaurantDetailsActivity.this, message, Toast.LENGTH_SHORT).show();
             }
@@ -128,8 +128,8 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
 
 
-            String idTag = RestaurantsManager.getInstance().get(activity.index).getTrackingNumber();
-            List<Inspection> inspectionsTemp = new ArrayList<>();
+            String idTag = RestaurantsManager.getInstance().get(RestaurantsManager.getInstance().getCurrentRestaurant()).getTrackingNumber();
+            List<Inspection> inspectionsTemp = new ArrayList<Inspection>();
 
             //Finds the specific inspections for restaurant
             for(int i = 0; i < InspectionManager.getInstance().getSize(); i++) {
@@ -140,7 +140,9 @@ public class restaurantDetailsActivity extends AppCompatActivity {
             }
 
             ListView mListView = (ListView) activity.findViewById(R.id.singleInspectionView);
+//            inspectionsTemp.add(new Inspection("SWOD-APSP3X",20190102,"a",0,0,"a","a"));
             inspectionListAdapter adapter = new inspectionListAdapter(activity.getApplicationContext(), R.layout.details, (ArrayList<Inspection>) inspectionsTemp);
+
             mListView.setAdapter(adapter);
 
 

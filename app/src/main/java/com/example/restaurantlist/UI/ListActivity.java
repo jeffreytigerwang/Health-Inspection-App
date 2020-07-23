@@ -64,6 +64,7 @@ public class ListActivity extends AppCompatActivity {
 
 
         populateListView();
+
         registerClickCallback();
 
     }

@@ -66,11 +66,13 @@ public class welcomeActivity extends AppCompatActivity {
          restaurantsManager = RestaurantsManager.getInstance();
          inspectionManager = InspectionManager.getInstance();
 
-
+        readCSVrestaurantt();
         readCSVinspections();
-        sortInspectionByName();
+        //readCSVinspectionss();
         readCSVrestaurant();
+        sortInspectionByName();
         sortRestaurantsByName();
+
 
 
         //hide hideNavigationBar, let it full screen.
@@ -226,7 +228,44 @@ public class welcomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    private void readCSVinspectionss() {
+        InputStream is = getResources().openRawResource(R.raw.inspectionreports_itr2);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8")));
 
+        String line="";
+
+        try {
+            //step over headers
+            reader.readLine();
+
+
+            while (((line = reader.readLine()) != null)) {
+                //Spilt by " , "
+
+                String[] tokens = line.split(",",7);
+                //read the data
+                if(tokens[6].length()>0)
+                { inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
+                        Integer.parseInt(tokens[1]),
+                        tokens[2].replace("\"",""),
+                        Integer.parseInt(tokens[3]),
+                        Integer.parseInt(tokens[4]),
+                        tokens[5].replace("\"",""),
+                        tokens[6].replace("\"","") ));}
+                else
+                {   inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
+                        Integer.parseInt(tokens[1]),
+                        tokens[2].replace("\"",""),Integer.parseInt(tokens[3]),Integer.parseInt(tokens[4]),
+                        tokens[5].replace("\"",""),
+                        ""));   }
+
+            }
+        } catch (IOException e) {
+            Log.wtf("MyActivity","Error reading data file on line " + line,e);
+            e.printStackTrace();
+        }
+    }
     private void readCSVrestaurant() {
 
 
@@ -261,6 +300,51 @@ public class welcomeActivity extends AppCompatActivity {
         }
 
 
+
+    }
+    private void readCSVrestaurantt() {
+
+
+        try {
+
+            InputStream inputStream = getResources().openRawResource(R.raw.restaurants_itr2);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,Charset.forName("UTF-8")));
+
+
+            String line = "";
+            reader.readLine();
+
+
+            while (((line = reader.readLine()) != null)) {
+
+                if (line.indexOf('"') != -1) {
+                    //Toast.makeText(getBaseContext(), ""+ "EOFHWOEF" , Toast.LENGTH_SHORT ).show();
+
+                    int firstIndex = line.indexOf('"');
+                    int commalocation = line.indexOf(',', firstIndex);
+
+                    line = line.substring(0, commalocation) + line.substring(commalocation + 1);
+                    line = line.substring(0, firstIndex) + line.substring(firstIndex + 1);
+                    firstIndex = line.indexOf('"');
+                    line = line.substring(0, firstIndex) + line.substring(firstIndex + 1);
+                    //Toast.makeText(getBaseContext(), ""+ lines[i], Toast.LENGTH_SHORT ).show();
+
+
+                }
+
+                String[] tokens = line.split(",");
+                //Toast.makeText(getBaseContext(), ""+ tokens[0] , LENGTH_LONG ).show();
+                //Toast.makeText(getBaseContext(), ""+ tokens[1] , LENGTH_LONG ).show();
+                RestaurantsManager.getInstance().add(new Restaurant(tokens[1], tokens[2], tokens[0], Double.parseDouble(tokens[6]),
+                        Double.parseDouble(tokens[5]), tokens[3], tokens[4], InspectionManager.getInstance()));
+
+
+            }
+        } catch (Exception e) {
+            Log.wtf("myactivity", "error reading data file on line", e);
+            e.printStackTrace();
+        }
 
     }
 

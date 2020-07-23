@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,6 +33,9 @@ import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -58,7 +62,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private Marker mMarker;
+    private LocationCallback mLocationCallback;
     private RestaurantsManager manager = RestaurantsManager.getInstance();
+    private List <MyClusterItem> markers = new ArrayList<>();
 
 
     private FusedLocationProviderClient mfusedLocationProviderClient;
@@ -100,12 +106,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         restaurants= RestaurantsManager.getInstance();
         inspections= InspectionManager.getInstance();
         //extractDataFromIntent();
-
-
-
-
-
         getLocationPremission();
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                Location location = locationResult.getLastLocation();
+                Log.d(TAG, "onLocationResult: Location is: " + location.getLatitude() + "  " + location.getLongitude());
+            }
+        };
+
+
+
         changelist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,6 +215,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (SecurityException e) {
             Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage());
         }
+
+        getLocationUpdates();
+
     }
 
     private void movecamera(LatLng latLng, float zoom){
@@ -299,29 +317,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setInfoWindowAdapter(adapter);
 
         Intent intent = getIntent();
-        passLat = intent.getDoubleExtra(Message,1);
+        //passLat = intent.getDoubleExtra(Message,1);
+        double getlat = intent.getDoubleExtra("key",0);
+        double getlongt = intent.getDoubleExtra("key1",0);
 
-        if(passLat==0)
-            Toast.makeText(MapsActivity.this,"asdas",Toast.LENGTH_SHORT).show();
-
-        if(passLat !=0)
-        {
-
-            LatLng latLng = new LatLng(49.19205936,-122.75625586);
-            movecamera(latLng,DEFAULT_ZOOM);
 /***
 
-            Collection<Marker> clusters = mClusterManager.getMarkerCollection().getMarkers();
+        if(passLat==0)
+            Toast.makeText(MapsActivity.this,""+getlat,Toast.LENGTH_SHORT).show();
+
+***/
+
+        if ((getlat != 0) || (getlongt != 0))
+        {
+
+            LatLng latLng = new LatLng(getlat,getlongt);
+            movecamera(latLng,DEFAULT_ZOOM);
+
+/***
+            Collection <Marker> clusters = mClusterManager.getMarkerCollection().getMarkers();
             setUpClusterer();
             Toast.makeText(MapsActivity.this,clusters.size()+" ",Toast.LENGTH_SHORT).show();
             for(Marker m : clusters ){
-                if(m.getPosition().latitude==passLat){
+                if((m.getPosition().latitude==getlat) && (m.getPosition().longitude == getlongt)){
                     m.showInfoWindow();
                     movecamera(m.getPosition(),DEFAULT_ZOOM);
                     break;
                 }
             }
- ***/
+***/
         }
         else{
             if (mLocationPermissionsGrandted) {
@@ -458,6 +482,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             mClusterManager.addItem(newItem);
+            //markers.add(newItem);
         }
 
     }
@@ -504,6 +529,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             markerOptions.icon(item.getHazard());
             markerOptions.title(item.getTitle());
             super.onBeforeClusterItemRendered(item, markerOptions);
+
         }
     }
 
@@ -521,6 +547,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
+    @SuppressLint("MissingPermission")
+    private void getLocationUpdates() {
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(3000);
+
+
+        mfusedLocationProviderClient.requestLocationUpdates(locationRequest, mLocationCallback, null);
+    }
 
 
 

@@ -67,8 +67,12 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this,49.19205936);
-                startActivity(intent);
+                //Intent intent = MapsActivity.makeIntent(restaurantDetailsActivity.this,49.19205936);
+
+                Intent i = new Intent(restaurantDetailsActivity.this, MapsActivity.class);
+                i.putExtra("key", RestaurantsManager.getInstance().get(index).getLatitude());
+                i.putExtra("key1", RestaurantsManager.getInstance().get(index).getLongitude());
+                startActivity(i);
             }
         });
         //this,RestaurantsManager.getInstance().get(index).getLatitude()

@@ -1,8 +1,5 @@
 package com.example.restaurantlist.UI;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,31 +10,26 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
-import com.example.restaurantlist.Model.requestHttp;
 import com.example.restaurantlist.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.common.api.GoogleApiActivity;
-import com.google.gson.Gson;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,6 +58,8 @@ public class welcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
          restaurantsManager = RestaurantsManager.getInstance();
          inspectionManager = InspectionManager.getInstance();
+
+
 
         if(restaurantsManager.getcount()==0) {
             readCSVrestaurantt();
@@ -277,8 +271,8 @@ public class welcomeActivity extends AppCompatActivity {
 
         try {
 
-            InputStream inputStream = getResources().openRawResource(R.raw.restaurants_itr2);
 
+            InputStream inputStream = getResources().openRawResource(R.raw.restaurants_itr1);
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,Charset.forName("UTF-8")));
 
 
@@ -317,14 +311,16 @@ public class welcomeActivity extends AppCompatActivity {
         }
 
     }
-    private void readCSVrestaurantt() {
 
+    private void readCSVrestaurantt() {
+        File file = method(welcomeActivity.this, "restaurants_itr1.csv");
+        InputStream is1 = null;
 
         try {
+            is1 = new FileInputStream(file);
 
-            InputStream inputStream = getResources().openRawResource(R.raw.restaurants_itr2);
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream,Charset.forName("UTF-8")));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is1,Charset.forName("UTF-8")));
 
 
             String line = "";

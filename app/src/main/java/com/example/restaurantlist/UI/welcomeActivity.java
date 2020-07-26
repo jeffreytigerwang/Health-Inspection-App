@@ -63,8 +63,8 @@ public class welcomeActivity extends AppCompatActivity {
 
         if(restaurantsManager.getcount()==0) {
             readCSVrestaurantt();
-            readCSVinspections();
-            //readCSVinspectionss();
+            //readCSVinspections();
+            readCSVinspectionss();
             //readCSVrestaurant();
             sortInspectionByName();
             sortRestaurantsByName();
@@ -189,13 +189,19 @@ public class welcomeActivity extends AppCompatActivity {
     }
 
     private void readCSVinspections() {
-        InputStream is = getResources().openRawResource(R.raw.inspectionreports_itr1);
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8")));
+        File file2 = method(welcomeActivity.this, "inspectionreports_itr1.csv");
+        InputStream is2 = null;
+
 
         String line="";
 
         try {
+
+            is2 = new FileInputStream(file2);
+
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(is2, Charset.forName("UTF-8")));
+
             //step over headers
             reader.readLine();
 
@@ -206,19 +212,9 @@ public class welcomeActivity extends AppCompatActivity {
                 String[] tokens = line.split(",",7);
                 //read the data
                 if(tokens[6].length()>0)
-                { inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
-                        Integer.parseInt(tokens[1]),
-                        tokens[2].replace("\"",""),
-                        Integer.parseInt(tokens[3]),
-                        Integer.parseInt(tokens[4]),
-                        tokens[5].replace("\"",""),
-                        tokens[6].replace("\"","") ));}
+                { }
                 else
-                {   inspectionManager.add(new Inspection(tokens[0].replace("\"",""),
-                        Integer.parseInt(tokens[1]),
-                        tokens[2].replace("\"",""),Integer.parseInt(tokens[3]),Integer.parseInt(tokens[4]),
-                        tokens[5].replace("\"",""),
-                        ""));   }
+                { }
 
             }
         } catch (IOException e) {
@@ -228,7 +224,7 @@ public class welcomeActivity extends AppCompatActivity {
     }
 
     private void readCSVinspectionss() {
-        InputStream is = getResources().openRawResource(R.raw.inspectionreports_itr2);
+        InputStream is = getResources().openRawResource(R.raw.inspectionreports_itr1);
         BufferedReader reader = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8")));
 

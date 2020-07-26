@@ -63,8 +63,8 @@ public class welcomeActivity extends AppCompatActivity {
 
         if(restaurantsManager.getcount()==0) {
             readCSVrestaurantt();
-            //readCSVinspections();
-            readCSVinspectionss();
+            readCSVinspections();
+            //readCSVinspectionss();
             //readCSVrestaurant();
             sortInspectionByName();
             sortRestaurantsByName();
@@ -204,19 +204,43 @@ public class welcomeActivity extends AppCompatActivity {
 
             //step over headers
             reader.readLine();
-
+            //IT SHOWS THE LINE IN CSV SO IT WORKS
+            Toast.makeText(getApplicationContext(),reader.readLine(),Toast.LENGTH_SHORT).show();
 
             while (((line = reader.readLine()) != null)) {
-                //Spilt by " , "
+                //THIS SEPERATES IT PROPERLY, I CHECKED ON A TEST PROJECT. IT WORKS
+                String[] lines = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-                String[] tokens = line.split(",",7);
+                //RUNNING THIS CODE MAKES APP GO BLANK FOR SOME REASON. MAYBE A SIZE ISSUE?
+                //Toast.makeText(getApplicationContext(),lines[0],Toast.LENGTH_SHORT).show();
+
+                //ONLY THING DIFFERENT IS THAT THE WHOLEVIOLDUMP HAS QUOTATIONS AT START AND END.
+                //So i simply remove it using the replace as usual
+/*
+
                 //read the data
-                if(tokens[6].length()>0)
-                { }
+                if(lines[5].length()>0)
+                { inspectionManager.add(new Inspection(lines[0],
+                        Integer.parseInt(lines[1]),
+                        lines[2],
+                        Integer.parseInt(lines[3]),
+                        Integer.parseInt(lines[4]),
+                        lines[6].replace("\"",""),
+                        lines[5]));
+                }
                 else
-                { }
-
+                { inspectionManager.add(new Inspection(lines[0],
+                        Integer.parseInt(lines[1]),
+                        lines[2],
+                        Integer.parseInt(lines[3]),
+                        Integer.parseInt(lines[4]),
+                        lines[6].replace("\"",""),
+                        ""));
+                }
+*/
             }
+
+
         } catch (IOException e) {
             Log.wtf("MyActivity","Error reading data file on line " + line,e);
             e.printStackTrace();

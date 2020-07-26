@@ -210,12 +210,13 @@ public class welcomeActivity extends AppCompatActivity {
             while (((line = reader.readLine()) != null)) {
                 //THIS SEPERATES IT PROPERLY, I CHECKED ON A TEST PROJECT. IT WORKS
                 String[] lines = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                //ONLY THING DIFFERENT IS THAT THE WHOLEVIOLDUMP HAS QUOTATIONS AT START AND END.
+                //So i simply remove it using the replace as usual
 
                 //RUNNING THIS CODE MAKES APP GO BLANK FOR SOME REASON. MAYBE A SIZE ISSUE?
                 //Toast.makeText(getApplicationContext(),lines[0],Toast.LENGTH_SHORT).show();
 
-                //ONLY THING DIFFERENT IS THAT THE WHOLEVIOLDUMP HAS QUOTATIONS AT START AND END.
-                //So i simply remove it using the replace as usual
+
 /*
 
                 //read the data

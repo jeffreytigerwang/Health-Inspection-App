@@ -5,11 +5,21 @@
     tools:ignore="MissingDefaultResource">
 
     <item
+        android:id="@+id/main_search_icon"
+        android:enabled="true"
+        android:icon="@drawable/main_search_icon"
+        android:title="Search"
+        android:visible="true"
+        app:showAsAction="always"
+        />
+
+    <item
         android:id="@+id/main_map_icon"
         android:enabled="true"
         android:icon="@drawable/map_icon"
         android:title="Map"
         android:visible="true"
         app:showAsAction="always" />
+
 
 </menu>

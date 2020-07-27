@@ -65,10 +65,14 @@
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_list"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".UI.MenuActivity" />
         <activity android:name=".UI.MenuActivity" />
-        <activity android:name=".UI.welcomeActivity">
+        <activity android:name=".UI.welcomeActivity"/>
+        <activity android:name=".UI.searchActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+
+
 
         </activity>
 

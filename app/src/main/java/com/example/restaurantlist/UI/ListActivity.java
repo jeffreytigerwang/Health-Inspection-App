@@ -1,42 +1,31 @@
 package com.example.restaurantlist.UI;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.InspectionManager;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *  this activity show all restaurants with some information
@@ -303,6 +292,14 @@ public class ListActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        /*
+        if(id==R.id.){
+            Intent isearch = new Intent(ListActivity.this, searchActivity.class);
+            startActivity(isearch);
+            finish();
+            return true;
+        }
+        */
         return super.onOptionsItemSelected(item);
     }
 

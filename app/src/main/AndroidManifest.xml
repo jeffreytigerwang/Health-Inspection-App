@@ -70,7 +70,8 @@
         <activity android:name=".UI.MenuActivity" />
         <activity android:name=".UI.welcomeActivity"/>
         <activity android:name=".UI.searchActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".UI.ListActivity">
 
 
 

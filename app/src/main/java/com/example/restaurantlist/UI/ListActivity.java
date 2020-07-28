@@ -292,14 +292,14 @@ public class ListActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
-        /*
-        if(id==R.id.){
-            Intent isearch = new Intent(ListActivity.this, searchActivity.class);
-            startActivity(isearch);
+
+        if(id==R.id.main_search_icon){
+            Intent isearch=new Intent(ListActivity.this, searchActivity.class);
             finish();
+            startActivity(isearch);
             return true;
         }
-        */
+
         return super.onOptionsItemSelected(item);
     }
 

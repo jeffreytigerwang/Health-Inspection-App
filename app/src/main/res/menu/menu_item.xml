@@ -7,7 +7,7 @@
     <item
         android:id="@+id/main_search_icon"
         android:enabled="true"
-        android:icon="@drawable/main_search_icon"
+        android:icon="@drawable/search_icon"
         android:title="Search"
         android:visible="true"
         app:showAsAction="always"

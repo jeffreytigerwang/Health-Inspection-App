@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".UI.DownloadDataActivity"
-    tools:showIn="@layout/download_data">
+    tools:showIn="@layout/activity_download_data">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/const_dialog"
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Update Avaliable"
+            android:text="Update now?"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

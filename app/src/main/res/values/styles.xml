@@ -14,7 +14,18 @@
         <item name="android:windowTranslucentNavigation">false</item>
 
     </style>
+    <string-array name="hazard_level_array">
+        <item>All</item>
+        <item>Low</item>
+        <item>Moderate</item>
+        <item>High</item>
+    </string-array>
 
+    <string-array name="comparator">
+        <item>All</item>
+        <item>Greater or Equal</item>
+        <item>Lesser or Equal</item>
+    </string-array>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

@@ -1,24 +1,21 @@
 package com.example.restaurantlist.Model;
 
-import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 
 import androidx.annotation.RequiresApi;
 
-
 import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class downloadCSV {
     private String url;
     private String fileName;
 
-    public downloadCSV (String url, String fileName) {
+    public downloadCSV(String url, String fileName) {
         this.url = url;
         this.fileName = fileName;
     }

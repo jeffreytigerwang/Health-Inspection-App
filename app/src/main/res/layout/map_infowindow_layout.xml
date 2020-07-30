@@ -9,13 +9,13 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/textSetMapAddress"
+            android:id="@+id/info_item_numNonCritical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textSetMapHazard"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="0dp"
-            android:layout_toEndOf="@+id/textMapAddress"
+            android:layout_above="@+id/info_item_numCritical"
+            android:layout_marginStart="28dp"
+            android:layout_marginBottom="1dp"
+            android:layout_toEndOf="@+id/info_textView10"
             android:text="na" />
 
         <ImageView
@@ -26,7 +26,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            app:srcCompat="@android:drawable/star_big_off" />
+            app:srcCompat="@drawable/icon1" />
 
         <TextView
             android:id="@+id/info_item_restaurantName"
@@ -40,44 +40,53 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textMapHazard"
+            android:id="@+id/info_textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/info_item_restaurantLogo"
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="16dp"
             android:layout_marginBottom="0dp"
             android:layout_toEndOf="@+id/info_item_restaurantLogo"
-            android:text="Hazard level:" />
+            android:text="num_critical" />
 
         <TextView
-            android:id="@+id/textMapAddress"
+            android:id="@+id/info_textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/textMapHazard"
-            android:layout_marginStart="0dp"
-            android:layout_marginBottom="0dp"
+            android:layout_above="@+id/info_textView9"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="1dp"
             android:layout_toEndOf="@+id/info_item_restaurantLogo"
-            android:text="Address:" />
+            android:text="num_non_critical" />
 
         <ImageView
-            android:id="@+id/imgMapHazard"
+            android:id="@+id/info_item_hazardImage"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="2dp"
             android:layout_marginEnd="4dp"
-            app:srcCompat="@android:drawable/presence_online" />
+            app:srcCompat="@drawable/icon1" />
 
         <TextView
-            android:id="@+id/textSetMapHazard"
+            android:id="@+id/info_item_numCritical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textMapHazard"
+            android:layout_alignBottom="@+id/info_textView9"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="0dp"
-            android:layout_toEndOf="@+id/textMapHazard"
+            android:layout_toEndOf="@+id/info_textView9"
             android:text="na" />
 
+        <TextView
+            android:id="@+id/info_item_lastInspection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/info_item_numCritical"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="2dp"
+            android:text="na" />
     </RelativeLayout>
 </RelativeLayout>

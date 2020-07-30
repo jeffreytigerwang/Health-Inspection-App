@@ -1,68 +1,120 @@
 package com.example.restaurantlist.Model;
 
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Data model: Store a collection of restaurants.
- */
 
-public class RestaurantsManager implements Iterable<Restaurant> {
+public class RestaurantsManager implements Iterable<Restaurant>{
+
     private List<Restaurant> restaurants = new ArrayList<>();
-    private static RestaurantsManager instance;
-    private int count=0;
+    private String searchTerm = "";
+    private String hazardLevelFilter = "All";
+    private String comparator = "All";
 
-    private int currentRestaurant;
-
-    public void setCurrentRestaurant(int index){
-        currentRestaurant = index;
-    }
-    public int getCurrentRestaurant(){
-        return currentRestaurant;
-    }
-
-
-    public void setcount(int i){
-        count=i;
-    }
-
-    public int getcount()
-    {
-        return count;
-    }
-
-    public static RestaurantsManager getInstance() {
-        if (instance == null) {
-            instance = new RestaurantsManager();
-        }
-        return instance;
-    }
-
-    private RestaurantsManager() {
-        // Nothing: ensure this is a singleton.
-    }
+    private int violationLimit;
 
     public void add(Restaurant restaurant) {
         restaurants.add(restaurant);
     }
+    public void setSearchTerm(String searchTerm) { this.searchTerm = searchTerm; }
+    public void setHazardLevelFilter(int index) {
+        if (index == 0) this.hazardLevelFilter = "All";
+        else if (index == 1) this.hazardLevelFilter = "Low";
+        else if (index == 2) this.hazardLevelFilter = "Moderate";
+        else if (index == 3) this.hazardLevelFilter = "High";
+    }
+    public void setComparator(int index) {
+        if (index == 0) {
 
-    public void remove(Restaurant restaurant) {
-        restaurants.remove(restaurant);
-    }
-    public Restaurant get(int i) {
-        return restaurants.get(i);
+            this.comparator = "All";
+
+        } else if (index == 1) {
+
+            this.comparator = "Greater or Equal";
+
+        } else if (index == 2) {
+
+            this.comparator = "Lesser or Equal";
+
+        }
     }
 
-    public  List get(){
-        return restaurants;
-    }
-    public int getNumRestaurants() {
-        return restaurants.size();
+    public void setViolationLimit(int violationLimit) { this.violationLimit = violationLimit; }
+
+    public Restaurant find(String tracking){
+        for (Restaurant restaurant: restaurants) {
+            if (restaurant.getTrackingNumber().equals(tracking)) {
+                return restaurant;
+            }
+        }
+        return null;
     }
 
+    public List<Restaurant> getRestaurants() {
+        searchTerm = searchTerm.trim();
+        if (searchTerm.isEmpty() &&
+                hazardLevelFilter.equalsIgnoreCase("All") &&
+                comparator.equalsIgnoreCase("All")) {
+
+            return restaurants; // O(1) when search term is empty.
+        }
+
+        List<Restaurant> filteredRestaurants = new ArrayList<>();
+        for (Restaurant restaurant : restaurants) {
+            if (qualifies(restaurant)) {
+                filteredRestaurants.add(restaurant);
+            }
+        }
+        return filteredRestaurants;
+    }
+
+    private boolean qualifies(Restaurant restaurant) {
+        String restaurantName = restaurant.getRestaurantName();
+        restaurantName = restaurantName.toLowerCase();
+        String hazardLevel = restaurant.getLastHazardLevel();
+        int criticalViolationCount = restaurant.getCriticalViolationCount();
+
+        if (restaurantName.toLowerCase().contains(searchTerm.toLowerCase()) &&
+                ((hazardLevelFilter.equalsIgnoreCase("All")) ||
+                        (hazardLevel.equalsIgnoreCase(hazardLevelFilter))) &&
+                (inRange(criticalViolationCount))) {
+
+            return true;
+
+        } else {
+
+            return false;
+        }
+
+    }
+
+    boolean inRange(int count) {
+        if ((comparator.equalsIgnoreCase("All")) ||
+                ((comparator.equalsIgnoreCase("Greater or Equal")) && (count >= violationLimit)) ||
+                ((comparator.equalsIgnoreCase("Lesser or Equal")) && (count <= violationLimit))) {
+
+            return true;
+        }
+        return false;
+    }
+
+    /*
+    Singleton Support
+    */
+    private static RestaurantsManager instance;
+
+    private RestaurantsManager() {
+        // prevent anyone else from instantiating object
+    }
+
+    public static RestaurantsManager getInstance() {
+        if(instance == null) {
+            instance = new RestaurantsManager();
+        }
+        return instance;
+    }
 
     public Restaurant findRestaurantByLatLng(double latitude, double longitude) {
         for (Restaurant res: restaurants) {
@@ -73,12 +125,10 @@ public class RestaurantsManager implements Iterable<Restaurant> {
         return null;
     }
 
-
-    @NonNull
     @Override
     public Iterator<Restaurant> iterator() {
-        return restaurants.iterator();
+        return getRestaurants().iterator();
     }
 
-
+    public int getManagerSize() { return restaurants.size(); }
 }

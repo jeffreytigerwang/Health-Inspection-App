@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-
 import com.example.restaurantlist.Model.obtainAPI;
 import com.example.restaurantlist.R;
 
@@ -30,7 +29,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 public class DownloadDataActivity extends AppCompatActivity {
 
     String[] url = {"http://data.surrey.ca/api/3/action/package_show?id=restaurants",
@@ -44,8 +42,9 @@ public class DownloadDataActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.download_data);
+        setContentView(R.layout.activity_download_data);
 
         long tDifference = 0;
 
@@ -75,14 +74,14 @@ public class DownloadDataActivity extends AppCompatActivity {
 
         if (tDifference < 72000000) {
             TextView dialogText = findViewById(R.id.txt_dialogMsg);
-            dialogText.setText("App already updated!");
+            dialogText.setText("Latest installed");
             noButton.setVisibility(View.INVISIBLE);
             dialogConstraint.setVisibility(View.VISIBLE);
             yesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     dialogConstraint.setVisibility(View.INVISIBLE);
-                    Intent intent = new Intent(DownloadDataActivity.this, welcomeActivity.class);
+                    Intent intent = new Intent(DownloadDataActivity.this, ListActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -105,8 +104,8 @@ public class DownloadDataActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     dialogConstraint.setVisibility(View.INVISIBLE);
                     Intent intent = new Intent();
-                    intent = welcomeActivity.makeLaunchIntent(DownloadDataActivity.this, "welcomeActivity");
-                    intent.putExtra("updated", "OLD");
+                    intent = ListActivity.makeLaunchIntent(DownloadDataActivity.this, "MainActivity");
+                    intent.putExtra("Extra", "OLD");
                     startActivity(intent);
                     DownloadDataActivity.this.finish();
                 }
@@ -128,17 +127,17 @@ public class DownloadDataActivity extends AppCompatActivity {
             System.out.println("Starting download");
 
             progressDialog = new ProgressDialog(DownloadDataActivity.this);
-            progressDialog.setMessage("Fetching latest data from server.\nTo cancel, click anywhere outside the progress box.");
+            progressDialog.setMessage("Obtaining newest data from server.\nClick outside the progress box to cancel.");
             progressDialog.setIndeterminate(true);
             progressDialog.setCancelable(true);
             progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
                     cancel(true);
-                    Toast.makeText(DownloadDataActivity.this,"Download has been cancelled.",Toast.LENGTH_LONG).show();
+                    Toast.makeText(DownloadDataActivity.this,"Download cancelled.",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent();
-                    intent = welcomeActivity.makeLaunchIntent(DownloadDataActivity.this, "welcomeActivity");
-                    intent.putExtra("updated", "OLD");
+                    intent = ListActivity.makeLaunchIntent(DownloadDataActivity.this, "MainActivity");
+                    intent.putExtra("Extra", "OLD");
                     context.startActivity(intent);
                     DownloadDataActivity.this.finish();
                 }
@@ -199,7 +198,7 @@ public class DownloadDataActivity extends AppCompatActivity {
         protected void onPostExecute(String file_url) {
             progressDialog.dismiss();
             if (file_url.equals("inspectionreports_itr1.csv")) {
-                Intent intent = new Intent(DownloadDataActivity.this, welcomeActivity.class);
+                Intent intent = new Intent(DownloadDataActivity.this, ListActivity.class);
                 startActivity(intent);
                 DownloadDataActivity.this.finish();
             }
@@ -218,5 +217,4 @@ public class DownloadDataActivity extends AppCompatActivity {
     static File method(Context obj, String filename) {
         return new File (obj.getFilesDir(), filename);
     }
-
 }

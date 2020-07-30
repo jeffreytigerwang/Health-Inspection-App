@@ -1,130 +1,188 @@
 package com.example.restaurantlist.Model;
 
 
+import com.example.restaurantlist.R;
+
+import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+
+
 
 public class Inspection {
-    private String TrackingNum;
-    private int[] InspectionDate;
+
+
+    private String formattedDate;
+    private String trackingNum;
+    private String testDate;
     private String InspType;
+    private String HazardRating;
+    private int diffInDay;
+
     private int NumCritical;
     private int NumNonCritical;
-    private String[] CViolLump;            //Critical ViolLUmp
-    private String HazardRating;
-    private String colour;
-    private String testdate;
 
-    public Inspection(String trackingNum) {
-        this.TrackingNum=trackingNum;
-        this.InspectionDate=new int[3];
-        this.InspType="";
-        this.NumCritical=0;
-        this.NumNonCritical=0;
-        this.HazardRating="";
+    private String[] CViolLump;
 
+    public Inspection(String trackingNum, String fullDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String wholecviolLump) {
+        this.trackingNum = trackingNum;
+        this.testDate = fullDate;
+        this.InspType = inspType;
+        this.NumCritical = numCritical;
+        this.NumNonCritical = numNonCritical;
+        this.HazardRating = hazardRating;
+        this.CViolLump = parseViolations(wholecviolLump);
+        initDate();
     }
 
+    //https://www.baeldung.com/java-date-difference
+    public void initDate() {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+            String rawInspectionDate = getTestDate();
+            Date inspectionDate = sdf.parse(rawInspectionDate);
+            Date currentDate = new Date();
 
-    public Inspection(String trackingNum, int fulldate, String inspType, int numCritical, int numNonCritical, String hazardRating, String wholecviolLump /*,String[] nonviolLump*/) {
-        TrackingNum = trackingNum;
-        InspectionDate = parseDate(fulldate);
-        InspType = inspType;
-        NumCritical = numCritical;
-        NumNonCritical = numNonCritical;
-        HazardRating = hazardRating;
-        CViolLump = paseviolLump(wholecviolLump);
-        testdate = Integer.toString (fulldate);
-        setColour();
+            long diffInMS = Math.abs(currentDate.getTime() - inspectionDate.getTime());
+            long diffInDay = TimeUnit.DAYS.convert(diffInMS, TimeUnit.MILLISECONDS);
+            this.diffInDay = (int) diffInDay;
 
+            //https://stackoverflow.com/questions/36370895/getyear-getmonth-getday-are-deprecated-in-calendar-what-to-use-then
+            String[] indexToMonth = new DateFormatSymbols().getMonths();
+            Calendar inspectionCalendar = Calendar.getInstance();
+            inspectionCalendar.setTime(inspectionDate);
+
+            if (diffInDay <= 1) {
+
+                this.formattedDate = diffInDay + "Day";
+
+            } else if (diffInDay <= 30) {
+
+                this.formattedDate = diffInDay + " Days";
+
+            } else if (diffInDay <= 365) {
+
+                this.formattedDate = indexToMonth[inspectionCalendar.get(Calendar.MONTH)]
+                        + " " + inspectionCalendar.get(Calendar.DAY_OF_MONTH);
+
+            } else {
+
+                this.formattedDate = indexToMonth[inspectionCalendar.get(Calendar.MONTH)]
+                        + " " + inspectionCalendar.get(Calendar.YEAR);
+
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            this.formattedDate = "N/A";
+        }
     }
 
-    private int[] parseDate(int fulldate) {
-        String year = String.valueOf(fulldate).substring(0,4);
-        String month = String.valueOf(fulldate).substring(4,6);
-        String day = String.valueOf(fulldate).substring(6,8);
-        int[] parsedDate = {Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day)};
+    public String dateFormatter() { return this.formattedDate; }
+    public int getDiffInDay() { return this.diffInDay; }
 
-        return parsedDate;
-    }
-
-    private String[] paseviolLump(String wholecviolLump) {
-
-        return  wholecviolLump.replace(",",", ").split("\\|");
+    private String[] parseViolations(String rawViolations) {
+        return rawViolations.replace(",", ", ").split("\\|");
     }
 
     public String getTrackingNum() {
-        return TrackingNum;
+        return trackingNum;
     }
 
-    public int[] getInspectionDate() {
-        return InspectionDate;
-    }
-
-    public void setInspectionDate(int[] inspectionDate) {
-        InspectionDate = inspectionDate;
+    public String getTestDate() {
+        return this.testDate;
     }
 
     public String getInspType() {
         return InspType;
     }
 
-    public void setInspType(String inspType) {
-        InspType = inspType;
-    }
 
     public int getNumCritical() {
         return NumCritical;
-    }
-
-    public void setNumCritical(int numCritical) {
-        NumCritical = numCritical;
     }
 
     public int getNumNonCritical() {
         return NumNonCritical;
     }
 
-    public void setNumNonCritical(int numNonCritical) {
-        NumNonCritical = numNonCritical;
-    }
-
     public String getHazardRating() {
         return HazardRating;
     }
 
-    public void setHazardRating(String hazardRating) {
-        HazardRating = hazardRating;
+    public String getFormattedDate() {
+        return formattedDate;
     }
 
     public String[] getCViolLump() {
-        return CViolLump;
-    }
-
-    public void setCViolLump(String[] violLump) {
-        CViolLump = violLump;
+        return this.CViolLump;
     }
 
 
-    public void setColour(){
-        if(this.HazardRating.equals("Low"))
-        {
-            this.colour="blue";
+    public int getHazardIcon() {
+
+        if (HazardRating.equals("Low")) {
+
+            return R.drawable.blue;
+
+        } else if (HazardRating.equals("Moderate")) {
+
+            return R.drawable.yellow;
+
+        } else {
+
+            return R.drawable.red;
+
         }
-        else if(this.HazardRating.equals("Moderate"))
-        {
-            this.colour="yellow";
+
+    }
+
+    @Override
+    public String toString() {
+
+        return  NumCritical + ", " +
+                NumNonCritical + ", " +
+                this.dateFormatter() + ", " +
+                InspType + ", " +
+                HazardRating;
+
+    }
+
+    public String getShortViolation(int position) {
+
+        if (CViolLump.length == 0) {
+
+            return "";
+
         }
-        else if(this.HazardRating.equals("High"))
-        {
-            this.colour="red";
+
+        String[] shortViolations = new String[CViolLump.length];
+
+        for (int i = 0; i < CViolLump.length; i++) {
+
+            if (CViolLump[i].length() > 10) {
+
+                if (CViolLump[i].length() < 40) {
+
+                    shortViolations[i] = CViolLump[i];
+
+                } else {
+
+                    shortViolations[i] = CViolLump[i].substring(0, 40) + "...";
+
+                }
+            }
+
+            else {
+
+                shortViolations[i] = CViolLump[i];
+
+            }
         }
-    }
-    public String getColour(){
-        return colour;
-    }
 
-
-    public String getTestdate() {
-        return testdate;
+        return shortViolations[position];
     }
-
 }

@@ -1,9 +1,9 @@
 package com.example.restaurantlist.Model;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
+
 
 //With reference to: https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering
 public class MyClusterItem implements ClusterItem {

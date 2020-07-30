@@ -36,7 +36,7 @@
     <string name="violation_type">Violation Type</string>
     <string name="not_critical">Severity: Not Critical</string>
     <string name="critical">Severity: Critical</string>
-
+    <string name="greeting">hi, nothing here</string>
 
     <string-array name="my_array">
         <item>Regulatory failure </item>
@@ -47,4 +47,11 @@
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="enter_address_city_or_zip_code">Enter Address, City or Zip Code</string>
+
+
+
+
+
+
+
 </resources>

@@ -2,159 +2,126 @@ package com.example.restaurantlist.Model;
 
 import com.example.restaurantlist.R;
 
+import java.util.ArrayList;
+
+
 public class Restaurant {
+
     private String restaurantName;
-    private String restaurantNameL;
-
     private String address;
-    private String trackingNumber;
-    private double longitude;
-    private double latitude;
     private String physicalCity;
-    private String facType;
-    private InspectionManager inspections;
+    private String trackingNumber;
+
+    private double latitude;
+    private double longitude;
+
     private int icon;
+    private int criticalViolationCount;
 
 
+    public ArrayList<Inspection> inspections;
 
-    public Restaurant() {
-        this.restaurantName="";
-        this.address="";
-        this.trackingNumber="";
-        this.longitude=0;
-        this.latitude=0;
-        this.physicalCity="";
-        this.facType="";
-
-    }
-
-    public Restaurant(String restaurantName, String address, String trackingNumber, double longitude, double latitude, String physicalCity, String facType, InspectionManager inspections) {
+    public Restaurant(String restaurantName, String address, String physicalCity, double latitude, double longitude, String trackingNumber) {
         this.restaurantName = restaurantName;
         this.address = address;
-        this.trackingNumber = trackingNumber;
-        this.longitude = longitude;
-        this.latitude = latitude;
         this.physicalCity = physicalCity;
-        this.facType = facType;
-        this.inspections = inspections;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.trackingNumber = trackingNumber;
         this.icon = matchLogo();
+        this.inspections = new ArrayList<>();
+        this.criticalViolationCount = countCriticalViolation();
+
     }
 
     public String getRestaurantName() {
         return restaurantName;
     }
 
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
+    public void setRestaurantName(String name) {
+        this.restaurantName = name;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getTrackingNumber() {
-        return trackingNumber;
-    }
-
-    public void setTrackingNumber(String trackingNumber) {
-        this.trackingNumber = trackingNumber;
+    public double getLatitude() {
+        return latitude;
     }
 
     public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public String getTrackingNumber() {
+        return trackingNumber;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public int getIcon() {
+        return icon;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public int getCriticalViolationCount() { return this.criticalViolationCount; }
+
+    public String getLastHazardLevel() {
+        if (inspections.isEmpty()) return "None";
+        return inspections.get(0).getHazardRating();
     }
 
-    public String getPhysicalCity() {
-        return physicalCity;
-    }
-
-    public void setPhysicalCity(String physicalCity) {
-        this.physicalCity = physicalCity;
-    }
-
-    public String getFacType() {
-        return facType;
-    }
-
-    public void setFacType(String facType) {
-        this.facType = facType;
-    }
-
-    public void setInspections(InspectionManager inspections) {
-        this.inspections = inspections;
-    }
-
-    public InspectionManager getInspections() {
-        return inspections;
-    }
-
-    public Restaurant getRestaurant(String trackingNumber){
-        if(this.trackingNumber==trackingNumber)
-        {
-            return this;
+    private int countCriticalViolation() {
+        int count = 0;
+        for (Inspection inspection : inspections) {
+            if (inspection.getDiffInDay() <= 365) {
+                count = count + inspection.getNumCritical();
+            }
         }
-
-        return null;
+        return count;
     }
 
     private int matchLogo(){
-        restaurantNameL = this.getRestaurantName().toLowerCase();
-        if (restaurantNameL.contains("a&w") || restaurantNameL.contains("a & w")){
+        restaurantName = this.getRestaurantName().toLowerCase();
+
+        if (restaurantName.contains("a&w") || restaurantName.contains("a & w")){
             return R.drawable.aw_canada_logo;
         }
-        else if (restaurantNameL.contains("lee yuen seafood")){
+        else if (restaurantName.contains("lee yuen seafood")){
             return R.drawable.lee_yuen_logo;
         }
-        else if (restaurantNameL.contains("unfindable")){
+        else if (restaurantName.contains("unfindable")){
             return R.drawable.icon;
         }
-        else if (restaurantNameL.contains("top in town pizza")){
+        else if (restaurantName.contains("top in town pizza")){
             return R.drawable.top_in_town_pizza;
         }
-        else if (restaurantNameL.contains("104 sushi")){
+        else if (restaurantName.contains("104 sushi")){
             return R.drawable.sushi_104;
         }
-        else if (restaurantNameL.contains("zugba flame")){
+        else if (restaurantName.contains("zugba flame")){
             return R.drawable.zugba_flame;
         }
-        else if (restaurantNameL.contains("5 star catering")){
+        else if (restaurantName.contains("5 star catering")){
             return R.drawable.logo5;
         }
-        else if (restaurantNameL.contains("mcdonald")){
+        else if (restaurantName.contains("mcdonald")){
             return R.drawable.mcdonald;
         }
-        else if (restaurantNameL.contains("7-eleven")){
+        else if (restaurantName.contains("7-eleven")){
             return R.drawable.seven_eleven;
         }
-        else if (restaurantNameL.contains("pizza hut")){
+        else if (restaurantName.contains("pizza hut")){
             return R.drawable.pizza_hut;
         }
-        else if (restaurantNameL.contains("kfc")){
+        else if (restaurantName.contains("kfc")){
             return R.drawable.kfc;
         }
-        else if (restaurantNameL.contains("subway")){
+        else if (restaurantName.contains("subway")){
             return R.drawable.subway;
         }
-        else if (restaurantNameL.contains("burger king")){
+        else if (restaurantName.contains("burger king")){
             return R.drawable.burger_king;
         }
-        else if (restaurantNameL.contains("boston pizza")){
+        else if (restaurantName.contains("boston pizza")){
             return R.drawable.bp_pizza;
         }
         else{
@@ -162,12 +129,55 @@ public class Restaurant {
         }
     }
 
-    public int getIcon() {
-        return icon;
+    public ArrayList<Inspection> getInspections() {
+        return inspections;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
+    public Inspection getInspection(int inspection) {
+        if (inspections.size() <= inspection || inspection < 0){
+            return null;
+        }
+
+        return inspections.get(inspection);
     }
 
+    public int getInspectionSize() {
+        return inspections.size();
+    }
+
+
+
+    @Override
+    public String toString() {
+        boolean empty = false;
+        Inspection first = new Inspection("", "", "", 0, 0, "", "");
+
+        if (inspections.isEmpty()) {
+
+            empty = true;
+
+        } else {
+
+            first = inspections.get(0);
+
+        }
+
+
+        if (!empty) {
+
+            return trackingNumber + ", "
+                    + restaurantName + ", "
+                    + (first.getNumCritical() + first.getNumNonCritical())
+                    + ", "
+                    + first.getHazardRating() + ", "
+                    + first.dateFormatter();
+
+        } else {
+
+            return trackingNumber + " "
+                    + restaurantName + "\nNo inspections";
+
+        }
+
+    }
 }

@@ -24,10 +24,6 @@ public class ParseCSV {
 
             while ((line = br.readLine()) != null) {
 
-                // need to add in an extra space in case there are no violations
-//                line = line + ", ";
-                //String[] lineValues = line.split(COMMA_SEPARATOR);
-
                 String[] lineValues = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 values.add(Arrays.asList(lineValues));
 
@@ -37,7 +33,7 @@ public class ParseCSV {
 
         } catch (FileNotFoundException e) {
 
-            Log.wtf("ParseCSV", "File not found ", e);
+            Log.wtf("ParseCSV", "Unable to find file", e);
             e.printStackTrace();
 
         } catch (IOException e) {

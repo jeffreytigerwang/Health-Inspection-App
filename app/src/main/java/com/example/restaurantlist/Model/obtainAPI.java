@@ -20,7 +20,8 @@ public class obtainAPI {
     }
 
     public void fetchData() {
-        //https://stackoverflow.com/questions/6343166/how-to-fix-android-os-networkonmainthreadexception
+        //With reference to https://stackoverflow.com/questions/6343166/how-to-fix-android-os-networkonmainthreadexception
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 

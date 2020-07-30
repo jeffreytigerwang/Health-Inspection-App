@@ -37,8 +37,8 @@
             android:layout_height="16dp"
             android:textSize="17sp"
             android:visibility="invisible"
-            tools:layout_editor_absoluteX="380dp"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/inspec_Description"

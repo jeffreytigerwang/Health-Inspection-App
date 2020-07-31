@@ -68,6 +68,81 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        tools:layout_editor_absoluteY="1dp"
+        tools:ignore="MissingConstraints" />
+
+    <CheckBox
+        android:id="@+id/checkBoxSearch"
+        android:layout_width="201dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="32dp"
+        android:text="show favourite only"
+        app:layout_constraintStart_toStartOf="@+id/search_userEnter"
+        app:layout_constraintTop_toBottomOf="@+id/search_userEnter" />
+
+    <TextView
+        android:id="@+id/textViolation"
+
+        android:layout_width="187dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="44dp"
+        android:text="Critical Violations"
+        app:layout_constraintStart_toStartOf="@+id/search_userEnter"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSearch" />
+
+    <Spinner
+        android:id="@+id/hazard_spinner_COUNT_search"
+        android:layout_width="137dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:background="#20050505"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/search_userEnter"
+        app:layout_constraintTop_toBottomOf="@+id/textViolation"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/count_text_search"
+        android:layout_width="139dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="60dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="Data"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/hazard_spinner_COUNT_search"
+        app:layout_constraintStart_toEndOf="@+id/hazard_spinner_COUNT_search"
+        app:layout_constraintTop_toTopOf="@+id/hazard_spinner_COUNT_search"
+        app:layout_constraintVertical_bias="1.0"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="115dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Hazard Level"
+        app:layout_constraintStart_toStartOf="@+id/textViolation"
+        app:layout_constraintTop_toBottomOf="@+id/hazard_spinner_COUNT_search" />
+
+    <Spinner
+        android:id="@+id/hazard_level"
+        android:layout_width="137dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="48dp"
+        android:background="#20050505"
+        android:spinnerMode="dropdown"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/hazard_spinner_COUNT_search"
+        app:layout_constraintStart_toStartOf="@+id/hazard_spinner_COUNT_search"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

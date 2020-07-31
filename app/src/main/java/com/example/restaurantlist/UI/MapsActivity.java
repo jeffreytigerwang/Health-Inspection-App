@@ -395,7 +395,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //From: https://www.youtube.com/watch?v=MWowf5SkiOE&list=PLgCYzUzKIBE-vInwQhGSdnbyJ62nixHCt&index=6
-    
+
     private void onButtonClick() {
         ImageView goToList = findViewById(R.id.ic_list);
 

@@ -206,18 +206,21 @@ public class inspectionDetailsActivity extends AppCompatActivity {
 
                 imageView.setImageResource(R.drawable.food);
 
-            } else if (violations.get(position).contains("Sanitized") || violations.get(position).contains("sanitized")) {
+            } else if (violations.get(position).contains("Sanitized") || violations.get(position).contains("sanitized") || violations.get(position).contains("310") ) {
 
                 imageView.setImageResource(R.drawable.sanitized);
 
-            } else if (violations.get(position).contains("handwashing")) {
+            } else if ((violations.get(position).contains("handwashing")) || (violations.get(position).contains("wash hands"))) {
 
                 imageView.setImageResource(R.drawable.wash);
 
-            } else if (violations.get(position).contains("FOODSAFE")) {
+            } else if (violations.get(position).contains("FOODSAFE") ||(violations.get(position).contains("402"))) {
 
                 imageView.setImageResource(R.drawable.foodsafe);
 
+            } else if (violations.get(position).contains("Premises") ||(violations.get(position).contains("311"))) {
+
+                imageView.setImageResource(R.drawable.premises);
 
             } else {
 

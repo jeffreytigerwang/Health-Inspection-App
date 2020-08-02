@@ -1,6 +1,7 @@
 package com.example.restaurantlist.UI;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -187,7 +188,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void getDeviceLocation() {
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
-        Task location = mFusedLocationProviderClient.getLastLocation();
+        @SuppressLint("MissingPermission") Task location = mFusedLocationProviderClient.getLastLocation();
         location.addOnCompleteListener(new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
@@ -230,6 +231,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -347,9 +349,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onInfoWindowClick(Marker marker) {
                 // Find the restaurant to work with.
-                LatLng latLng0 = marker.getPosition();
-                double lat = latLng0.latitude;
-                double lng = latLng0.longitude;
+                LatLng myposition = marker.getPosition();
+                double lat = myposition.latitude;
+                double lng = myposition.longitude;
                 Restaurant restaurant = manager.findRestaurantByLatLng(lat, lng);
 
                 String message = restaurant.toString();
@@ -411,6 +413,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         ImageView gpsLocation = findViewById(R.id.ic_location);
         gpsLocation.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
                 if(mLocationPermissionsGranted) {
@@ -425,8 +428,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i3 = new Intent(MapsActivity.this, searchActivity.class);
-                startActivityForResult(i3, 458);
+                Intent intent3 = new Intent(MapsActivity.this, searchActivity.class);
+                startActivityForResult(intent3, 458);
             }
         });
 

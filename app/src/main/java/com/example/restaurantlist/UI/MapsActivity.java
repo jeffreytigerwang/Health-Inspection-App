@@ -295,7 +295,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String hazardLevel = mostRecentInspection.getHazardRating();
 
                 if (hazardLevel.equals("Low")) {
-                    hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_green);
+                    hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_blue);
                 } else if (hazardLevel.equals("Moderate")) {
                     hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_yellow);
                 } else {

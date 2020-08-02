@@ -47,11 +47,9 @@
     </string-array>
     <string name="title_activity_maps">Map</string>
     <string name="enter_address_city_or_zip_code">Enter Address, City or Zip Code</string>
-
-
-
-
-
+    <string name="of_critical_violation"># of Critical Violation:</string>
+    <string name="of_non_critical_violation"># of Non-critical Violation:</string>
+    <string name="na">na</string>
 
 
 </resources>

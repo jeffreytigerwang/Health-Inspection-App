@@ -13,10 +13,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/info_item_numCritical"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="5dp"
             android:layout_marginBottom="1dp"
             android:layout_toEndOf="@+id/info_textView10"
-            android:text="na" />
+            android:text="@string/na" />
 
         <ImageView
             android:id="@+id/info_item_restaurantLogo"
@@ -44,20 +44,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/info_item_restaurantLogo"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="5dp"
             android:layout_marginBottom="0dp"
             android:layout_toEndOf="@+id/info_item_restaurantLogo"
-            android:text="num_critical" />
+            android:text="@string/of_critical_violation" />
 
         <TextView
             android:id="@+id/info_textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/info_textView9"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="5dp"
             android:layout_marginBottom="1dp"
             android:layout_toEndOf="@+id/info_item_restaurantLogo"
-            android:text="num_non_critical" />
+            android:text="@string/of_non_critical_violation" />
 
         <ImageView
             android:id="@+id/info_item_hazardImage"
@@ -74,10 +74,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/info_textView9"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="5dp"
             android:layout_marginBottom="0dp"
             android:layout_toEndOf="@+id/info_textView9"
-            android:text="na" />
+            android:text="@string/na" />
 
         <TextView
             android:id="@+id/info_item_lastInspection"
@@ -87,6 +87,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="2dp"
-            android:text="na" />
+            android:text="@string/na" />
     </RelativeLayout>
 </RelativeLayout>

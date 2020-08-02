@@ -1,5 +1,6 @@
 package com.example.restaurantlist.UI;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 
 public class inspectionDetailsActivity extends AppCompatActivity {
@@ -54,78 +56,61 @@ public class inspectionDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inspection_details);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        getInspection();
-        displayDetails();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        fetchInspection();
+        displayList();
         registerClickCallback();
 
     }
 
-    private void displayDetails(){
-        violationListView();
+    @SuppressLint("SetTextI18n")
+    private void displayList(){
+        violationList();
 
-        TextView trackingNumberText= findViewById(R.id.trackingNumber);
-        TextView inspectionDateText= findViewById(R.id.inspectionDate);
-        TextView inspectionTypeText= findViewById(R.id.inspectionType);
-        TextView numCriticalText= findViewById(R.id.numCritical);
-        TextView numNonCriticalText= findViewById(R.id.numNonCritical);
-        TextView hazardRatingText= findViewById(R.id.hazardRating);
+        TextView trackingNumber= findViewById(R.id.trackingNumber);
+        trackingNumber.setText(mInspection.getTrackingNum());
+
+        TextView inspectionDate= findViewById(R.id.inspectionDate);
+        inspectionDate.setText(getFormatDate());
+
+        TextView inspectionType= findViewById(R.id.inspectionType);
+        inspectionType.setText(mInspection.getInspType());
+
+        TextView numCritical= findViewById(R.id.numCritical);
+        numCritical.setText(Integer.toString(mInspection.getNumCritical()));
+
+        TextView hazardRating= findViewById(R.id.hazardRating);
+        hazardRating.setText(mInspection.getHazardRating());
+
+        TextView numNonCritical= findViewById(R.id.numNonCritical);
+        numNonCritical.setText(Integer.toString(mInspection.getNumNonCritical()));
+
+
         ImageView hazardImage = findViewById(R.id.hazardImage);
 
+        switch (mInspection.getHazardRating()) {
+            case "Low":
 
-        trackingNumberText.setText(mInspection.getTrackingNum());
-        inspectionDateText.setText(getFormatDate());
-        inspectionTypeText.setText(mInspection.getInspType());
-        numCriticalText.setText(Integer.toString(mInspection.getNumCritical()));
-        numNonCriticalText.setText(Integer.toString(mInspection.getNumNonCritical()));
-        hazardRatingText.setText(mInspection.getHazardRating());
+                hazardRating.setTextColor(Color.BLUE);
 
-        if (mInspection.getHazardRating().equals("Low")) {
+                break;
+            case "Moderate":
 
-            hazardRatingText.setTextColor(Color.BLUE);
+                hazardRating.setTextColor(Color.rgb(205, 205, 0));
 
-        } else if (mInspection.getHazardRating().equals("Moderate")) {
+                break;
+            case "High":
 
-            hazardRatingText.setTextColor(Color.rgb(205, 205, 0));
+                hazardRating.setTextColor(Color.RED);
 
-        } else if (mInspection.getHazardRating().equals("High")) {
-
-            hazardRatingText.setTextColor(Color.RED);
-
+                break;
         }
 
         hazardImage.setImageResource(mInspection.getHazardIcon());
 
     }
 
-    // Return a date formatted in "May 12, 2019"
-    private String getFormatDate() {
-        try {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
-            Date inspectionDate = sdf.parse(mInspection.getTestDate());
-            Calendar inspectionCalendar = Calendar.getInstance();
-
-            inspectionCalendar.setTime(inspectionDate);
-            String[] indexToMonth = new DateFormatSymbols().getMonths();
-
-            return indexToMonth[inspectionCalendar.get(Calendar.MONTH)]
-                    + " " + inspectionCalendar.get(Calendar.DAY_OF_MONTH)
-                    + ", " + inspectionCalendar.get(Calendar.YEAR);
-
-        }
-
-        catch (Exception e) {
-
-            // Handle it.
-        }
-
-        return "N/A";
-    }
-
-    private void getInspection() {
+    private void fetchInspection() {
 
         RestaurantsManager manager = RestaurantsManager.getInstance();
         Intent intent = getIntent();
@@ -149,8 +134,7 @@ public class inspectionDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void violationListView() {
-
+    private void violationList() {
         ArrayAdapter<String> adapter = new CustomAdapter();
         ListView violationsList = findViewById(R.id.violationsList);
         violationsList.setAdapter(adapter);
@@ -198,7 +182,7 @@ public class inspectionDetailsActivity extends AppCompatActivity {
 
                 imageView.setImageResource(R.drawable.pest);
 
-            } else if (violations.get(position).contains("Equipment") || violations.get(position).contains("equipment")) {
+            } else if (violations.get(position).contains("Equipment") || violations.get(position).contains("equipment") || violations.get(position).contains("315")) {
 
                 imageView.setImageResource(R.drawable.equipment);
 
@@ -227,7 +211,6 @@ public class inspectionDetailsActivity extends AppCompatActivity {
                 imageView.setImageResource(R.drawable.blank);
 
             }
-
 
 
             TextView textView = (TextView) itemView.findViewById(R.id.violationtext);
@@ -275,12 +258,6 @@ public class inspectionDetailsActivity extends AppCompatActivity {
                 description.setText("");
 
             }
-
-
-
-
-
-
             return itemView;
         }
 
@@ -311,19 +288,37 @@ public class inspectionDetailsActivity extends AppCompatActivity {
                     }
                 }
                 if(message.length()>10) {
-                    showToast(message);
+                    Toast.makeText(inspectionDetailsActivity.this, message, Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    private void showToast(String text) {
-        Toast.makeText(inspectionDetailsActivity.this, text, Toast.LENGTH_LONG).show();
+    // Return dates in an intelligent format as user stories asked in iteration 1
+    private String getFormatDate() {
+        try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
+            Date inspectionDate = sdf.parse(mInspection.getTestDate());
+            Calendar inspectionCalendar = Calendar.getInstance();
+
+            inspectionCalendar.setTime(inspectionDate);
+            String[] indexToMonth = new DateFormatSymbols().getMonths();
+
+            return indexToMonth[inspectionCalendar.get(Calendar.MONTH)]
+                    + " " + inspectionCalendar.get(Calendar.DAY_OF_MONTH)
+                    + ", " + inspectionCalendar.get(Calendar.YEAR);
+
+        }
+
+        catch (Exception e) {
+            return "N/A";
+        }
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu_inspections, menu);
         return true;
@@ -331,9 +326,6 @@ public class inspectionDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         finish();
         return true;
     }

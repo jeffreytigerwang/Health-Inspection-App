@@ -12,9 +12,9 @@ public class MyClusterItem implements ClusterItem {
     private String mTitle;
     private BitmapDescriptor mHazard;
 
-    public MyClusterItem(double lat, double lng, String mTitle, BitmapDescriptor mHazard) {
+    public MyClusterItem(double lat, double lng, String Title, BitmapDescriptor mHazard) {
         this.mPosition = new LatLng(lat, lng);
-        this.mTitle = mTitle;
+        this.mTitle = Title;
         this.mHazard = mHazard;
     }
 

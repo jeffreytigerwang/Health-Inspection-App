@@ -55,7 +55,7 @@
             android:layout_height="23dp"
             android:layout_marginStart="100dp"
             android:layout_marginTop="16dp"
-            android:text="Description :"
+            android:text="@string/description"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

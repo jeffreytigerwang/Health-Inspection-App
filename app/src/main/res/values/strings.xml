@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">RestaurantList</string>
     <string name="title_activity_list">Restaurant List</string>
     <string name="_0">0%</string>
@@ -50,6 +50,19 @@
     <string name="of_critical_violation"># of Critical Violation:</string>
     <string name="of_non_critical_violation"># of Non-critical Violation:</string>
     <string name="na">na</string>
+    <string name="update_now">Update now?</string>
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="tracking">Tracking #</string>
+    <string name="todo">TODO</string>
+    <string name="Hazard_level">Hazard level</string>
+    <string name="How_long_ago">How long ago</string>
+    <string name="search">search</string>
+    <string name="enter_search_preferences">Enter Search Preferences :</string>
+    <string name="show_critical_violations">Show Critical Violations</string>
+    <string name="enter_data">Enter Data</string>
+    <string name="clear">CLEAR</string>
+    <string name="enter_restaurant_name">Enter Restaurant Name</string>
 
 
 </resources>

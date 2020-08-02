@@ -24,7 +24,7 @@
             android:id="@+id/search2"
             android:layout_width="match_parent"
             android:layout_height="64dp"
-            android:hint="Enter Restaurant Name" />
+            android:hint="@string/enter_restaurant_name" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:text="Show Critical Violations"
+        android:text="@string/show_critical_violations"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="492dp"
-        android:text="search"
+        android:text="@string/search"
         app:layout_constraintStart_toStartOf="@+id/search_bar2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:text="Enter Search Preferences : "
+        android:text="@string/enter_search_preferences"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +103,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="282dp"
         android:layout_marginTop="492dp"
-        android:text="CLEAR"
+        android:text="@string/clear"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +115,7 @@
         android:layout_marginTop="84dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="Enter Data "
+        android:hint="@string/enter_data"
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"

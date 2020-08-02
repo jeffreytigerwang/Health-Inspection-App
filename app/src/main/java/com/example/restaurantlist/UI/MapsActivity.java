@@ -455,9 +455,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             View itemView = context.getLayoutInflater().inflate(R.layout.map_infowindow_layout, null);
 
             // Find the restaurant to work with.
-            LatLng latLng0 = marker.getPosition();
-            double lat = latLng0.latitude;
-            double lng = latLng0.longitude;
+            LatLng latLng_restaurant = marker.getPosition();
+            double lat = latLng_restaurant.latitude;
+            double lng = latLng_restaurant.longitude;
             Restaurant restaurant = manager.findRestaurantByLatLng(lat, lng);
 
             // Fill the view

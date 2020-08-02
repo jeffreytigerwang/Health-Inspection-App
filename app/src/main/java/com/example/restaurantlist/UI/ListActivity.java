@@ -49,9 +49,9 @@ public class ListActivity extends AppCompatActivity {
     List<Restaurant> updatedRestaurants = new ArrayList<>();
 
     public static Intent makeLaunchIntent(Context c, String message) {
-        Intent i1 = new Intent(c, ListActivity.class);
-        i1.putExtra(EXTRA_MESSAGE, message);
-        return i1;
+        Intent intent = new Intent(c, ListActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, message);
+        return intent;
     }
 
     @Override

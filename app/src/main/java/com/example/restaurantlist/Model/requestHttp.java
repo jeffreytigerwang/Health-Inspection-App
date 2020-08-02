@@ -6,24 +6,20 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class requestHttp {
+
     private java.net.URL URL;
     private final int timeOutLimitInMS = 5000;
 
     public requestHttp(String URL) {
         try {
             this.URL = new URL(URL);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
 
-    /*
-      Fetches the content from the HTTP request.
-      @return content in StringBuffer (Can be converted into JSON)
 
-     */
     public StringBuffer getRequest() {
         try {
             HttpURLConnection connection = (HttpURLConnection) this.URL.openConnection();
@@ -39,14 +35,13 @@ public class requestHttp {
             String inputLine;
             StringBuffer content = new StringBuffer();
 
-            while((inputLine = reader.readLine()) != null){
+            while ((inputLine = reader.readLine()) != null) {
                 content.append(inputLine);
             }
 
             reader.close();
             return content;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             return null;
         }

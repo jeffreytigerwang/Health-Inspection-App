@@ -63,6 +63,11 @@
     <string name="enter_data">Enter Data</string>
     <string name="clear">CLEAR</string>
     <string name="enter_restaurant_name">Enter Restaurant Name</string>
+    <string name="Restaurant_List">Restaurant List</string>
+    <string name="Restaurant_Details">Restaurant Details</string>
+    <string name="Restaurant_Inspection">Restaurant Inspection</string>
+    <string name="Search">Search</string>
+    <string name="Latest_installed">Latest installed</string>
 
 
 </resources>

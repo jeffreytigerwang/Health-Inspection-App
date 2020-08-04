@@ -347,14 +347,32 @@ public class ListActivity extends AppCompatActivity {
 
                 int totalIssues = mostRecentInspection.getNumNonCritical() + mostRecentInspection.getNumCritical();
                 TextView totIssues = itemView.findViewById(R.id.list_totalIssues);
-                totIssues.setText("Issues Found: " + totalIssues);
+                totIssues.setText(getString(R.string.Issues_Found) + totalIssues);
 
                 TextView hazardLevel = itemView.findViewById(R.id.list_hazard_rating);
-                hazardLevel.setText("Hazard Level: " + mostRecentInspection.getHazardRating());
+                hazardLevel.setText(getString(R.string.Hazard_Level) + mostRecentInspection.getHazardRating());
+
+                TextView data = itemView.findViewById(R.id.data);
+                hazardLevel.setText(getString(R.string.Date) + mostRecentInspection.dateFormatter() );
 
 
                 ImageView hazard = itemView.findViewById(R.id.item_hazard);
                 hazard.setImageResource(mostRecentInspection.getHazardIcon());
+
+
+            }
+            else{
+                TextView totIssues = itemView.findViewById(R.id.list_totalIssues);
+                totIssues.setText(getString(R.string.Issues_Found) + " 0");
+
+                TextView hazardLevel = itemView.findViewById(R.id.list_hazard_rating);
+                hazardLevel.setText(getString(R.string.Hazard_Level) + " Low");
+
+
+                ImageView hazard = itemView.findViewById(R.id.item_hazard);
+                hazard.setImageResource(R.drawable.blue);
+
+
 
             }
             return itemView;

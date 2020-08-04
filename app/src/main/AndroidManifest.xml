@@ -27,7 +27,7 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".UI.searchActivity"
-            android:label="Search"
+            android:label="@string/Search"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!--
@@ -51,21 +51,21 @@
         <activity
             android:name=".UI.inspectionDetailsActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:label="Restaurant Inspection"
+            android:label="@string/Restaurant_Inspection"
             android:parentActivityName=".UI.restaurantDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UI.restaurantDetailsActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:label="Restaurant Details"
+            android:label="@string/Restaurant_Details"
             android:parentActivityName=".UI.ListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UI.ListActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"
-            android:label="Restaurant List"
+            android:label="@string/Restaurant_List"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

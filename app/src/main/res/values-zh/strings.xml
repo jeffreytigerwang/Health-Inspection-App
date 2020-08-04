@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">餐厅清单</string>
+    <string name="title_activity_list">餐厅清单</string>
+    <string name="_0">0%</string>
+    <string name="loading">载入中...</string>
+    <string name="main_menu">主菜单</string>
+    <string name="list_of_restaurant">餐厅清单</string>
+    <string name="restaurant_name">餐厅名称</string>
+    <string name="restaurant_information">餐厅信息</string>
+    <string name="how_long_ago">多久以前</string>
+    <string name="noncrit">非暴击</string>
+    <string name="crit">暴击</string>
+    <string name="gps_coords">GPS坐标：</string>
+    <string name="address">地址 ：</string>
+    <string name="title_activity_inspection_details">检验细节</string><!-- Strings used for fragments for navigation --><string name="first_fragment_label">第一片段</string>
+    <string name="second_fragment_label">第二片段</string>
+    <string name="next">下一个</string>
+    <string name="previous">以前</string>
+
+    <string name="hello_first_fragment">你好第一个片段</string>
+    <string name="hello_second_fragment">你好第二个片段。精氨酸：％1 $ s</string>
+    <string name="description">描述：</string>
+    <string name="severity">严重程度：</string>
+    <string name="date_of_inspection">检验日期：</string>
+    <string name="textview">文字检视</string>
+    <string name="inspection_type">检验类型：</string>
+    <string name="critical_issues_found">发现了＃个关键问题：</string>
+    <string name="non_critical_issues_found">＃发现非关键问题：</string>
+    <string name="hazard_level">危害等级：</string>
+    <string name="color_coded">颜色编码：</string>
+    <string name="list_of_violations">违规清单：</string>
+    <string name="hazard_icon">危险图标</string>
+    <string name="severity_icon">严重程度图标</string>
+    <string name="violation_type">违规类型</string>
+    <string name="not_critical">严重程度：不重要</string>
+    <string name="critical">严重程度：危急</string>
+    <string name="greeting">嗨，这里什么都没有</string>
+
+    <string-array name="my_array">
+        <item>监管失灵</item>
+        <item>食物加工不当</item>
+        <item>设备/器具卫生问题</item>
+        <item>员工卫生问题</item>
+        <item>缺少食品安全等级1或同等水平</item>
+    </string-array>
+    <string name="title_activity_maps">地图</string>
+    <string name="enter_address_city_or_zip_code">输入地址，城市或邮政编码</string>
+    <string name="of_critical_violation">严重违反次数：</string>
+    <string name="of_non_critical_violation">非严重违反次数：</string>
+    <string name="na">上</string>
+    <string name="update_now">现在更新？</string>
+    <string name="no">没有</string>
+    <string name="yes">是</string>
+    <string name="tracking">追踪编号</string>
+    <string name="todo">一切</string>
+    <string name="Hazard_level">危害等级</string>
+    <string name="How_long_ago">多久以前</string>
+    <string name="search">搜索</string>
+    <string name="enter_search_preferences">输入搜索首选项：</string>
+    <string name="show_critical_violations">显示严重违规</string>
+    <string name="enter_data">输入数据</string>
+    <string name="clear">明确</string>
+    <string name="enter_restaurant_name">输入餐厅名称</string>
+    <string name="Restaurant_List">餐厅清单</string>
+    <string name="Restaurant_Details">餐厅详情</string>
+    <string name="Restaurant_Inspection">餐厅检查</string>
+    <string name="Search">搜索</string>
+    <string name="Latest_installed">最新安装</string>
+    <string name="Issues_Found">\发现问题： \</string>
+    <string name="Hazard_Level">危害等级：</string>
+    <string name="of_critical_issues_found">“发现的关键问题数量：”</string>
+    <string name="of_non_critical_issues_found">“发现了非关键问题的数量：”</string>
+    <string name="number_Hazard_Level">“危险等级：”</string>
+    <string name="Date">“日期：”</string>
+
+
+</resources>

@@ -62,6 +62,17 @@
     <string name="enter_data">Entrer des données</string>
     <string name="clear">CLAIR</string>
     <string name="enter_restaurant_name">Entrez le nom du restaurant</string>
+    <string name="Restaurant_List">Liste des restaurants</string>
+    <string name="Restaurant_Details">Détails du restaurant</string>
+    <string name="Restaurant_Inspection">Inspection de restaurant</string>
+    <string name="Search">Chercher</string>
+    <string name="Latest_installed">Dernière installation</string>
+    <string name="Issues_Found">\Questions trouvé: \</string>
+    <string name="Hazard_Level">\ Niveau de danger: \</string>
+    <string name="of_critical_issues_found">&quot;# de problèmes critiques détectés:&quot;</string>
+    <string name="of_non_critical_issues_found">&quot;# de problèmes non critiques détectés:&quot;</string>
+    <string name="number_Hazard_Level">&quot;Niveau de danger: " </string>
+    <string name="Date">"Date: "</string>
 
 
 </resources>

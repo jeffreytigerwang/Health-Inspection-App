@@ -14,7 +14,7 @@ public class Restaurant {
 
     private double latitude;
     private double longitude;
-
+    private boolean checkFavourite;
     private int icon;
     private int criticalViolationCount;
 
@@ -31,6 +31,7 @@ public class Restaurant {
         this.icon = matchLogo();
         this.inspections = new ArrayList<>();
         this.criticalViolationCount = countCriticalViolation();
+        this.checkFavourite=false;
 
     }
 
@@ -179,5 +180,13 @@ public class Restaurant {
 
         }
 
+    }
+
+    public boolean isCheckFavourite() {
+        return checkFavourite;
+    }
+
+    public void setCheckFavourite(boolean checkFavourite) {
+        this.checkFavourite = checkFavourite;
     }
 }

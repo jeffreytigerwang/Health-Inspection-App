@@ -4,6 +4,7 @@ package com.example.restaurantlist.UI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,10 +33,13 @@ public class restaurantDetailsActivity extends AppCompatActivity {
     private RestaurantsManager manager;
     private Restaurant restaurant;
     private int size = 0;
+    int indexofrestaurant;
     private String[] inspectionStrings = new String[size];
     private static final String EXTRA_MESSAGE = "Extra";
     private String restaurantString;    // Name of calling restaurant object
     private ArrayList<Inspection> inspectionList;
+    SharedPreferences preferences;
+
     List<Inspection> inspections = new ArrayList<>();
 
     public static Intent makeLaunchIntent(Context c, String message) {
@@ -51,7 +55,6 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         populateInspectionList();
         registerClickCallback();
         setupDefaultIntent();
@@ -187,6 +190,8 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_restaurant, menu);
+
+
         return true;
     }
 

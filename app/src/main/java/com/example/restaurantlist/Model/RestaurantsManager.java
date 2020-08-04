@@ -12,7 +12,6 @@ public class RestaurantsManager implements Iterable<Restaurant>{
     private String searchTerm = "";
     private String hazardLevelFilter = "All";
     private String comparator = "All";
-
     private int violationLimit;
 
     public void add(Restaurant restaurant) {
@@ -131,4 +130,6 @@ public class RestaurantsManager implements Iterable<Restaurant>{
     }
 
     public int getManagerSize() { return restaurants.size(); }
+
+
 }

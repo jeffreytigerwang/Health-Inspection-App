@@ -25,6 +25,7 @@ import com.example.restaurantlist.Model.ParseCSV;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,14 +34,16 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class ListActivity extends AppCompatActivity {
 
     SharedPreferences mSharedPreferences;
 
-    private static final String EXTRA_MESSAGE = "Extra";
+    public static final String EXTRA_MESSAGE = "Extra";
     private RestaurantsManager manager;
     private int size = 0;
     private String[] restaurantStrings = new String[size];
@@ -325,7 +328,45 @@ public class ListActivity extends AppCompatActivity {
             }
 
             // Find the restaurant to work with.
-            Restaurant currentRestaurant = restaurants.get(position);
+            final Restaurant currentRestaurant = restaurants.get(position);
+            final ImageView isFavourite=itemView.findViewById(R.id.favouritebtn);
+            if(currentRestaurant.isCheckFavourite()){
+                isFavourite.setImageResource(R.drawable.star_open);
+            }
+            else {
+                isFavourite.setImageResource(R.drawable.star_close);
+            }
+            isFavourite.setTag(position);
+            isFavourite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Restaurant restaurant = restaurants.get((Integer) view.getTag());
+                    if(currentRestaurant.isCheckFavourite()){
+                        currentRestaurant.setCheckFavourite(false);
+                        isFavourite.setImageResource(R.drawable.star_close);
+                        mSharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+                        Set<String> favourite= new HashSet<String>(mSharedPreferences.getStringSet("favourite", new HashSet<String>()));
+                        Gson g = new Gson();
+                        String j = g.toJson(currentRestaurant);
+                        favourite.remove(j);
+                        mSharedPreferences.edit().putStringSet("favourite:", favourite).apply();
+                    }
+                    else{
+                        currentRestaurant.setCheckFavourite(true);
+                        isFavourite.setImageResource(R.drawable.star_open);
+                        mSharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+                        Set<String> favourite = new HashSet<String>(mSharedPreferences.getStringSet("favourite", new HashSet<String>()));
+                        SharedPreferences.Editor editor = mSharedPreferences.edit();
+                        Gson g = new Gson();
+                        String j = g.toJson(currentRestaurant);
+                        favourite.add(j);
+                        editor.putStringSet("favourite:", favourite).apply();
+
+                    }
+                }
+            });
+
+
 
             // Fill the view
             ImageView logo = itemView.findViewById(R.id.item_restaurantLogo);

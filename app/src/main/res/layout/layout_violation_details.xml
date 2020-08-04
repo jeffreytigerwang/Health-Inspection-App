@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/inspec_Description"
-            android:layout_width="265dp"
+            android:layout_width="280dp"
             android:layout_height="29dp"
             android:layout_marginStart="100dp"
             android:layout_marginTop="44dp"

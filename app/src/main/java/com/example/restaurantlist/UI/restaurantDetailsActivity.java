@@ -112,16 +112,16 @@ public class restaurantDetailsActivity extends AppCompatActivity {
             imageView.setImageResource(currentInspection.getHazardIcon());
 
             TextView textView = (TextView) itemView.findViewById(R.id.inspection_crit);
-            textView.setText("# of critical issues found : " + currentInspection.getNumCritical());
+            textView.setText(getString(R.string.of_critical_issues_found) + currentInspection.getNumCritical());
 
             TextView textView2 = (TextView) itemView.findViewById(R.id.inspection_noncrit);
-            textView2.setText("# of non critical issues found : " + currentInspection.getNumNonCritical());
+            textView2.setText(getString(R.string.of_non_critical_issues_found) + currentInspection.getNumNonCritical());
 
             TextView textView3 = (TextView) itemView.findViewById(R.id.inspection_long);
             textView3.setText( currentInspection.dateFormatter());
 
             TextView textView4 = (TextView) itemView.findViewById(R.id.inspection_hazard);
-            textView4.setText("Hazard Level : " + currentInspection.getHazardRating());
+            textView4.setText(getString(R.string.number_Hazard_Level) + currentInspection.getHazardRating());
 
             return itemView;
         }

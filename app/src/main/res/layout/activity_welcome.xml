@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/percent"
-        android:layout_width="85dp"
+        android:layout_width="100dp"
         android:layout_height="32dp"
         android:text="@string/loading"
         android:textColor="#DD2C00"

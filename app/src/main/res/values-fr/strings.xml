@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Liste des restaurants</string>
+    <string name="title_activity_list">Liste des restaurants</string>
+    <string name="_0">0%</string>
+    <string name="loading">Chargement…</string>
+    <string name="main_menu">Menu principal</string>
+    <string name="list_of_restaurant">Liste des restaurants</string>
+    <string name="restaurant_name">Nom du restaurant</string>
+    <string name="restaurant_information">informations sur le restaurant</string>
+    <string name="how_long_ago">il y a combien de temps</string>
+    <string name="noncrit">NonCrit</string>
+    <string name="crit">Crit</string>
+    <string name="gps_coords">Coordonnées GPS:</string>
+    <string name="address">Adresse :</string>
+    <string name="title_activity_inspection_details">Détails d\'inspection</string><!-- Strings used for fragments for navigation --><string name="first_fragment_label">Premier fragment</string>
+    <string name="second_fragment_label">Deuxième fragment</string>
+    <string name="next">Prochain</string>
+    <string name="previous">précédent</string>
+
+    <string name="hello_first_fragment">Bonjour premier fragment</string>
+    <string name="hello_second_fragment">Bonjour deuxième fragment. Arg:% 1 $ s</string>
+    <string name="description">La description:</string>
+    <string name="severity">Gravité:</string>
+    <string name="date_of_inspection">Date d\'inspection:</string>
+    <string name="textview">Affichage</string>
+    <string name="inspection_type">Type d\'inspection:</string>
+    <string name="critical_issues_found"># problèmes critiques détectés:</string>
+    <string name="non_critical_issues_found"># problèmes non critiques détectés:</string>
+    <string name="hazard_level">Niveau de danger:</string>
+    <string name="color_coded">Code couleur:</string>
+    <string name="list_of_violations">Liste des violations:</string>
+    <string name="hazard_icon">Icône de danger</string>
+    <string name="severity_icon">Icône de gravité</string>
+    <string name="violation_type">Type de violation</string>
+    <string name="not_critical">Gravité: Pas critique</string>
+    <string name="critical">Gravité: Critique</string>
+    <string name="greeting">salut, rien ici</string>
+
+    <string-array name="my_array">
+        <item>Échec réglementaire</item>
+        <item>Processus alimentaires inappropriés</item>
+        <item>Problème sanitaire équipement / ustensiles</item>
+        <item>Problème sanitaire des employés</item>
+        <item>Niveau 1 FOODSAFE manquant ou équivalent</item>
+    </string-array>
+    <string name="title_activity_maps">Carte</string>
+    <string name="enter_address_city_or_zip_code">Entrez l\'adresse, la ville ou le code postal</string>
+    <string name="of_critical_violation"># de violation critique:</string>
+    <string name="of_non_critical_violation">Nombre de violations non critiques:</string>
+    <string name="na">sur</string>
+    <string name="update_now">Mettez à jour maintenant?</string>
+    <string name="no">non</string>
+    <string name="yes">Oui</string>
+    <string name="tracking">Suivi #</string>
+    <string name="todo">TOUT</string>
+    <string name="Hazard_level">Niveau de danger</string>
+    <string name="How_long_ago">Il y a combien de temps</string>
+    <string name="search">chercher</string>
+    <string name="enter_search_preferences">Entrez les préférences de recherche:</string>
+    <string name="show_critical_violations">Afficher les violations critiques</string>
+    <string name="enter_data">Entrer des données</string>
+    <string name="clear">CLAIR</string>
+    <string name="enter_restaurant_name">Entrez le nom du restaurant</string>
+
+
+</resources>

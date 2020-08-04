@@ -72,7 +72,7 @@
     <string name="of_critical_issues_found">&quot;# de problèmes critiques détectés:&quot;</string>
     <string name="of_non_critical_issues_found">&quot;# de problèmes non critiques détectés:&quot;</string>
     <string name="number_Hazard_Level">&quot;Niveau de danger: " </string>
-    <string name="Date">"Date: "</string>
+    <string name="Date">Date: </string>
 
 
 </resources>

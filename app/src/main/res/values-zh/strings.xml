@@ -72,7 +72,7 @@
     <string name="of_critical_issues_found">“发现的关键问题数量：”</string>
     <string name="of_non_critical_issues_found">“发现了非关键问题的数量：”</string>
     <string name="number_Hazard_Level">“危险等级：”</string>
-    <string name="Date">“日期：”</string>
+    <string name="Date">日期：</string>
 
 
 </resources>

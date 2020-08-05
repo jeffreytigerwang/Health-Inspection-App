@@ -6,6 +6,7 @@ import com.google.maps.android.clustering.ClusterItem;
 
 
 //With reference to: https://developers.google.com/maps/documentation/android-sdk/utility/marker-clustering
+//Detail behind cluster of markers on the map
 public class MyClusterItem implements ClusterItem {
 
     private LatLng mPosition;

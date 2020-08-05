@@ -4,7 +4,7 @@ import com.example.restaurantlist.R;
 
 import java.util.ArrayList;
 
-
+//Holds details for restaurant
 public class Restaurant {
 
     private String restaurantName;

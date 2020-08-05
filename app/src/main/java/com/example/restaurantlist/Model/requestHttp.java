@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+//Reads url with data
 public class requestHttp {
 
     private java.net.URL URL;

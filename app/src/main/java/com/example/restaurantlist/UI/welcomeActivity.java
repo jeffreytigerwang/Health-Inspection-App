@@ -19,6 +19,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import java.util.Timer;
 import java.util.TimerTask;
 
+//Loading screen into main program
 public class welcomeActivity extends AppCompatActivity {
     ProgressBar progressBar;
     int count=0;

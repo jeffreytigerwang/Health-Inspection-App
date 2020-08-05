@@ -27,6 +27,7 @@ public class Inspection {
 
     private String[] CViolLump;
 
+    //Inspections for the restaurants
     public Inspection(String trackingNum, String fullDate, String inspType, int numCritical, int numNonCritical, String hazardRating, String wholecviolLump) {
         this.trackingNum = trackingNum;
         this.testDate = fullDate;

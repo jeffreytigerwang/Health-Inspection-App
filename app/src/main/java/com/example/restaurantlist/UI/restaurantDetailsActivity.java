@@ -4,7 +4,6 @@ package com.example.restaurantlist.UI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,14 +22,11 @@ import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-
+//Shows Restaurant details and list of inspections for that restaurant.
 public class restaurantDetailsActivity extends AppCompatActivity {
     private RestaurantsManager manager;
     private Restaurant restaurant;

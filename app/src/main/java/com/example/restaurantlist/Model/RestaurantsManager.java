@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+//Manages all restaurants in an ArrayList
 public class RestaurantsManager implements Iterable<Restaurant>{
 
     private List<Restaurant> restaurants = new ArrayList<>();

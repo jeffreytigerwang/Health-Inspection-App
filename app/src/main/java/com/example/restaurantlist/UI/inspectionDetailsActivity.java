@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-
+//Shows Inspection details for each activity
 public class inspectionDetailsActivity extends AppCompatActivity {
 
     private static final String EXTRA_MESSAGE = "Extra";

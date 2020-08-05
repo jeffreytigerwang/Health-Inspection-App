@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//Download Screen that updates to available new data if user wants to download
 public class DownloadDataActivity extends AppCompatActivity {
 
     String[] url = {"http://data.surrey.ca/api/3/action/package_show?id=restaurants",

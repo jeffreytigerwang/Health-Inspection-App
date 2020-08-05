@@ -19,7 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
 
-
+//Lets user search for specific restaurants
 public class searchActivity extends AppCompatActivity {
 
     //Search filters

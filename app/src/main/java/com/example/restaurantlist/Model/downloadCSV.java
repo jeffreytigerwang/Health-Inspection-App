@@ -11,6 +11,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 
+//Takes a CSV file and downloads it into files.
 public class downloadCSV {
     private String url;
     private String fileName;

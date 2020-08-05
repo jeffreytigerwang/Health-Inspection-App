@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+//Parses all CSV and stores into 2d ArrayList
 public class ParseCSV {
 
     private List<List<String>> values = new ArrayList<>();

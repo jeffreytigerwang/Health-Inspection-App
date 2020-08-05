@@ -1,7 +1,7 @@
-Kai Chu, chukaic        Product Owner
+Kai Chu, chukaic        Repo Manager
 
-Yue Zhao, yza490        Team Member
+Yue Zhao, yza490        Product Owner
 
-Lansheng Feng, lfa24    Scrum Master
+Lansheng Feng, lfa24    Team Member
  
-Jeffrey Wang, jtw14     Repo Manager
+Jeffrey Wang, jtw14     Scrum Master

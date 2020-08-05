@@ -69,7 +69,7 @@ public class ListActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+        favourite();
         compareForUpdate();
 
         registerClickCallback();
@@ -90,6 +90,8 @@ public class ListActivity extends AppCompatActivity {
 
         restaurantStrings = new String[size];
 
+
+
         restaurants = updatedRestaurants;
 
         for (Restaurant temp : restaurants) {
@@ -109,6 +111,37 @@ public class ListActivity extends AppCompatActivity {
                 launchMap();
             }
         });
+    }
+    private void favourite(){
+        manager = RestaurantsManager.getInstance();
+        mSharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+        Set<String> favourite = new HashSet<String>(mSharedPreferences.getStringSet("Favourite:", new HashSet<String>()));
+
+        ArrayList<String> a = new ArrayList<>();
+        ArrayList<String> b = new ArrayList<>();
+
+        for (String s : favourite) {
+            for (Restaurant restaurant : manager) {
+                if (restaurant.isCheckFavourite()) {
+                    System.out.println( "Test> "+restaurant.toString() + " Favourite: " + restaurant.isCheckFavourite());
+                    Gson g = new Gson();
+                    Restaurant previousRestaurant = g.fromJson(s, Restaurant.class);
+                    System.out.println(  "Test> "+restaurant.toString() + " Favourite: " + restaurant.isCheckFavourite());
+                    String js = new Gson().toJson(restaurant);
+                    if (previousRestaurant.getTrackingNumber()==restaurant.getTrackingNumber()) {
+                        if (!s.equals(js)) {
+                            updatedRestaurants.add(restaurant);
+                            System.out.println("Test> "+restaurant.toString() + " Favourite: " + restaurant.isCheckFavourite());
+                            a.add(s);
+                            b.add(js);
+                        }
+                    }
+                }
+            }
+        }
+        favourite.removeAll(a);
+        favourite.addAll(b);
+        mSharedPreferences.edit().putStringSet("Favourite:", favourite).apply();
     }
 
     private void launchMap() {
@@ -205,10 +238,20 @@ public class ListActivity extends AppCompatActivity {
 
             manager.add(restaurant);
 
-            mSharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+            mSharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+            Set<String> favourite = new HashSet<String>(mSharedPreferences.getStringSet("Favourite:", new HashSet<String>()));
+            for (String s : favourite) {
+                        Gson g = new Gson();
+                        Restaurant previousRestaurant = g.fromJson(s, Restaurant.class);
+                        if (previousRestaurant.getTrackingNumber()==restaurant.getTrackingNumber()) {
+                            System.out.println("Test> " + previousRestaurant.getTrackingNumber() + " and " + restaurant.getTrackingNumber());
+                            restaurant.setCheckFavourite(true);
+
+                    }
+                }
+            }
 
 
-        }
 
         populateWithInspections();
 
@@ -308,9 +351,7 @@ public class ListActivity extends AppCompatActivity {
         }
     }
 
-    static class ViewHolder {
 
-    }
 
     private class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 

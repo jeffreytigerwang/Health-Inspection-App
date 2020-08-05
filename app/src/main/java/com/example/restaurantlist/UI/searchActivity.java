@@ -29,6 +29,8 @@ public class searchActivity extends AppCompatActivity {
     private Button clearBtn;
     private Spinner hazardSpinner;
     private Spinner comparatorSpinner;
+    private Spinner favouriteSpinner;
+    private boolean searchFavourite;
 
 
     private RestaurantsManager manager = RestaurantsManager.getInstance();
@@ -111,6 +113,22 @@ public class searchActivity extends AppCompatActivity {
                 manager.setComparator(0);
             }
         });
+        favouriteSpinner=(Spinner)findViewById(R.id.favourite);
+        ArrayAdapter<CharSequence> favouriteAdapter = ArrayAdapter.createFromResource(this,
+                R.array.FavoriteChoose, android.R.layout.simple_spinner_dropdown_item);
+        favouriteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        favouriteSpinner.setAdapter(favouriteAdapter);
+        favouriteSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                manager.setSearchFavourite(true);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                manager.setSearchFavourite(false);
+            }
+        });
     }
 
 
@@ -134,6 +152,7 @@ public class searchActivity extends AppCompatActivity {
         manager.setSearchTerm("");
         manager.setHazardLevelFilter(0);
         manager.setComparator(0);
+        manager.setSearchFavourite(false);
 
     }
 

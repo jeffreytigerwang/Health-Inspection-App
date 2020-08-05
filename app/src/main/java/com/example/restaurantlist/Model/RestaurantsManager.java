@@ -13,6 +13,7 @@ public class RestaurantsManager implements Iterable<Restaurant>{
     private String hazardLevelFilter = "All";
     private String comparator = "All";
     private int violationLimit;
+    private boolean searchFavourite=false;
 
     public void add(Restaurant restaurant) {
         restaurants.add(restaurant);
@@ -53,7 +54,7 @@ public class RestaurantsManager implements Iterable<Restaurant>{
 
     public List<Restaurant> getRestaurants() {
         searchTerm = searchTerm.trim();
-        if (searchTerm.isEmpty() &&
+        if (!searchFavourite&&searchTerm.isEmpty() &&
                 hazardLevelFilter.equalsIgnoreCase("All") &&
                 comparator.equalsIgnoreCase("All")) {
 
@@ -77,7 +78,7 @@ public class RestaurantsManager implements Iterable<Restaurant>{
 
         if (restaurantName.toLowerCase().contains(searchTerm.toLowerCase()) &&
                 ((hazardLevelFilter.equalsIgnoreCase("All")) ||
-                        (hazardLevel.equalsIgnoreCase(hazardLevelFilter))) &&
+                        (hazardLevel.equalsIgnoreCase(hazardLevelFilter))) &&(restaurant.isCheckFavourite()||!searchFavourite)&&
                 (inRange(criticalViolationCount))) {
 
             return true;
@@ -132,4 +133,11 @@ public class RestaurantsManager implements Iterable<Restaurant>{
     public int getManagerSize() { return restaurants.size(); }
 
 
+    public boolean isSearchFavourite() {
+        return searchFavourite;
+    }
+
+    public void setSearchFavourite(boolean searchFavourite) {
+        this.searchFavourite = searchFavourite;
+    }
 }

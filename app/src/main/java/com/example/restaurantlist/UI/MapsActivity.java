@@ -64,7 +64,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     private static final String EXTRA_MESSAGE = "Extra";
-
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private Marker mMarker;
@@ -293,7 +292,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (mostRecentInspection != null) {
             String hazardLevel = mostRecentInspection.getHazardRating();
-
+            if (!restaurant.isCheckFavourite()) {
                 if (hazardLevel.equals("Low")) {
                     hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_blue);
                 } else if (hazardLevel.equals("Moderate")) {
@@ -302,11 +301,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_red);
 
                 }
-        } else {
+            }
+            else {
+                hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_green);
+            }
+        }else {
 
-
+            if (!restaurant.isCheckFavourite()) {
                 hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_no_inspection);
-
+            }
+            else {
+                hazardIcon = bitmapDescriptorFromVector(this, R.drawable.peg_green);
+            }
         }
         return hazardIcon;
     }

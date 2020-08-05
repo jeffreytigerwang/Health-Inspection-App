@@ -43,7 +43,7 @@ public class ListActivity extends AppCompatActivity {
 
     SharedPreferences mSharedPreferences;
 
-    public static final String EXTRA_MESSAGE = "Extra";
+    private static final String EXTRA_MESSAGE = "Extra";
     private RestaurantsManager manager;
     private int size = 0;
     private String[] restaurantStrings = new String[size];
@@ -381,7 +381,7 @@ public class ListActivity extends AppCompatActivity {
             isFavourite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Restaurant restaurant = restaurants.get((Integer) view.getTag());
+                    Restaurant currentRestaurant = restaurants.get((Integer) view.getTag());
                     if(currentRestaurant.isCheckFavourite()){
                         currentRestaurant.setCheckFavourite(false);
                         isFavourite.setImageResource(R.drawable.star_close);

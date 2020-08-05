@@ -23,13 +23,15 @@ import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class restaurantDetailsActivity extends AppCompatActivity {
-
     private RestaurantsManager manager;
     private Restaurant restaurant;
     private int size = 0;
@@ -38,7 +40,6 @@ public class restaurantDetailsActivity extends AppCompatActivity {
     private static final String EXTRA_MESSAGE = "Extra";
     private String restaurantString;    // Name of calling restaurant object
     private ArrayList<Inspection> inspectionList;
-    SharedPreferences preferences;
 
     List<Inspection> inspections = new ArrayList<>();
 

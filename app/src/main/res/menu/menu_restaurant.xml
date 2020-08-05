@@ -10,11 +10,5 @@
         android:title="Map"
         android:visible="true"
         app:showAsAction="always|withText" />
-    <item
-        android:id="@+id/favourite_icon"
-        android:icon="@drawable/star_close"
-        android:title="favourite_icon"
-        app:showAsAction="always"
-        />
 
 </menu>

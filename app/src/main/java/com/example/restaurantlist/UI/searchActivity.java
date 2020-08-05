@@ -122,11 +122,12 @@ public class searchActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                manager.setSearchFavourite(true);
+               boolean check=position!=0;
+               searchFavourite=check;
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                manager.setSearchFavourite(false);
+                searchFavourite=false;
             }
         });
     }
@@ -136,7 +137,7 @@ public class searchActivity extends AppCompatActivity {
         updateViolationCountRestriction();
         String searchTerm = searchField.getText().toString();
         manager.setSearchTerm(searchTerm);
-
+        manager.setSearchFavourite(searchFavourite);
         this.finish();
     }
 

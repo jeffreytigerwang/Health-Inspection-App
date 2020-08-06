@@ -59,7 +59,7 @@ public class DownloadDataActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            long epoch = date.getTime();    // lastmodified time of remote file
+            long epoch = date.getTime();
             epoch = epoch / 1000;
             long difference = epoch - (file.lastModified());
 

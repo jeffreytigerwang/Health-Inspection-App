@@ -73,7 +73,7 @@ public class Restaurant {
     private int countCriticalViolation() {
         int count = 0;
         for (Inspection inspection : inspections) {
-            if (inspection.getDiffInDay() <= 365) {
+            if (inspection.getNumCritical()>=0) {
                 count = count + inspection.getNumCritical();
             }
         }

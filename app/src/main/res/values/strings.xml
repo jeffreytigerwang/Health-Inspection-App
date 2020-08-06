@@ -77,6 +77,7 @@
     <string name="number_Hazard_Level">"Hazard Level : "</string>
     <string name="show_favourite_only">Show Favourite Only: </string>
     <string name="Date">Date: </string>
+    <string name="enter_number">Enter Number</string>
     <string-array name="FavoriteChoose">
         <item>No</item>
         <item>Yes</item>

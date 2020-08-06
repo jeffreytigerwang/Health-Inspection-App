@@ -150,7 +150,7 @@
         android:layout_marginTop="232dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="@string/enter_data"
+        android:hint="@string/enter_number"
         android:inputType="number"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"

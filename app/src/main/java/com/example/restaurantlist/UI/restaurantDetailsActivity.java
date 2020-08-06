@@ -64,7 +64,6 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         setupDefaultIntent();
         favourite1();
         addFavourite();
-
     }
 
 

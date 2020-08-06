@@ -545,4 +545,13 @@ public class ListActivity extends AppCompatActivity {
     static File method(Context obj, String filename){
         return new File (obj.getFilesDir(), filename );
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        repopulateListView();
+
+    }
+
 }

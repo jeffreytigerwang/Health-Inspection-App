@@ -39,7 +39,7 @@ public class Inspection {
         initDate();
     }
 
-    //https://www.baeldung.com/java-date-difference
+    //With reference to: https://www.baeldung.com/java-date-difference
     public void initDate() {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.ENGLISH);
@@ -51,7 +51,7 @@ public class Inspection {
             long diffInDay = TimeUnit.DAYS.convert(diffInMS, TimeUnit.MILLISECONDS);
             this.diffInDay = (int) diffInDay;
 
-            //https://stackoverflow.com/questions/36370895/getyear-getmonth-getday-are-deprecated-in-calendar-what-to-use-then
+            //With reference to: https://stackoverflow.com/questions/36370895/getyear-getmonth-getday-are-deprecated-in-calendar-what-to-use-then
             String[] indexToMonth = new DateFormatSymbols().getMonths();
             int testMonth;
             Calendar inspectionCalendar = Calendar.getInstance();

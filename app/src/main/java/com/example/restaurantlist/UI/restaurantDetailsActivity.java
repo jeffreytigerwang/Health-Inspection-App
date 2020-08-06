@@ -4,6 +4,7 @@ package com.example.restaurantlist.UI;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,12 +23,18 @@ import com.example.restaurantlist.Model.Inspection;
 import com.example.restaurantlist.Model.Restaurant;
 import com.example.restaurantlist.Model.RestaurantsManager;
 import com.example.restaurantlist.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 //Shows Restaurant details and list of inspections for that restaurant.
 public class restaurantDetailsActivity extends AppCompatActivity {
+    SharedPreferences mSharedPreferences;
+
+
     private RestaurantsManager manager;
     private Restaurant restaurant;
     private int size = 0;
@@ -55,7 +62,12 @@ public class restaurantDetailsActivity extends AppCompatActivity {
         populateInspectionList();
         registerClickCallback();
         setupDefaultIntent();
+        favourite1();
+        addFavourite();
+
     }
+
+
 
     private void setupDefaultIntent() {
         Intent i = new Intent();
@@ -128,6 +140,80 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
     }
 
+    private void favourite1(){
+        manager = RestaurantsManager.getInstance();
+        mSharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+        Set<String> favourite = new HashSet<String>(mSharedPreferences.getStringSet("Favourite:", new HashSet<String>()));
+
+        ArrayList<String> a = new ArrayList<>();
+        ArrayList<String> b = new ArrayList<>();
+
+        for (String s : favourite) {
+            for (Restaurant restaurant : manager) {
+                if (restaurant.isCheckFavourite()) {
+                    System.out.println( "Test> "+restaurant.toString() + " Favourite: " + restaurant.isCheckFavourite());
+                    Gson g = new Gson();
+                    Restaurant previousRestaurant = g.fromJson(s, Restaurant.class);
+                    System.out.println(  "Test> "+restaurant.toString() + " Favourite: " + restaurant.isCheckFavourite());
+                    String js = new Gson().toJson(restaurant);
+                    if (previousRestaurant.getTrackingNumber()==restaurant.getTrackingNumber()) {
+                        if (!s.equals(js)) {
+                            //updatedRestaurants.add(restaurant);
+                            System.out.println("Test> "+restaurant.toString() + " Favourite: " + restaurant.isCheckFavourite());
+                            a.add(s);
+                            b.add(js);
+                        }
+                    }
+                }
+            }
+        }
+        favourite.removeAll(a);
+        favourite.addAll(b);
+        mSharedPreferences.edit().putStringSet("Favourite:", favourite).apply();
+    }
+
+
+    private void addFavourite() {
+        //final Restaurant currentRestaurant = restaurants.get(position);
+        final ImageView isFavourite = findViewById(R.id.favouritebtn2);
+        if(restaurant.isCheckFavourite()){
+            isFavourite.setImageResource(R.drawable.star_open);
+        }
+        else {
+            isFavourite.setImageResource(R.drawable.star_close);
+        }
+        //isFavourite.setTag(position);
+        isFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Restaurant currentRestaurant = restaurant;
+                if(currentRestaurant.isCheckFavourite()){
+                    currentRestaurant.setCheckFavourite(false);
+                    isFavourite.setImageResource(R.drawable.star_close);
+                    mSharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+                    Set<String> favourite= new HashSet<String>(mSharedPreferences.getStringSet("favourite", new HashSet<String>()));
+                    Gson g = new Gson();
+                    String j = g.toJson(currentRestaurant);
+                    favourite.remove(j);
+                    mSharedPreferences.edit().putStringSet("favourite:", favourite).apply();
+                }
+                else{
+                    currentRestaurant.setCheckFavourite(true);
+                    isFavourite.setImageResource(R.drawable.star_open);
+                    mSharedPreferences = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
+                    Set<String> favourite = new HashSet<String>(mSharedPreferences.getStringSet("favourite", new HashSet<String>()));
+                    SharedPreferences.Editor editor = mSharedPreferences.edit();
+                    Gson g = new Gson();
+                    String j = g.toJson(currentRestaurant);
+                    favourite.add(j);
+                    editor.putStringSet("favourite:", favourite).apply();
+
+                }
+            }
+        });
+    }
+
+
 
     private void processInspections() {
 
@@ -143,7 +229,7 @@ public class restaurantDetailsActivity extends AppCompatActivity {
             }
         }
 
-        // Populate the list of inspections for the selected restaurant
+        // Populate the list of inspections
         inspectionList = restaurant.getInspections();
         TextView name = findViewById(R.id.restaurant_name);
         name.setText(restaurant.getRestaurantName());
@@ -184,8 +270,6 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_restaurant, menu);
 
 
@@ -194,9 +278,6 @@ public class restaurantDetailsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
             case (R.id.restaurant_map_icon):
                 goToMapsActivity();

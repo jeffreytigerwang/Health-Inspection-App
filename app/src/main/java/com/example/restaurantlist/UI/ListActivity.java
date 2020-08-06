@@ -415,12 +415,12 @@ public class ListActivity extends AppCompatActivity {
 
 
 
-            TextView restaurantNameText = itemView.findViewById(R.id.item_restaurantName);
+            TextView restaurantName = itemView.findViewById(R.id.item_restaurantName);
             String temp = currentRestaurant.getRestaurantName();
             if (temp.length() > 30) {
-                restaurantNameText.setText(temp.substring(0, 30) + "...");
+                restaurantName.setText(temp.substring(0, 30) + "...");
             } else {
-                restaurantNameText.setText(temp);
+                restaurantName.setText(temp);
             }
 
 
@@ -463,10 +463,6 @@ public class ListActivity extends AppCompatActivity {
     }
 
 
-
-    /**
-     * Calback register for RestaurantActivity
-     */
     private void registerClickCallback() {
         ListView list = findViewById(R.id.listViewMain);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -517,17 +513,13 @@ public class ListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         switch (item.getItemId()) {
             case (R.id.main_map_icon):
                 Intent intent = new Intent(ListActivity.this, MapsActivity.class);

@@ -45,6 +45,8 @@
         <item>Employee sanitary issue</item>
         <item>Missing FOODSAFE Level 1 or equivalent</item>
     </string-array>
+
+
     <string name="title_activity_maps">Map</string>
     <string name="enter_address_city_or_zip_code">Enter Address, City or Zip Code</string>
     <string name="of_critical_violation"># of Critical Violation:</string>

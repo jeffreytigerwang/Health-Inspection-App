@@ -141,13 +141,6 @@ public class searchActivity extends AppCompatActivity {
         this.finish();
     }
 
-    private void updateViolationCountRestriction() {
-        try {
-            int limit = Integer.parseInt(violationCountField.getText().toString());
-            manager.setViolationLimit(limit);
-        }
-        catch (Exception e) {}
-    }
 
     private void clearFilters() {
         manager.setSearchTerm("");
@@ -161,6 +154,15 @@ public class searchActivity extends AppCompatActivity {
         Intent i = new Intent();
         setResult(Activity.RESULT_OK, i);
     }
+
+    private void updateViolationCountRestriction() {
+        try {
+            int limit = Integer.parseInt(violationCountField.getText().toString());
+            manager.setViolationLimit(limit);
+        }
+        catch (Exception e) {}
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

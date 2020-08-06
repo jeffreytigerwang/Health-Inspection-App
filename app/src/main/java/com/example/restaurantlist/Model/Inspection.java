@@ -53,6 +53,7 @@ public class Inspection {
 
             //https://stackoverflow.com/questions/36370895/getyear-getmonth-getday-are-deprecated-in-calendar-what-to-use-then
             String[] indexToMonth = new DateFormatSymbols().getMonths();
+            int testMonth;
             Calendar inspectionCalendar = Calendar.getInstance();
             inspectionCalendar.setTime(inspectionDate);
 
@@ -65,9 +66,8 @@ public class Inspection {
                 this.formattedDate = diffInDay + " Days";
 
             } else if (diffInDay <= 365) {
-
                 this.formattedDate = indexToMonth[inspectionCalendar.get(Calendar.MONTH)]
-                        + " " + inspectionCalendar.get(Calendar.DAY_OF_MONTH);
+                    + " " + inspectionCalendar.get(Calendar.DAY_OF_MONTH);
 
             } else {
 

@@ -56,17 +56,18 @@
 
     <TextView
         android:id="@+id/textSearch"
-        android:layout_width="142dp"
-        android:layout_height="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="196dp"
         android:text="@string/show_favourite_only"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/fix_text13"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_bar2" />
+        app:layout_constraintTop_toTopOf="@+id/fix_text13"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_search"
@@ -98,26 +99,23 @@
         android:layout_width="137dp"
         android:layout_height="46dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
         android:background="#20050505"
         android:spinnerMode="dropdown"
         android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/favourite"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fix_text13"
+        app:layout_constraintTop_toTopOf="@+id/favourite"
         tools:visibility="visible" />
 
     <Spinner
         android:id="@+id/favourite"
         android:layout_width="137dp"
         android:layout_height="46dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:background="#20050505"
         android:spinnerMode="dropdown"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/count_hazard_spinner_search"
+        app:layout_constraintStart_toStartOf="@+id/textSearch"
         app:layout_constraintTop_toBottomOf="@+id/textSearch"
         tools:visibility="visible" />
 
